@@ -6,6 +6,7 @@ import * as httpStatus from 'http-status-codes';
 
 import { config } from './appConfig';
 import logger from './appLogger';
+import router from './routes';
 
 /*  Express server  */
 const app = express();
@@ -25,6 +26,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+/*  Routes  */
+app.use(router);
 
 /*  404 middleware  */
 app.use((req, res, next) => {
