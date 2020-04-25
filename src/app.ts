@@ -6,7 +6,7 @@ import * as httpStatus from 'http-status-codes';
 
 import { config } from './appConfig';
 import logger from './appLogger';
-import router from './routes';
+import router from './components';
 
 /*  Express server  */
 const app = express();

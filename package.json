@@ -4,14 +4,20 @@
   "description": "",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/app.js",
-    "dev": "ts-node-dev --no-notify src/app.ts",
+    "start": "npm run db:up && node dist/app.js",
+    "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p 5432:5432 -d postgres:alpine",
+    "dev": "npm run dev:db && concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --no-notify src/app.ts'",
+    "generate": "prisma generate",
+    "db": "npm run db:migrate && npm run db:up",
+    "db:migrate": "prisma migrate save --create-db --experimental",
+    "db:up": "prisma migrate up --create-db --experimental",
     "lint": "eslint src --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@prisma/cli": "^2.0.0-beta.3",
     "@types/express": "^4.17.6",
     "@types/express-session": "^1.17.0",
     "@types/http-errors": "^1.6.3",
@@ -21,19 +27,21 @@
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
+    "concurrently": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-plugin-import": "^2.20.2",
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "dependencies": {
-    "typescript": "^3.8.3",
+    "@prisma/client": "^2.0.0-beta.3",
     "env-var": "^6.0.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "http-errors": "^1.7.3",
     "http-status-codes": "^1.4.0",
     "morgan": "^1.10.0",
+    "typescript": "^3.8.3",
     "winston": "^3.2.1"
   }
 }

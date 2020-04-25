@@ -8,6 +8,7 @@ services:
       - PORT
       - SESSION_SECRET
       - MODE
+      - DB_URL
     ports:
       - "${PORT}:${PORT}"
     networks:
