@@ -1,14 +1,14 @@
 FROM node:lts-alpine
 
-RUN mkdir /app && chown node:node /app
+RUN mkdir /app && mkdir /app/logs -p && chown node: /app -R
 
 COPY . /app
 WORKDIR /app
 
 USER node
 
-ENV NODE_ENV=production
 RUN npm install --no-optional
+RUN npm run build
 
 EXPOSE $PORT
 

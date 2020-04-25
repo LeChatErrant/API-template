@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node dist/app.js",
+    "start": "node dist/app.js",
     "dev": "ts-node-dev --no-notify src/app.ts",
     "lint": "eslint src --fix"
   },
