@@ -7,7 +7,8 @@ WORKDIR /app
 
 USER node
 
-RUN npm install
+ENV NODE_ENV=production
+RUN npm install --no-optional
 
 EXPOSE $PORT
 
