@@ -2,7 +2,7 @@ import express from 'express';
 
 import userMiddleware from '../../middlewares/userMiddleware';
 
-import * as controllers from './controllers';
+import * as controllers from './userControllers';
 
 const router = express.Router();
 

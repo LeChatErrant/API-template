@@ -5,7 +5,7 @@ import createError from 'http-errors';
 import { config } from '../../appConfig';
 import db from '../../appDatabase';
 
-import type { UserCreation, UserModifiableFields, UserCredentials } from './types';
+import type { UserCreation, UserModifiableFields, UserCredentials } from './userTypes';
 
 const userWithoutPassword = {
   id: true,
