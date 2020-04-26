@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches-ignore:
+    - gh-pages
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Setup flutter environment
+      uses: subosito/flutter-action@v1
+
+    - name: Cache Flutter build folder
+      uses: actions/cache@v1
+      with:
+        path: build
+        key: ${{ runner.OS }}-build-${{ hashFiles('**/pubspec.yaml') }}
+
+    - name: Retreive Flutter packages
+      run: flutter pub get
+
+    - name: Run the tests
+      run: flutter test

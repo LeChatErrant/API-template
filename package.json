@@ -11,7 +11,7 @@
     "db": "npm run db:migrate && npm run db:up",
     "db:migrate": "prisma migrate save --create-db --experimental",
     "db:up": "prisma migrate up --create-db --experimental",
-    "lint": "eslint src --fix"
+    "lint": "eslint './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
   "author": "",

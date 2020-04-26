@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 /*  Error middleware  */
 const errorHandler: ErrorRequestHandler = (err, req, res, _) => {
   logger.error(err.message);
-  if (!err.status) console.error(err);
+  if (!err.status) logger.error(err);
   res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send({ error: err.message });
 };
 app.use(errorHandler);
@@ -47,4 +47,4 @@ app.use(errorHandler);
 process.on('uncaughtException', (e) => logger.error(e));
 process.on('unhandledRejection', (e: any) => logger.error(e ? e.stack : e));
 
-app.listen(port, () => console.log(`Server listening on port ${port}...`));
+app.listen(port, () => logger.info(`Server listening on port ${port}...`));
