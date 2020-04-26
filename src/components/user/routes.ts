@@ -1,5 +1,7 @@
 import express from 'express';
 
+import userMiddleware from '../../middlewares/userMiddleware';
+
 import * as controllers from './controllers';
 
 const router = express.Router();
@@ -15,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await controllers.createUser(req.body);
+    const user = await controllers.signup(req.body);
     res.send(user);
   } catch (error) {
     next(error);
@@ -23,30 +25,37 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/signin', async (req, res, next) => {
-
-});
-
-router.get('/:id', async (req, res, next) => {
   try {
-    const user = await controllers.getUser(req.params.id);
+    const user = await controllers.signin(req.body);
+    req.session!.userId = user.id;
+    req.session!.userRole = user.role;
     res.send(user);
   } catch (error) {
     next(error);
   }
 });
 
-router.patch('/:id', async (req, res, next) => {
+router.get('/:userId', userMiddleware, async (req, res, next) => {
   try {
-    const user = await controllers.updateUser(req.params.id, req.body);
+    const user = await controllers.getUser(req.params.userId);
     res.send(user);
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:id', async(req, res, next) => {
+router.patch('/:userId', userMiddleware, async (req, res, next) => {
   try {
-    await controllers.deleteUser(req.params.id);
+    const user = await controllers.updateUser(req.params.userId, req.body);
+    res.send(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:userId', userMiddleware, async (req, res, next) => {
+  try {
+    await controllers.deleteUser(req.params.userId);
     const users = await controllers.getUsers();
     res.send(users);
   } catch (error) {
