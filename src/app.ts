@@ -45,6 +45,6 @@ app.use(errorHandler);
 
 /*  Server error handlers */
 process.on('uncaughtException', (e) => logger.error(e));
-process.on('unhandledRejection', (e) => logger.error(e.stack || e));
+process.on('unhandledRejection', (e: any) => logger.error(e ? e.stack : e));
 
 app.listen(port, () => console.log(`Server listening on port ${port}...`));
