@@ -9,6 +9,9 @@ services:
       - SESSION_SECRET
       - MODE
       - DB_URL
+      - REDIS_PORT
+      - REDIS_HOST
+      - REDIS_PASS
     ports:
       - "${PORT}:${PORT}"
     networks:
@@ -18,7 +21,9 @@ services:
 
   redis:
     container_name: redis
-    image: redis:alpine
+    image: bitnami/redis:latest
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASS}
     networks:
       - backend
 
