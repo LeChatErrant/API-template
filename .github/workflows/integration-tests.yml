@@ -1,4 +1,4 @@
-name: Test
+name: Integration tests
 
 on:
   push:
@@ -20,5 +20,5 @@ jobs:
       with:
         node-version: '12.x'
 
-    - name: Analyze the coding style
-      run: npm run test
+    - name: Run integration tests
+      run: npm run integration
