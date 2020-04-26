@@ -4,7 +4,7 @@ import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 
-function validationMiddleware<T>(type: any): RequestHandler {
+function validationMiddleware(type: any): RequestHandler {
   return async (req, res, next) => {
     const errors = await validate(plainToClass(type, req.body));
     if (errors.length !== 0) {
