@@ -18,6 +18,8 @@ Comes with :
  * Sessions stored on redis
  * Postgresql database
  * Prisma ORM
+ * Seeders
+ * Migrations
  * Error middlewares
  * User management
  * User role system
