@@ -39,9 +39,12 @@
   "dependencies": {
     "@prisma/client": "^2.0.0-beta.3",
     "bcrypt": "^4.0.1",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
     "compose-middleware": "^5.0.1",
     "env-var": "^6.0.4",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "express-session": "^1.17.1",
     "http-errors": "^1.7.3",
     "http-status-codes": "^1.4.0",
