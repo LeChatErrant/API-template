@@ -1,6 +1,6 @@
 import { IsEmail, IsOptional, IsString } from 'class-validator';
 
-export class UserSignup {
+export class UserSignupDto {
   @IsEmail()
   email!: string;
 
@@ -12,7 +12,7 @@ export class UserSignup {
   password!: string;
 }
 
-export class UserSignin {
+export class UserSigninDto {
   @IsEmail()
   email!: string;
 
@@ -20,7 +20,7 @@ export class UserSignin {
   password!: string;
 }
 
-export class UserUpdate {
+export class UserUpdateDto {
   @IsEmail()
   @IsOptional()
   email!: string;

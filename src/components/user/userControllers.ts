@@ -5,7 +5,7 @@ import createError from 'http-errors';
 import { config } from '../../appConfig';
 import db from '../../appDatabase';
 
-import type { UserSignup, UserSignin, UserUpdate } from './userTypes';
+import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 
 const userWithoutPassword = {
   id: true,
@@ -19,7 +19,7 @@ function hashPassword(password: string) {
   return bcrypt.hash(password, config.saltRounds);
 }
 
-export async function signup(payload: UserSignup) {
+export async function signup(payload: UserSignupDto) {
   const hashedPassword = await hashPassword(payload.password);
   try {
     return await db.user.create({
@@ -31,7 +31,7 @@ export async function signup(payload: UserSignup) {
   }
 }
 
-export async function signin(payload: UserSignin) {
+export async function signin(payload: UserSigninDto) {
   const user = await db.user.findOne({
     where: { email: payload.email },
   });
@@ -56,7 +56,7 @@ export async function getUser(id: string) {
   return user;
 }
 
-export async function updateUser(id: string, fields: UserUpdate) {
+export async function updateUser(id: string, fields: UserUpdateDto) {
   try {
     const user = await db.user.update({
       where: { id },
