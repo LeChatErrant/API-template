@@ -40,7 +40,9 @@ Run `npm install`
 
 ## Configuration
 
-For development, I'm using [direnv](https://direnv.net/). It will load the .envrc at the root of the repository and will let you freely overides environment variables
+Configuration of the application is done through environment variables, in the .envrc at the root of the repository
+
+For development, I'm using [direnv](https://direnv.net/), which will load the .envrc automaticaly and will let you freely overrides environment variables
 
 ## Generate migrations
 
@@ -50,12 +52,13 @@ Run `npm run db:migrate`
 
 Run `npm run db:up`
 
-> Note that `npm run db` will migrate and apply migrations
+> Note that `npm run db` will migrate and apply migrations, all at once
 
 ## Dev mode
 
-Start local database `npm run dev:db`
-Run `npm run dev` will watch for any changes
+You can start a local database with `npm run dev:db`
+
+`npm run dev` will generate the orm, start the server, and watch for any changes. That all you need
 
 ## Lint
 
