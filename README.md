@@ -32,8 +32,7 @@ The purpose of this template is to provide a typesafe production ready webserver
 
 ## Architecture
 
-
-
+![Architecture](/.github/assets/topology.png)
 
 ## Installation
 
