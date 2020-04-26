@@ -7,10 +7,10 @@ import { compose } from 'compose-middleware';
 import authMiddleware from './authMiddleware';
 
 const adminMiddleware: RequestHandler = (req, res, next) => {
-  if (req.session!.userRole !== Role.ADMIN) {
-    next(createError(httpStatus.FORBIDDEN, 'You must be admin to perform this operation'));
-  } else {
+  if (req.session!.userRole === Role.ADMIN) {
     next();
+  } else {
+    next(createError(httpStatus.FORBIDDEN, 'You must be admin to perform this operation'));
   }
 };
 
