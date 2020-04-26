@@ -2,7 +2,7 @@ import express, { ErrorRequestHandler } from 'express';
 import morgan from 'morgan';
 import session from 'express-session';
 import createError from 'http-errors';
-import * as httpStatus from 'http-status-codes';
+import httpStatus from 'http-status-codes';
 
 import { config } from './appConfig';
 import logger from './appLogger';

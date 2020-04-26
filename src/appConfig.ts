@@ -11,4 +11,5 @@ export const config = {
   port: get('PORT').required().asPortNumber(),
   sessionSecret: get('SESSION_SECRET').required().asString(),
   mode: get('MODE').required().asEnum(Object.values(MODES)),
+  saltRounds: 12,
 };
