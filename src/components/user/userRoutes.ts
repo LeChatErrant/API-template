@@ -10,34 +10,34 @@ import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 
 const router = express.Router();
 
-router.get('/', adminMiddleware, handler(async (req, res, next) => {
+router.get('/', adminMiddleware, handler(async (req, res) => {
   const users = await controllers.getUsers();
   res.send(users);
 }));
 
-router.post('/signup', validate(UserSignupDto), handler(async (req, res, next) => {
+router.post('/signup', validate(UserSignupDto), handler(async (req, res) => {
   const user = await controllers.signup(req.body);
   res.send(user);
 }));
 
-router.post('/signin', validate(UserSigninDto), handler(async (req, res, next) => {
+router.post('/signin', validate(UserSigninDto), handler(async (req, res) => {
   const user = await controllers.signin(req.body);
   req.session!.userId = user.id;
   req.session!.userRole = user.role;
   res.send(user);
 }));
 
-router.get('/:userId', userMiddleware, handler(async (req, res, next) => {
+router.get('/:userId', userMiddleware, handler(async (req, res) => {
   const user = await controllers.getUser(req.params.userId);
   res.send(user);
 }));
 
-router.patch('/:userId', validate(UserUpdateDto), userMiddleware, handler(async (req, res, next) => {
+router.patch('/:userId', validate(UserUpdateDto), userMiddleware, handler(async (req, res) => {
   const user = await controllers.updateUser(req.params.userId, req.body);
   res.send(user);
 }));
 
-router.delete('/:userId', userMiddleware, handler(async (req, res, next) => {
+router.delete('/:userId', userMiddleware, handler(async (req, res) => {
   await controllers.deleteUser(req.params.userId);
   const users = await controllers.getUsers();
   res.send(users);
