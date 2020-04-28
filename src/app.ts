@@ -24,7 +24,7 @@ app.set('trust proxy', true);
 
 /*  Redis */
 let store;
-if (config.mode !== MODES.LOCAL) {
+if (redisConfig.enabled) {
   const redisClient = redis.createClient({
     host: redisConfig.host,
     port: redisConfig.port,
