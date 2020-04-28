@@ -54,12 +54,13 @@ app.use((req, res, next) => {
 });
 
 /*  Error middleware  */
-const errorHandler: ErrorRequestHandler = (err, req, res, _) => {
+app.use(((err, req, res, _) => {
   logger.error(err.message);
-  if (!err.status) logger.error(err);
+  if (!err.status) {
+    logger.error(err);
+  }
   res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send({ error: err.message });
-};
-app.use(errorHandler);
+}) as ErrorRequestHandler);
 
 /*  Server error handlers */
 process.on('uncaughtException', (e) => logger.error(e));
