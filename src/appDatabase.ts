@@ -8,11 +8,11 @@ const client = new PrismaClient();
 client
   .connect()
   .then(() => {
-    logger.info(`Connected to database at url ${config.db_url}`);
+    logger.info(`Connected to database at url ${config.dbUrl}`);
   })
   .catch((error) => {
     logger.error(error);
-    logger.error(`Can't connect to database at url ${config.db_url}`);
+    logger.error(`Can't connect to database at url ${config.dbUrl}`);
   });
 
 export default client;
