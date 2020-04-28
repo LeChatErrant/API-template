@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 
-import { config, redisConfig, MODES } from './appConfig';
+import { config, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
 
