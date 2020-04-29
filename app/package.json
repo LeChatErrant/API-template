@@ -6,7 +6,7 @@
     "build": "tsc",
     "test": "exit 0",
     "integration": "exit 0",
-    "start": "npm run db:up && node dist/app.js",
+    "start": "node dist/app.js",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p 5432:5432 -d postgres:alpine",
     "dev": "concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --no-notify src/app.ts'",
     "generate": "prisma generate",
