@@ -54,6 +54,7 @@ app.use((req, res, next) => {
 });
 
 /*  Error middleware  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(((err, req, res, _) => {
   logger.error(err.message);
   if (!err.status) {

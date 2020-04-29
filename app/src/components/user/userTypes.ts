@@ -33,4 +33,3 @@ export class UserUpdateDto {
   @IsOptional()
   password!: string;
 }
-
