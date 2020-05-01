@@ -68,6 +68,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "lib": ["es2020"]
+  ]
 }
