@@ -13,6 +13,8 @@
     "db": "npm run db:migrate && npm run db:up",
     "db:migrate": "prisma migrate save --create-db --experimental",
     "db:up": "prisma migrate up --create-db --experimental",
+    "db:format": "prisma format",
+    "db:studio": "prisma studio --experimental --port 3000",
     "lint": "eslint './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
@@ -36,8 +38,8 @@
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "dependencies": {
-    "@prisma/cli": "^2.0.0-beta.3",
-    "@prisma/client": "^2.0.0-beta.3",
+    "@prisma/cli": "^2.0.0-beta.4",
+    "@prisma/client": "^2.0.0-beta.4",
     "bcrypt": "^4.0.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",

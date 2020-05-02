@@ -8,12 +8,12 @@ datasource db {
 }
 
 model User {
-  id        String    @default(cuid()) @id
-  email     String    @unique
+  id        String   @default(cuid()) @id
+  email     String   @unique
   password  String
   name      String?
-  role      Role      @default(USER)
-  createdAt DateTime  @default(now())
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
 }
 
 enum Role {
