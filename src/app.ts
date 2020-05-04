@@ -6,7 +6,7 @@ import httpStatus from 'http-status-codes';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 
-import { config, redisConfig } from './appConfig';
+import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
 
@@ -40,6 +40,7 @@ if (redisConfig.enabled) {
 /*  Express session */
 app.use(session({
   secret: config.sessionSecret,
+  cookie: { httpOnly: true, secure: config.mode === MODES.PROD },
   resave: false,
   saveUninitialized: false,
   store,
