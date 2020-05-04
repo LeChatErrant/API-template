@@ -15,7 +15,8 @@
     "db:up": "prisma migrate up --create-db --experimental",
     "db:format": "prisma format",
     "db:studio": "prisma studio --experimental --port 3000",
-    "lint": "eslint './src/**/*.{ts,tsx}'"
+    "lint": "eslint './src/**/*.{ts,tsx}' --fix",
+    "lint:ci": "eslint './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
   "author": "",
