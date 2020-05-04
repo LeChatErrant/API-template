@@ -12,7 +12,7 @@ export const config = {
   sessionSecret: get('SESSION_SECRET').required().asString(),
   mode: get('MODE').required().asEnum(Object.values(MODES)),
   dbUrl: get('DB_URL').required().asString(),
-  saltRounds: 12,
+  saltLength: 32,
 };
 
 const redisEnabled = config.mode !== MODES.LOCAL;

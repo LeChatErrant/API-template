@@ -1,9 +1,8 @@
-import bcrypt from 'bcrypt';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 
-import { config } from '../../appConfig';
 import db from '../../appDatabase';
+import { hashPassword, verifyPassword } from '../../utils/hash';
 
 import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 
@@ -15,9 +14,6 @@ const userWithoutPassword = {
   createdAt: true,
 };
 
-function hashPassword(password: string) {
-  return bcrypt.hash(password, config.saltRounds);
-}
 
 export async function signup(payload: UserSignupDto) {
   const hashedPassword = await hashPassword(payload.password);
@@ -35,7 +31,7 @@ export async function signin(payload: UserSigninDto) {
   const user = await db.user.findOne({
     where: { email: payload.email },
   });
-  if (!user || !bcrypt.compareSync(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
+  if (!user || !await verifyPassword(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
   delete user.password;
   return user;
 }
