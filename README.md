@@ -1,31 +1,14 @@
 # typescript-server-template
+![Lint](https://github.com/LeChatErrant/API-template/workflows/Lint/badge.svg)
+![Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
+![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
+![Dependabot](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
+
 Simple typescript server template
 
 ### Notes
 
 Simple typescript server template to easily start a new project
-
-Comes with : 
- * Typescript configuration
- * Airbnb linter
- * Dockerfile
- * Docker-compose
- * Dev tooling to easily work (see package.json)
- * Environment-based configuration
- * Environment type checking
- * Custom logger, with errors.logs and all.logs saved to files
- * Route logger
- * Sessions stored on redis
- * Postgresql database
- * Prisma ORM
- * Migrations
- * Error middlewares
- * User management
- * User role system
- * Handling of error throwned in async routes
- * Validation middleware
- * Various middlewares to protect routes (logged, user, admin) and combination logic
- * Unhandled error handling
 
 The purpose of this template is to provide a typesafe production ready webserver and a fully setup dev-environment with the most possible tooling
 
