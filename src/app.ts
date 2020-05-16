@@ -66,6 +66,7 @@ app.use(((err, req, res, _) => {
 
 /*  Server error handlers */
 process.on('uncaughtException', (e) => logger.error(e));
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 process.on('unhandledRejection', (e: any) => logger.error(e ? e.stack : e));
 
 app.listen(port, () => logger.info(`Server listening on port ${port}...`));
