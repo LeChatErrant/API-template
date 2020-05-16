@@ -3,6 +3,7 @@
 ![Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
 ![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
+![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
 
 Simple typescript server template
 
