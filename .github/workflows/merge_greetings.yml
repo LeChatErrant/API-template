@@ -12,5 +12,5 @@ jobs:
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@master
         with:
-          message: '![Congratulation!](/.github/assets/congratulation.gif)'
+          message: '![Congratulation!](https://github.com/LeChatErrant/API-template/.github/assets/congratulation.gif)'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
