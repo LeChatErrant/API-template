@@ -2,12 +2,16 @@ import winston from 'winston';
 
 import { config, MODES } from './appConfig';
 
+const customFormat = winston.format.printf(({
+  level, message, timestamp,
+}) => `${timestamp} | ${level}: ${message}`);
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
     winston.format.colorize(),
     winston.format.timestamp(),
-    winston.format.simple(),
+    customFormat,
   ),
   transports: [
     //
