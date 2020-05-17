@@ -21,7 +21,7 @@ The purpose of this template is to provide a typesafe production ready webserver
 
 Application is configured through *environment variables*
 
-###### Modes
+##### Modes
 
 The environment variable `MODE` can be set either to *local*, *dev*, or *prod*
 
@@ -33,7 +33,7 @@ The environment variable `MODE` can be set either to *local*, *dev*, or *prod*
 
 The template comes with a nicely configured development environment
 
-###### Configuration
+##### Configuration
 
 Pre-configured environment variables are available in the [.envrc](/.envrc) file. Use it to configure your application during development
 
@@ -41,23 +41,23 @@ Pre-configured environment variables are available in the [.envrc](/.envrc) file
 
 > Even environment variables are typed and validated thanks to [env-var](https://www.npmjs.com/package/env-var)
 
-###### Database
+##### Database
 
 You can run a simple development database by running `npm run dev:db`
 
 It will launch a single local database exposed on port `5432`
 
-###### Local mode
+##### Local mode
 
 During development, simply run `npm run dev` to launch dev mode (don't forget to set `MODE` at *local*)
 
 It will continuously watch your files to reload the API as you code, and will even regenerate the ORM on schema's changes!
 
-> Dev mode is configured to use the dev database by default 
+> Dev mode is configured to use the dev database by default
 >
 > Local storage is used for sessions when `MODE` is set at *local*, so you don't even need to launch redis
 
-###### Prisma studio
+##### Prisma studio
 
 You can access and edit your database in a web interface by running `npm run db:studio`
 
@@ -97,7 +97,7 @@ I choosed [Prisma](https://www.prisma.io/), which is in my mind the most conveni
 
 It guaranties type safety from your database model, is very-well designed, and comes along with a great documentation and useful tooling (such as automatic migrations or web database editor).
 
-###### Schema
+##### Schema
 
 With Prisma, schema is written in PSL (Prisma Schema Language). It makes you model pretty straightforward
 
@@ -126,7 +126,7 @@ enum Role {
 }
 ```
 
-###### Generation
+##### Generation
 
 Prisma is a generated ORM.
 
@@ -142,7 +142,7 @@ It can be achieved through `npm run generate`
 |---|
 | *Client workflow from [prisma documentation](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/generating-prisma-client)* |
 
-###### Migrations
+##### Migrations
 
 Changing your database model is not changing what's in your database. That's why you need *migrations*
 
@@ -151,7 +151,7 @@ Migrations describe changes in your database.
 Generate it with `npm run db:migrate` once you're satisfied with your new model
 > It will be generated in [prisma/migration](/prisma/migrations)
 
-Once generated, apply it on your database with `npm run db:up` 
+Once generated, apply it on your database with `npm run db:up`
 > Be careful! It's not automated as it is a potentially *destructive* operation (eg: user table)
 
 | ![Prisma migrations](https://i.imgur.com/OImder6.png) |
@@ -162,9 +162,9 @@ Once generated, apply it on your database with `npm run db:up`
 
 ## Linter
 
-Code styling is handled by [eslint](https://eslint.org/) 
+Code styling is handled by [eslint](https://eslint.org/)
 
-We're using the AirBnb configuration (the most used one), extended for typescript. It will ensure coherence across the whole codebase, and make sure you're following general good practices 
+We're using the AirBnb configuration (the most used one), extended for typescript. It will ensure coherence across the whole codebase, and make sure you're following general good practices
 
 You can run the linter manually and fix errors with `npm run lint`
 
@@ -194,24 +194,24 @@ It means
 
 The template comes with a [*Dockerfile*](/Dockerfile) and a [*docker-compose.yml*](/docker-compose.yml)
 
-###### Services
+##### Services
 
 Docker-compose launches 3 services:
  * Database
  * Redis
  * Application
- 
-###### Persistence
+
+##### Persistence
 
 It creates a binded mount on logs directory to make logs persistent adn available from outside the container
 
 It creates a volume on `/var/lib/postgresql/data` to make database storage persistent
 
-###### Security
+##### Security
 
 Database and redis are not exposed to the world directly and are made reachable from the application thanks to docker sub network
 
-Database and redis are secured with password and 
+Database and redis are secured with password and
 
 The application is not running as `root` user inside the docker
 
@@ -234,17 +234,17 @@ The route logger middleware [morgan](https://www.npmjs.com/package/morgan) is in
 
 ## Documentation
 
-###### Swagger
+##### Swagger
 
 > Coming soon
 
-###### Postman
+##### Postman
 
 A [postman collection](/App.postman_collection.json) is available to test application routes
 
 ## Error handling
 
-###### Error responses
+##### Error responses
 
 All errors from the app are catched with an *error middleware*, and forwarded to the user.
 
@@ -254,7 +254,7 @@ This middleware catch [http-errors](https://www.npmjs.com/package/http-errors), 
 
 Any unknown errors are logged on `stdout` (to give hints to developers) and are converted into a `500` response
 
-###### Async handler
+##### Async handler
 
 Express doesn't handle errors thrown in an async context. It means that even with an error middleware, errors won't be catched if they are thrown from an async handler
 
@@ -266,11 +266,11 @@ router.post('/signin', handler(async (req, res) => {
 }));
 ```
 
-###### Not found
+##### Not found
 
 A middleware handling not found routes is present, formatting a NotFound error passed the the error middleware, as every other errors
 
-###### Unhandled errors
+##### Unhandled errors
 
 It happens to have some left unhandled promise rejections or uncaught exceptions
 
@@ -280,30 +280,30 @@ Don't worry, your application won't crash : they are handled too and are logged 
 
 The template comes with basic user management logic
 
-###### Routes
+##### Routes
 
 | Method | Route | Description |
-|---|---|---| 
+|---|---|---|
 | `GET` | `/users` | User list |
-|---|---|---| 
+|---|---|---|
 | `POST` | `/users/signup` | Signup |
-|---|---|---| 
+|---|---|---|
 | `POST` | `/users/signin` | Signin |
-|---|---|---| 
+|---|---|---|
 | `GET` | `/users/:id` | User information |
-|---|---|---| 
+|---|---|---|
 | `PATCH` | `/users/:id` | Update user |
-|---|---|---| 
+|---|---|---|
 | `DELETE` | `/users/:id` | Delete user |
-|---|---|---| 
+|---|---|---|
 
-###### Security
+##### Security
 
 Passwords are stored hashed in the database. The algorithm in use is [argon2](https://www.npmjs.com/package/argon2)
 
 Passwords need to have a length of at least 8 bytes
 
-###### Route protection
+##### Route protection
 
 Some routes need the user to be logged
 
@@ -322,7 +322,7 @@ The *userMiddleware* is used to protect routes accessing specific user resources
  * Make sure `userId` is present in the URL (eg: `GET` `/users/:userId/someResource`)
  * Make sure the `userId` is the id of the current user **or** that the user is admin
  * Allow using *me* as `userId` (eg: `GET` `/users/me/someResource`)
- 
+
 > You can compose middlewares thanks to the [compose-middleware](https://www.npmjs.com/package/compose-middleware) module.
 >
 > It allows you some fancy syntax such as `export default compose([authMiddleware, userMiddleware]);`
@@ -331,21 +331,21 @@ The *userMiddleware* is used to protect routes accessing specific user resources
 
 ## Role system
 
-###### Roles
+##### Roles
 
 The template has a *role* system
 
 Two roles are available :
  * USER
  * ADMIN
- 
+
 When a new user signup, he is attributed the role of *USER*
 
 *ADMIN* can access other user resources and some private routes
 
 For example, the `GET` `/users` route to list all users (useful for monitoring or to create an admin console) is not available for a *USER* but is available for an *ADMIN*
 
-###### Route protection
+##### Route protection
 
 You can make a route accessible only by an *ADMIN* with the *adminMiddleware*. Admin middleware ensure the user is logged in and got the *ADMIN* role
 
