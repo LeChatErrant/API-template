@@ -222,11 +222,11 @@ The application comes with a custom logger made with [winston](https://www.npmjs
 It allows you to output nicely formated logs as simply as
 ```javascript
 logger.info('Server listening on 8000')
-````
+```
 
 Error logs are written into `logs/error.log`, and a mix of all logs level from info are written into `logs/all.log`
 
-In production mode, logs are written in `stdout`, only in files
+In production mode, logs are not written in `stdout`, only in files
 > This is essential as console.log is a blocking operation
 >
 > It reduces the IO usage too
