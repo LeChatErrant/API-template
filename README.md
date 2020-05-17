@@ -1,4 +1,4 @@
-# typescript-server-template
+# API-template
 ![Lint](https://github.com/LeChatErrant/API-template/workflows/Lint/badge.svg)
 ![Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
 ![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
