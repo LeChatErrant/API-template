@@ -152,7 +152,7 @@ Generate it with `npm run db:migrate` once you're satisfied with your new model
 > It will be generated in [prisma/migration](/prisma/migrations)
 
 Once generated, apply it on your database with `npm run db:up`
-> Be careful! It's not automated as it is a potentially *destructive* operation (eg: user table)
+> Be careful! It's not automated as it is a potentially *destructive* operation (eg: removing user table)
 
 | ![Prisma migrations](https://i.imgur.com/OImder6.png) |
 |---|
