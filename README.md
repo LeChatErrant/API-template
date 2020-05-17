@@ -203,7 +203,7 @@ Docker-compose launches 3 services:
 
 ##### Persistence
 
-It creates a binded mount on logs directory to make logs persistent adn available from outside the container
+It creates a binded mount on logs directory to make logs persistent and available from outside the container
 
 It creates a volume on `/var/lib/postgresql/data` to make database storage persistent
 
