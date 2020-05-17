@@ -286,19 +286,13 @@ The template comes with basic user management logic
 ##### Routes
 
 | Method | Route | Description |
-|---|---|---|
+| --- | --- | --- |
 | `GET` | `/users` | User list |
-|---|---|---|
 | `POST` | `/users/signup` | Signup |
-|---|---|---|
 | `POST` | `/users/signin` | Signin |
-|---|---|---|
 | `GET` | `/users/:id` | User information |
-|---|---|---|
 | `PATCH` | `/users/:id` | Update user |
-|---|---|---|
 | `DELETE` | `/users/:id` | Delete user |
-|---|---|---|
 
 ##### Security
 
