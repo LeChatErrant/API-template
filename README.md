@@ -61,7 +61,7 @@ It will continuously watch your files to reload the API as you code, and will ev
 
 You can access and edit your database in a web interface by running `npm run db:studio`
 
-[Prisma studio](.github/assets/studio.png)
+![Prisma studio](.github/assets/studio.png)
 
 ## Deployed mode
 
