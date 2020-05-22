@@ -38,7 +38,7 @@
     "ts-node-dev": "^1.0.0-pre.44"
   },
   "dependencies": {
-    "@prisma/cli": "^2.0.0-beta.5",
+    "@prisma/cli": "^2.0.0-beta.4",
     "@prisma/client": "^2.0.0-beta.5",
     "argon2": "^0.26.2",
     "class-transformer": "^0.2.3",
