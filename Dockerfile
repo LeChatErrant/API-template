@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:lts-alpine
 
 RUN mkdir /app && mkdir /app/logs -p && chown node: /app -R
 
