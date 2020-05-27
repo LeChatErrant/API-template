@@ -5,11 +5,9 @@
 ![Dependabot](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
 ![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
 
-Simple typescript server template
+Simple production-ready API template
 
 ### Notes
-
-Simple typescript server template to easily start a new project
 
 The purpose of this template is to provide a typesafe production ready webserver and a fully setup dev-environment with the most possible tooling
 
