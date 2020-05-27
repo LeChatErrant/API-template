@@ -49,7 +49,7 @@ app.use(session({
 }));
 
 /*  Documentation */
-app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(doc.swaggerDefinition, doc.swaggerUIOptions));
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(doc.swaggerDefinition, doc.swaggerUIOptions));
 
 /*  Routes  */
 app.use(router);
