@@ -294,7 +294,7 @@ The template comes with basic user management logic
 
 ##### Security
 
-Passwords are stored hashed in the database. The algorithm in use is [argon2](https://www.npmjs.com/package/argon2)
+Passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 Passwords need to have a length of at least 8 bytes
 
