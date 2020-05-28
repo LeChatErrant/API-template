@@ -10,6 +10,25 @@ import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management and authentification
+ */
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: List users
+ *     tags: [Users]
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: users
+ */
 router.get('/', adminMiddleware, handler(async (req, res) => {
   const users = await controllers.getUsers();
   res.send(users);

@@ -10,7 +10,7 @@ import swaggerUI from 'swagger-ui-express';
 import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
-import doc from './appDoc';
+import { swaggerSpec, swaggerUiOptions } from './appDoc';
 
 /*  Express server  */
 const app = express();
@@ -49,7 +49,7 @@ app.use(session({
 }));
 
 /*  Documentation */
-app.use('/doc', swaggerUI.serve, swaggerUI.setup(doc.swaggerDefinition, doc.swaggerUIOptions));
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerSpec, swaggerUiOptions));
 
 /*  Routes  */
 app.use(router);
