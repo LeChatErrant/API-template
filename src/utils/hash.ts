@@ -1,11 +1,11 @@
-import argon2 from 'argon2';
+import bcrypt from 'bcrypt';
 
 import { config } from '../appConfig';
 
 export async function hashPassword(password: string) {
-  return argon2.hash(password, { saltLength: config.saltLength });
+  return bcrypt.hash(password, config.saltRounds);
 }
 
 export function verifyPassword(password: string, cryptedPassword: string) {
-  return argon2.verify(cryptedPassword, password);
+  return bcrypt.compare(password, cryptedPassword);
 }

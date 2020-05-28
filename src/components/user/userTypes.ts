@@ -1,5 +1,5 @@
 import {
-  IsEmail, IsOptional, IsString, MinLength,
+  IsEmail, IsOptional, IsString, MinLength, MaxLength,
 } from 'class-validator';
 
 export class UserSignupDto {
@@ -12,6 +12,7 @@ export class UserSignupDto {
 
   @IsString()
   @MinLength(8)
+  @MaxLength(64)
   password!: string;
 }
 
@@ -34,6 +35,7 @@ export class UserUpdateDto {
 
   @IsString()
   @MinLength(8)
+  @MaxLength(64)
   @IsOptional()
   password!: string;
 }
