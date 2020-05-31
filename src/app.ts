@@ -5,12 +5,10 @@ import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
-import swaggerUI from 'swagger-ui-express';
 
 import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
-import { swaggerSpec, swaggerUiOptions } from './appDoc';
 
 /*  Express server  */
 const app = express();
@@ -47,9 +45,6 @@ app.use(session({
   saveUninitialized: false,
   store,
 }));
-
-/*  Documentation */
-app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerSpec, swaggerUiOptions));
 
 /*  Routes  */
 app.use(router);
