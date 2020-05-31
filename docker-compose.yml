@@ -19,6 +19,19 @@ services:
     volumes:
       - ./logs:/app/logs
 
+  studio:
+    container_name: studio
+    build: .
+    command:
+      - db:studio
+    environment:
+      - DB_URL
+      - STUDIO_PORT
+    ports:
+      - "${STUDIO_PORT}:${STUDIO_PORT}"
+    networks:
+      - backend
+
   redis:
     container_name: redis
     image: bitnami/redis:latest

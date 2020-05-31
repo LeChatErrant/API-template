@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts
 
 RUN mkdir /app && mkdir /app/logs -p && chown node: /app -R
 
@@ -12,4 +12,5 @@ RUN npm run build
 
 EXPOSE $PORT
 
-CMD [ "npm", "start" ]
+ENTRYPOINT [ "npm", "run" ]
+CMD [ "start" ]
