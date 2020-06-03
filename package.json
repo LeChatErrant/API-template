@@ -8,7 +8,7 @@
     "integration": "exit 0",
     "start": "npm run db:up && node dist/app.js",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
-    "dev": "concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --no-notify src/app.ts'",
+    "dev": "npm run db:up && concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --no-notify src/app.ts'",
     "generate": "prisma generate",
     "db": "npm run db:migrate && npm run db:up",
     "db:migrate": "prisma migrate save --create-db --experimental",
