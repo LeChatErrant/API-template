@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  lint:
+  greet:
     runs-on: ubuntu-latest
 
     steps:
