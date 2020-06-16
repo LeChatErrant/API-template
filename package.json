@@ -36,7 +36,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-plugin-import": "^2.21.2",
-    "ts-node-dev": "^1.0.0-pre.47"
+    "ts-node-dev": "^1.0.0-pre.48"
   },
   "dependencies": {
     "@prisma/cli": "^2.0.0",
