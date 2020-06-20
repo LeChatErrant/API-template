@@ -14,7 +14,6 @@ const userWithoutPassword = {
   createdAt: true,
 };
 
-
 export async function signup(payload: UserSignupDto) {
   const hashedPassword = await hashPassword(payload.password);
   try {
