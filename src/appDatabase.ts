@@ -3,7 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import logger from './appLogger';
 import { config } from './appConfig';
 
-const client = new PrismaClient();
+const client = new PrismaClient({
+  log: ['info', 'warn'],
+});
 
 client
   .connect()
