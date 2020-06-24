@@ -55,6 +55,6 @@
     "morgan": "^1.10.0",
     "redis": "^3.0.2",
     "typescript": "^3.9.5",
-    "winston": "^3.3.2"
+    "winston": "^3.3.3"
   }
 }
