@@ -39,7 +39,7 @@
     "ts-node-dev": "^1.0.0-pre.49"
   },
   "dependencies": {
-    "@prisma/cli": "^2.0.1",
+    "@prisma/cli": "^2.1.0",
     "@prisma/client": "^2.1.0",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.2.3",
