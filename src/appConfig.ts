@@ -1,5 +1,7 @@
 import { get } from 'env-var';
 
+const env = (name: string, required = true) => get(name).required(required);
+
 export enum MODES {
   TEST = 'test',
   LOCAL = 'local',
@@ -8,10 +10,10 @@ export enum MODES {
 }
 
 export const config = {
-  port: get('PORT').required().asPortNumber(),
-  sessionSecret: get('SESSION_SECRET').required().asString(),
-  mode: get('MODE').required().asEnum(Object.values(MODES)),
-  dbUrl: get('DB_URL').required().asString(),
+  port: env('PORT').asPortNumber(),
+  sessionSecret: env('SESSION_SECRET').asString(),
+  mode: env('MODE').asEnum(Object.values(MODES)),
+  dbUrl: env('DB_URL').asString(),
   saltRounds: 12,
 };
 
@@ -19,7 +21,7 @@ const redisEnabled = config.mode !== MODES.LOCAL;
 
 export const redisConfig = {
   enabled: redisEnabled,
-  port: get('REDIS_PORT').required(redisEnabled).asPortNumber(),
-  host: get('REDIS_HOST').required(redisEnabled).asString(),
-  password: get('REDIS_PASS').required(redisEnabled).asString(),
+  port: env('REDIS_PORT', redisEnabled).asPortNumber(),
+  host: env('REDIS_HOST', redisEnabled).asString(),
+  password: env('REDIS_PASS', redisEnabled).asString(),
 };
