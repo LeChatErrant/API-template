@@ -54,7 +54,7 @@
     "http-status-codes": "^1.4.0",
     "morgan": "^1.10.0",
     "redis": "^3.0.2",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.6",
     "winston": "^3.3.3"
   }
 }
