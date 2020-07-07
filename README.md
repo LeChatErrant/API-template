@@ -269,7 +269,7 @@ router.post('/signin', handler(async (req, res) => {
 
 ##### Not found
 
-A middleware handling not found routes is present, formatting a NotFound error passed the the error middleware, as every other errors
+A middleware handling not found routes is present, formatting a NotFound error passed the error middleware, as every other errors
 
 ##### Unhandled errors
 
