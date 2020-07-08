@@ -6,6 +6,9 @@ import httpStatus from 'http-status-codes';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 
+/*  This import is only used for class-transformer side effects */
+import 'reflect-metadata';
+
 import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
