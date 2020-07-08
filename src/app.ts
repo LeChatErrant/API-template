@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 app.use(((err, req, res, _) => {
   logger.error(err.message);
   if (!err.status) {
-    logger.error(err);
+    console.error(err);
   }
   res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send({ error: err.message });
 }) as ErrorRequestHandler);
