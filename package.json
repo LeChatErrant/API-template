@@ -48,7 +48,7 @@
     "@prisma/cli": "^2.3.0",
     "@prisma/client": "^2.3.0",
     "bcrypt": "^5.0.0",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "compose-middleware": "^5.0.1",
     "connect-redis": "^5.0.0",
