@@ -4,9 +4,9 @@ import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 import handler from 'express-async-handler';
+import { ClassType } from 'class-transformer/ClassTransformer';
 
-/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-function validationMiddleware(type: any): RequestHandler {
+function validationMiddleware<T>(type: ClassType<T>): RequestHandler {
   return handler(async (req, res, next) => {
     const parsedBody = plainToClass(type, req.body);
     const errors = await validate(parsedBody);
