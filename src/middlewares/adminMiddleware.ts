@@ -2,7 +2,6 @@ import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 import { Role } from '@prisma/client';
-import { compose } from 'compose-middleware';
 
 import authMiddleware from './authMiddleware';
 
@@ -14,4 +13,4 @@ const adminMiddleware: RequestHandler = (req, res, next) => {
   }
 };
 
-export default compose([authMiddleware, adminMiddleware]);
+export default [authMiddleware, adminMiddleware];
