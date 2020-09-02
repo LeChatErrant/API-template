@@ -34,7 +34,7 @@
     "@types/http-errors": "^1.8.0",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.6.2",
-    "@types/redis": "^2.8.26",
+    "@types/redis": "^2.8.27",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.33.0",
     "concurrently": "^5.3.0",
