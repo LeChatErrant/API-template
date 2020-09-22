@@ -19,7 +19,7 @@
     "db:migrate": "prisma migrate save --create-db --experimental",
     "db:up": "prisma migrate up --create-db --experimental",
     "db:format": "prisma format",
-    "db:studio": "prisma studio --experimental --port ${STUDIO_PORT}",
+    "db:studio": "prisma studio --port ${STUDIO_PORT}",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'"
   },
