@@ -37,6 +37,8 @@ Pre-configured environment variables are available in the [.envrc](/.envrc) file
 
 .envrc files are automatically loaded by [direnv](https://direnv.net/). I strongly recommand installing it along with its shell hook, to have an isolated development environment
 
+If, for any reason, you don't want to / you can't use direnv, simply `source .envrc` to load environment variables into your shell
+
 > Even environment variables are typed and validated thanks to [env-var](https://www.npmjs.com/package/env-var)
 
 ##### Database
