@@ -1,6 +1,9 @@
 import {
   IsEmail, IsOptional, IsString, MinLength, MaxLength,
 } from 'class-validator';
+import { Role } from '@prisma/client';
+
+import { Ro } from '../../appRo';
 
 export class UserSignupDto {
   @IsEmail()
@@ -38,4 +41,12 @@ export class UserUpdateDto {
   @MaxLength(64)
   @IsOptional()
   password!: string;
+}
+
+export interface UserRo extends Ro {
+  id: string;
+  email: string;
+  name: string | null;
+  role: Role;
+  createdAt: Date;
 }

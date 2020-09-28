@@ -12,6 +12,7 @@ import 'reflect-metadata';
 import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
+import { ErrorRo } from './appRo';
 
 /*  Express server  */
 const app = express();
@@ -66,7 +67,10 @@ app.use(((err, req, res, _) => {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-  res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR).send({ error: err.message });
+  const status = err.status || httpStatus.INTERNAL_SERVER_ERROR;
+  res
+    .status(status)
+    .send(ErrorRo(status, err.message));
 }) as ErrorRequestHandler);
 
 /*  Server error handlers */

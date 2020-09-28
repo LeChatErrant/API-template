@@ -5,22 +5,15 @@ import db from '../../appDatabase';
 import { hashPassword, verifyPassword } from '../../utils/hash';
 
 import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
-
-const userWithoutPassword = {
-  id: true,
-  email: true,
-  name: true,
-  role: true,
-  createdAt: true,
-};
+import { buildUserRo } from './userHelpers';
 
 export async function signup(payload: UserSignupDto) {
   const hashedPassword = await hashPassword(payload.password);
   try {
-    return await db.user.create({
+    const user = await db.user.create({
       data: { ...payload, password: hashedPassword },
-      select: userWithoutPassword,
     });
+    return buildUserRo(user);
   } catch (error) {
     throw createError(httpStatus.CONFLICT, `A user with email ${payload.email} already exists`);
   }
@@ -31,24 +24,22 @@ export async function signin(payload: UserSigninDto) {
     where: { email: payload.email },
   });
   if (!user || !await verifyPassword(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
-  delete user.password;
-  return user;
+  return buildUserRo(user);
 }
 
 export async function getUsers() {
-  return db.user.findMany({
-    select: userWithoutPassword,
+  const users = await db.user.findMany({
     orderBy: { createdAt: 'desc' },
   });
+  return users.map((user) => buildUserRo(user));
 }
 
 export async function getUser(id: string) {
   const user = await db.user.findOne({
     where: { id },
-    select: userWithoutPassword,
   });
   if (!user) throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
-  return user;
+  return buildUserRo(user);
 }
 
 export async function updateUser(id: string, fields: UserUpdateDto) {
@@ -56,9 +47,8 @@ export async function updateUser(id: string, fields: UserUpdateDto) {
     const user = await db.user.update({
       where: { id },
       data: fields,
-      select: userWithoutPassword,
     });
-    return user;
+    return buildUserRo(user);
   } catch (error) {
     throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
   }
@@ -67,6 +57,7 @@ export async function updateUser(id: string, fields: UserUpdateDto) {
 export async function deleteUser(id: string) {
   try {
     await db.user.delete({ where: { id } });
+    return getUsers();
   } catch (error) {
     throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
   }
