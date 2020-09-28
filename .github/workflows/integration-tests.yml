@@ -3,7 +3,14 @@ name: Integration tests
 on:
   push:
     branches-ignore:
-    - gh-pages
+     - gh-pages
+    paths:
+      - package.json
+      - package-lock.json
+      - prisma/**
+      - src/**
+      - tsconfig.json
+      - .github/workflows/integration-tests.yml
 
 jobs:
   integration-tests:

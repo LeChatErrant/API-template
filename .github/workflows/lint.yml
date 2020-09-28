@@ -4,6 +4,13 @@ on:
   push:
     branches-ignore:
       - gh-pages
+    paths:
+      - '**.ts'
+      - package.json
+      - package-lock.json
+      - tsconfig.json
+      - .eslintrc.js
+      - .github/workflows/lint.yml
 
 jobs:
   lint:

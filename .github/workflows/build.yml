@@ -4,6 +4,14 @@ on:
   push:
     branches:
      - master
+    paths:
+      - Dockerfile
+      - package.json
+      - package-lock.json
+      - prisma/**
+      - src/**
+      - tsconfig.json
+      - .github/workflows/build.yml
 
 jobs:
   build:
@@ -12,14 +20,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 100
-
-    - name: Check changed dependencies
-      uses: marceloprado/has-changed-path@master
-      id: app-deps
-      with:
-        paths: Dockerfile package.json package-lock.json prisma src tsconfig.json
 
     - name: Build and push the Docker image
       uses: docker/build-push-action@v1
