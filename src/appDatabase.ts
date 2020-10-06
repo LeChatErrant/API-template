@@ -8,7 +8,7 @@ const client = new PrismaClient({
 });
 
 client
-  .connect()
+  .$connect()
   .then(() => {
     logger.info(`Connected to database at url ${config.dbUrl}`);
   })
