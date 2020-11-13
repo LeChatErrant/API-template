@@ -27,7 +27,7 @@ export async function signin(payload: UserSigninDto) {
   return buildUserRo(user);
 }
 
-export async function getUsers() {
+export async function listUsers() {
   const users = await db.user.findMany({
     orderBy: { createdAt: 'desc' },
   });
@@ -57,7 +57,7 @@ export async function updateUser(id: string, fields: UserUpdateDto) {
 export async function deleteUser(id: string) {
   try {
     await db.user.delete({ where: { id } });
-    return getUsers();
+    return listUsers();
   } catch (error) {
     throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
   }

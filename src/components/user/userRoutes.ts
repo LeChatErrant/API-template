@@ -11,7 +11,7 @@ import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 const router = express.Router();
 
 router.get('/', adminMiddleware, handler(async (req, res) => {
-  const users = await controllers.getUsers();
+  const users = await controllers.listUsers();
   res.send(users);
 }));
 
@@ -39,7 +39,7 @@ router.patch('/:userId', validate(UserUpdateDto), userMiddleware, handler(async 
 
 router.delete('/:userId', userMiddleware, handler(async (req, res) => {
   await controllers.deleteUser(req.params.userId);
-  const users = await controllers.getUsers();
+  const users = await controllers.listUsers();
   res.send(users);
 }));
 
