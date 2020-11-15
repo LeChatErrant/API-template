@@ -7,7 +7,7 @@ const customFormat = winston.format.printf(({
 }) => `${timestamp} | ${level}: ${message}`);
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'http',
   format: winston.format.combine(
     winston.format.colorize(),
     winston.format.timestamp(),
@@ -30,5 +30,13 @@ const logger = winston.createLogger({
 if (config.mode !== MODES.PROD) {
   logger.add(new winston.transports.Console());
 }
+
+/*
+logger.stream = {
+  write: (message) => {
+    logger.http(message)
+  },
+};
+*/
 
 export default logger;

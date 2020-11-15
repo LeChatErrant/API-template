@@ -1,5 +1,4 @@
-import express, { ErrorRequestHandler } from 'express';
-import morgan from 'morgan';
+import express from 'express';
 import session from 'express-session';
 import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
@@ -12,14 +11,15 @@ import 'reflect-metadata';
 import { config, MODES, redisConfig } from './appConfig';
 import logger from './appLogger';
 import router from './components';
-import { ErrorRo } from './appRo';
+import requestLogger from './middlewares/requestLogger';
+import errorMiddleware from './middlewares/errorMiddleware';
 
 /*  Express server  */
 const app = express();
 const { port } = config;
 
 /*  Middlewares */
-app.use(morgan('tiny'));
+app.use(requestLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -54,24 +54,10 @@ app.use(session({
 app.use(router);
 
 /*  404 middleware  */
-app.use((req, res, next) => {
-  next(createError(httpStatus.NOT_FOUND, `${req.url} not found`));
-});
+app.use((req, res, next) => next(createError(httpStatus.NOT_FOUND, `${req.url} not found`)));
 
 /*  Error middleware  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use(((err, req, res, _) => {
-  logger.error(err.message);
-  // If the error is not an HTTP error, the whole object is printed through console.error
-  if (!createError.isHttpError(err)) {
-    // eslint-disable-next-line no-console
-    console.error(err);
-  }
-  const status = err.status ?? httpStatus.INTERNAL_SERVER_ERROR;
-  res
-    .status(status)
-    .send(ErrorRo(status, err.message));
-}) as ErrorRequestHandler);
+app.use(errorMiddleware);
 
 /*  Server error handlers */
 process.on('uncaughtException', (e) => logger.error(e));
