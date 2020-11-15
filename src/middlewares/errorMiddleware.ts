@@ -16,5 +16,5 @@ export default ((err, req, res, _) => {
   const status = err.status ?? httpStatus.INTERNAL_SERVER_ERROR;
   res
     .status(status)
-    .send(ErrorRo(status, err.message));
+    .send(ErrorRo(status, err.message.trimEnd()));
 }) as ErrorRequestHandler;
