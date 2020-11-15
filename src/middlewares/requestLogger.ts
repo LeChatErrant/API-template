@@ -1,10 +1,12 @@
 import morgan from 'morgan';
 import logger from '../appLogger';
 
-export default morgan('tiny', {
+const requestLogger = morgan('tiny', {
   stream: {
     write(msg: string) {
       logger.http(msg.trimEnd());
     },
   },
 });
+
+export default requestLogger;

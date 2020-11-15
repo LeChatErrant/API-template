@@ -6,7 +6,7 @@ import logger from '../appLogger';
 import { ErrorRo } from '../appRo';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default ((err, req, res, _) => {
+const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
   logger.error(err.message.trimEnd());
   // If the error is not an HTTP error, the whole object is printed through console.error
   if (!createError.isHttpError(err)) {
@@ -17,4 +17,6 @@ export default ((err, req, res, _) => {
   res
     .status(status)
     .send(ErrorRo(status, err.message.trimEnd()));
-}) as ErrorRequestHandler;
+};
+
+export default errorMiddleware;
