@@ -62,12 +62,12 @@ app.use((req, res, next) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(((err, req, res, _) => {
   logger.error(err.message);
-  if (!err.status) {
-    // If the error is not an HTTP error, the whole object is printed through console.error
+  // If the error is not an HTTP error, the whole object is printed through console.error
+  if (!createError.isHttpError(err)) {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-  const status = err.status || httpStatus.INTERNAL_SERVER_ERROR;
+  const status = err.status ?? httpStatus.INTERNAL_SERVER_ERROR;
   res
     .status(status)
     .send(ErrorRo(status, err.message));
