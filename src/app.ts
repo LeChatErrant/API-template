@@ -2,15 +2,14 @@ import express from 'express';
 import session from 'express-session';
 import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
-import redis from 'redis';
-import connectRedis from 'connect-redis';
 
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
 
-import { config, MODES, redisConfig } from './appConfig';
+import { config, MODES } from './appConfig';
 import logger from './appLogger';
 import router from './components';
+import store from './appStore';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
 
@@ -25,21 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 
 /*  Proxy rules */
 app.set('trust proxy', true);
-
-/*  Redis */
-let store;
-if (redisConfig.enabled) {
-  const redisClient = redis.createClient({
-    host: redisConfig.host,
-    port: redisConfig.port,
-    password: redisConfig.password,
-  });
-  redisClient.on('error', (err) => logger.error(err));
-
-  const RedisStore = connectRedis(session);
-  store = new RedisStore({ client: redisClient });
-  logger.info('Connecting to Redis...');
-}
 
 /*  Express session */
 app.use(session({
