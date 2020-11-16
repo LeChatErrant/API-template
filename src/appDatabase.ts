@@ -1,20 +1,20 @@
 import { PrismaClient } from '@prisma/client';
-
 import logger from './appLogger';
-import { config } from './appConfig';
 
 const client = new PrismaClient({
-  log: ['info', 'warn'],
+  log: [
+    {
+      emit: 'event',
+      level: 'info',
+    },
+    {
+      emit: 'event',
+      level: 'warn',
+    },
+  ],
 });
 
-client
-  .$connect()
-  .then(() => {
-    logger.info(`Connected to database at url ${config.dbUrl}`);
-  })
-  .catch((error) => {
-    logger.error(error);
-    logger.error(`Can't connect to database at url ${config.dbUrl}`);
-  });
+client.$on('info', (e) => logger.info(e.message));
+client.$on('warn', (e) => logger.warn(e.message));
 
 export default client;
