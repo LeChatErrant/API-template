@@ -6,6 +6,31 @@ import createError from 'http-errors';
 import handler from 'express-async-handler';
 import { ClassType } from 'class-transformer/ClassTransformer';
 
+/**
+ * Validate the request body
+ *
+ * @param type The DTO object, defining the shape of the body
+ * @throws 400 - Bad request | If at least one constraint is not respected
+ *
+ * @example
+ * import validate from 'middlewares/validationMiddleware'
+ *
+ * class UserSignupDto {
+ *  @IsEmail()
+ *  email!: string;
+ *
+ *  @IsString()
+ *  @IsOptional()
+ *  name!: string;
+ *
+ *  @IsString()
+ *  @MinLength(8)
+ *  @MaxLength(64)
+ *  password!: string;
+ * }
+
+ * router.post('/users/signup', validate(UserSignupDto), ...);
+ */
 function validationMiddleware<T>(type: ClassType<T>): RequestHandler {
   return handler(async (req, res, next) => {
     const parsedBody = plainToClass(type, req.body);

@@ -1,6 +1,4 @@
 import express from 'express';
-import createError from 'http-errors';
-import httpStatus from 'http-status-codes';
 
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
@@ -11,6 +9,7 @@ import router from './components';
 import session from './appSession';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
+import notFoundMiddleware from './middlewares/notFoundMiddleware';
 
 /*  Express server  */
 const app = express();
@@ -31,7 +30,7 @@ app.use(session);
 app.use(router);
 
 /*  404 middleware  */
-app.use((req, res, next) => next(createError(httpStatus.NOT_FOUND, `${req.url} not found`)));
+app.use(notFoundMiddleware);
 
 /*  Error middleware  */
 app.use(errorMiddleware);
