@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "test": "exit 0",
-    "integration": "exit 0",
+    "integration": "jest",
+    "integration:watch": "jest --watch",
     "start": "npm run db:up && node dist/app.js",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",

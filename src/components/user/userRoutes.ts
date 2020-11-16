@@ -1,5 +1,6 @@
 import express from 'express';
 import handler from 'express-async-handler';
+import httpStatus from 'http-status-codes';
 
 import userMiddleware from '../../middlewares/userMiddleware';
 import adminMiddleware from '../../middlewares/adminMiddleware';
@@ -17,7 +18,7 @@ router.get('/', adminMiddleware, handler(async (req, res) => {
 
 router.post('/signup', validate(UserSignupDto), handler(async (req, res) => {
   const user = await controllers.signup(req.body);
-  res.send(user);
+  res.status(httpStatus.CREATED).send(user);
 }));
 
 router.post('/signin', validate(UserSigninDto), handler(async (req, res) => {
