@@ -1,5 +1,4 @@
 import express from 'express';
-import session from 'express-session';
 import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
 
@@ -9,7 +8,7 @@ import 'reflect-metadata';
 import { config, MODES } from './appConfig';
 import logger from './appLogger';
 import router from './components';
-import store from './appStore';
+import session from './appSession';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
 
@@ -26,13 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set('trust proxy', true);
 
 /*  Express session */
-app.use(session({
-  secret: config.sessionSecret,
-  cookie: { httpOnly: true, secure: config.mode === MODES.PROD },
-  resave: false,
-  saveUninitialized: false,
-  store,
-}));
+app.use(session);
 
 /*  Routes  */
 app.use(router);

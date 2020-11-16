@@ -22,8 +22,10 @@ router.post('/signup', validate(UserSignupDto), handler(async (req, res) => {
 
 router.post('/signin', validate(UserSigninDto), handler(async (req, res) => {
   const user = await controllers.signin(req.body);
-  req.session!.userId = user.id;
-  req.session!.userRole = user.role;
+  req.session.user = {
+    id: user.id,
+    role: user.role,
+  };
   res.send(user);
 }));
 

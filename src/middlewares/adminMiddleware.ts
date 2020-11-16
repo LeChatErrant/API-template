@@ -6,7 +6,7 @@ import { Role } from '@prisma/client';
 import authMiddleware from './authMiddleware';
 
 const adminMiddleware: RequestHandler = (req, res, next) => {
-  if (req.session!.userRole === Role.ADMIN) {
+  if (req.session.user!.role === Role.ADMIN) {
     next();
   } else {
     next(createError(httpStatus.FORBIDDEN, 'You must be admin to perform this operation'));
