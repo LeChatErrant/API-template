@@ -5,7 +5,7 @@ import httpStatus from 'http-status-codes';
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
 
-import { config, MODES } from './appConfig';
+import { config } from './appConfig';
 import logger from './appLogger';
 import router from './components';
 import session from './appSession';
