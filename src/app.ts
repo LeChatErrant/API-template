@@ -35,8 +35,10 @@ app.use(notFoundMiddleware);
 /*  Error middleware  */
 app.use(errorMiddleware);
 
-/*  Server error handlers */
+/*  App error handlers */
+// eslint-disable-next-line no-console
 process.on('uncaughtException', (e) => console.error(e));
+// eslint-disable-next-line no-console
 process.on('unhandledRejection', (e) => console.error(e));
 
 app.listen(port, () => logger.info(`Server listening on port ${port}...`));
