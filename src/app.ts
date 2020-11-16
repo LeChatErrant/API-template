@@ -36,8 +36,7 @@ app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
 /*  Server error handlers */
-process.on('uncaughtException', (e) => logger.error(e));
-/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-process.on('unhandledRejection', (e: any) => logger.error(e ? e.stack : e));
+process.on('uncaughtException', (e) => console.error(e));
+process.on('unhandledRejection', (e) => console.error(e));
 
 app.listen(port, () => logger.info(`Server listening on port ${port}...`));
