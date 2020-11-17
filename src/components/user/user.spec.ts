@@ -1,5 +1,6 @@
 import supertest from 'supertest';
 import httpStatus from 'http-status-codes';
+import { Role } from '@prisma/client';
 
 import app from '../../app';
 import db from '../../appDatabase';
@@ -16,13 +17,21 @@ const baseUser = {
   password: 'password',
 };
 
-function validateUser(user: any) {
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+function validateUser(user: any, role = Role.USER) {
+  const now = new Date(Date.now());
+  const creationDate = new Date(user.createdAt);
+  expect(creationDate.getMinutes()).toBeLessThanOrEqual(now.getMinutes());
+  expect(creationDate.getMinutes()).toBeGreaterThanOrEqual(now.getMinutes() - 1);
+
   expect(user.email).toBe(baseUser.email);
   expect(user.name).toBe(baseUser.name);
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
+  expect(user.role).toBe(role);
 }
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
   const { body } = await request
     .post('/users/signup')
@@ -32,11 +41,14 @@ async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
   return body;
 }
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 async function signin(user: any, statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .post('/users/signin')
     .send(user)
     .expect(statusCodeExpected);
+
+  return body;
 }
 
 test('Signup', async () => {
@@ -99,5 +111,52 @@ test('Signup - Email length 64 maximum', async () => {
 });
 
 test('Signin', async () => {
+  let user = await signup(baseUser);
+  validateUser(user);
+  const { id } = user;
 
-})
+  user = await signin(baseUser);
+  validateUser(user);
+  expect(id).toBe(user.id);
+});
+
+test('Signin - Consecutive', async () => {
+  let user = await signup(baseUser);
+  validateUser(user);
+  const { id } = user;
+
+  user = await signin(baseUser);
+  validateUser(user);
+  expect(id).toBe(user.id);
+
+  user = await signin(baseUser);
+  validateUser(user);
+  expect(id).toBe(user.id);
+});
+
+test('Signin - Missing parameter', async () => {
+  await signin({}, httpStatus.BAD_REQUEST);
+});
+
+test('Signin - Wrong email format', async () => {
+  await signin({ ...baseUser, email: 'the@fuck@is@this' }, httpStatus.BAD_REQUEST);
+});
+
+test('Signin - Unknown account', async () => {
+  await signin(baseUser, httpStatus.UNAUTHORIZED);
+});
+
+test('Signin - Wrong email', async () => {
+  await signup(baseUser);
+  await signin({ ...baseUser, email: 'crack.me@something.fr' }, httpStatus.UNAUTHORIZED);
+});
+
+test('Signin - Wrong password', async () => {
+  await signup(baseUser);
+  await signin({ ...baseUser, password: 'crack me' }, httpStatus.UNAUTHORIZED);
+});
+
+test('Signin - Hiding password length informations', async () => {
+  await signin({ ...baseUser, password: 'short' }, httpStatus.UNAUTHORIZED);
+  await signin({ ...baseUser, password: 'long'.repeat(50) }, httpStatus.UNAUTHORIZED);
+});
