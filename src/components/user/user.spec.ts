@@ -6,7 +6,7 @@ import db from '../../appDatabase';
 
 const request = supertest(app);
 
-beforeEach(async () => {
+afterEach(async () => {
   await db.user.deleteMany({});
 });
 
