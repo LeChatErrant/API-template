@@ -28,5 +28,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Launch database
+      run: npm run dev:db
+
     - name: Run integration tests
       run: npm run integration
