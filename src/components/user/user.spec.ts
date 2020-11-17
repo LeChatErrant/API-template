@@ -32,6 +32,13 @@ async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
   return body;
 }
 
+async function signin(user: any, statusCodeExpected = httpStatus.OK) {
+  const { body } = await request
+    .post('/users/signin')
+    .send(user)
+    .expect(statusCodeExpected);
+}
+
 test('Signup', async () => {
   const user = await signup(baseUser);
   validateUser(user);
@@ -90,3 +97,7 @@ test('Signup - Email length 64 maximum', async () => {
   falseUser.password = 'a'.repeat(64);
   await signup(falseUser, httpStatus.CREATED);
 });
+
+test('Signin', async () => {
+
+})
