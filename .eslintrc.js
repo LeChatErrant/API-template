@@ -8,6 +8,7 @@ module.exports = {
     ecmaVersion: 2020,
     project: './tsconfig.json',
   },
+  ignorePatterns: ["**/*.spec.[tj]s", "**/*.test.[tj]s"],
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
