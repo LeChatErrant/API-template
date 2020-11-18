@@ -42,7 +42,12 @@ export async function getUser(id: string) {
   return buildUserRo(user);
 }
 
-export async function updateUser(id: string, fields: UserUpdateDto) {
+export async function updateUser(id: string, payload: UserUpdateDto) {
+  const fields = payload;
+  if (payload.password) {
+    fields.password = await hashPassword(payload.password);
+  }
+
   try {
     const user = await db.user.update({
       where: { id },
