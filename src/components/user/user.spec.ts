@@ -5,9 +5,15 @@ import { Role } from '@prisma/client';
 import app from '../../app';
 import db from '../../appDatabase';
 
-const request = supertest(app);
+let request = supertest.agent(app);
+
+beforeEach(() => {
+  // Reset session before each test
+  request = supertest.agent(app);
+});
 
 afterEach(async () => {
+  // Clean db after each test
   await db.user.deleteMany({});
 });
 
@@ -19,15 +25,11 @@ const baseUser = {
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function validateUser(user: any, role = Role.USER) {
-  const now = new Date(Date.now());
-  const creationDate = new Date(user.createdAt);
-  expect(creationDate.getMinutes()).toBeLessThanOrEqual(now.getMinutes());
-  expect(creationDate.getMinutes()).toBeGreaterThanOrEqual(now.getMinutes() - 1);
-
   expect(user.email).toBe(baseUser.email);
   expect(user.name).toBe(baseUser.name);
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
+  expect(user.createdAt).toBeDefined();
   expect(user.role).toBe(role);
 }
 
@@ -51,19 +53,52 @@ async function signin(user: any, statusCodeExpected = httpStatus.OK) {
   return body;
 }
 
+async function getUsers(statusCodeExpected = httpStatus.OK) {
+  const { body } = await request
+    .get('/users')
+    .expect(statusCodeExpected);
+
+  return body;
+}
+
+async function getUser(userId: string, statusCodeExpected = httpStatus.OK) {
+  const { body } = await request
+    .get(`/users/${userId}`)
+    .expect(statusCodeExpected);
+
+  return body;
+}
+
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+async function updateUser(userId: string, payload: any, statusCodeExpected = httpStatus.OK) {
+  const { body } = await request
+    .patch(`/users/${userId}`)
+    .send(payload)
+    .expect(statusCodeExpected);
+
+  return body;
+}
+
+/*  Signup  */
+
 test('Signup', async () => {
   const user = await signup(baseUser);
   validateUser(user);
+
+  const now = new Date(Date.now());
+  const creationDate = new Date(user.createdAt);
+  expect(creationDate.getMinutes()).toBeLessThanOrEqual(now.getMinutes());
+  expect(creationDate.getMinutes()).toBeGreaterThanOrEqual(now.getMinutes() - 1);
 });
 
-test('Signup - User already exists', async () => {
+test('Signup - user already exists', async () => {
   const user = await signup(baseUser);
   validateUser(user);
 
   await signup(baseUser, httpStatus.CONFLICT);
 });
 
-test('Signup - Name can be omitted', async () => {
+test('Signup - name can be omitted', async () => {
   const { name, ...userWithoutName } = baseUser;
   const user = await signup(userWithoutName);
 
@@ -73,11 +108,11 @@ test('Signup - Name can be omitted', async () => {
   expect(user.id).toBeDefined();
 });
 
-test('Signup - Missing parameter', async () => {
+test('Signup - missing parameter', async () => {
   await signup({}, httpStatus.BAD_REQUEST);
 });
 
-test('Signup - Wrong email format', async () => {
+test('Signup - wrong email format', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.email = '';
@@ -90,7 +125,7 @@ test('Signup - Wrong email format', async () => {
   await signup(falseUser, httpStatus.BAD_REQUEST);
 });
 
-test('Signup - Email length 8 minimum', async () => {
+test('Signup - email length 8 minimum', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.password = '1234567';
@@ -100,7 +135,7 @@ test('Signup - Email length 8 minimum', async () => {
   await signup(falseUser, httpStatus.CREATED);
 });
 
-test('Signup - Email length 64 maximum', async () => {
+test('Signup - email length 64 maximum', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.password = 'a'.repeat(65);
@@ -109,6 +144,8 @@ test('Signup - Email length 64 maximum', async () => {
   falseUser.password = 'a'.repeat(64);
   await signup(falseUser, httpStatus.CREATED);
 });
+
+/*  Signin  */
 
 test('Signin', async () => {
   let user = await signup(baseUser);
@@ -120,43 +157,187 @@ test('Signin', async () => {
   expect(id).toBe(user.id);
 });
 
-test('Signin - Consecutive', async () => {
+test('Signin - consecutive', async () => {
   let user = await signup(baseUser);
   validateUser(user);
   const { id } = user;
 
   user = await signin(baseUser);
   validateUser(user);
-  expect(id).toBe(user.id);
+  expect(user.id).toBe(id);
 
   user = await signin(baseUser);
   validateUser(user);
-  expect(id).toBe(user.id);
+  expect(user.id).toBe(id);
 });
 
-test('Signin - Missing parameter', async () => {
+test('Signin - missing parameter', async () => {
   await signin({}, httpStatus.BAD_REQUEST);
 });
 
-test('Signin - Wrong email format', async () => {
+test('Signin - wrong email format', async () => {
   await signin({ ...baseUser, email: 'the@fuck@is@this' }, httpStatus.BAD_REQUEST);
 });
 
-test('Signin - Unknown account', async () => {
+test('Signin - unknown account', async () => {
   await signin(baseUser, httpStatus.UNAUTHORIZED);
 });
 
-test('Signin - Wrong email', async () => {
+test('Signin - wrong email', async () => {
   await signup(baseUser);
   await signin({ ...baseUser, email: 'crack.me@something.fr' }, httpStatus.UNAUTHORIZED);
 });
 
-test('Signin - Wrong password', async () => {
+test('Signin - wrong password', async () => {
   await signup(baseUser);
   await signin({ ...baseUser, password: 'crack me' }, httpStatus.UNAUTHORIZED);
 });
 
-test('Signin - Hiding password length informations', async () => {
+test('Signin - hiding password length informations', async () => {
   await signin({ ...baseUser, password: 'short' }, httpStatus.UNAUTHORIZED);
   await signin({ ...baseUser, password: 'long'.repeat(50) }, httpStatus.UNAUTHORIZED);
+});
+
+test.todo('Signin - admin');
+
+/*  Get users */
+
+test('Get users - auth', async () => {
+  await getUsers(httpStatus.UNAUTHORIZED);
+});
+
+test('Get users - forbidden unless admin', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+  await getUsers(httpStatus.FORBIDDEN);
+});
+
+test.todo('Get users - empty');
+test.todo('Get users - order');
+test.todo('Get users - pagination');
+
+/*  Get user  */
+
+test('Get user - auth', async () => {
+  const { id } = await signup(baseUser);
+  await getUser(id, httpStatus.UNAUTHORIZED);
+});
+
+test('Get user', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+  const user = await getUser(id);
+  validateUser(user);
+  expect(user.id).toBe(id);
+});
+
+test('Get user - me', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+  const user = await getUser('me');
+  validateUser(user);
+  expect(user.id).toBe(id);
+});
+
+test('Get user - access others forbidden unless admin', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+  await getUser('otherUserId', httpStatus.FORBIDDEN);
+});
+
+test('Get user - admin', () => {
+  // Self
+  // Me
+  // Other
+  // Unknown
+});
+
+/*  Update user */
+
+test('Update user - auth', async () => {
+  const { id } = await signup(baseUser);
+  await updateUser(id, { name: 'LeChatErrant' }, httpStatus.UNAUTHORIZED);
+});
+
+test('Update user - name', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  const user = await updateUser(id, { name: 'LeChatErrant' });
+  expect(user.name).toBe('LeChatErrant');
+  user.name = baseUser.name;
+  validateUser(user);
+});
+
+test('Update user - email', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  const user = await updateUser(id, { email: 'a.new@email.com' });
+  expect(user.email).toBe('a.new@email.com');
+  user.email = baseUser.email;
+  validateUser(user);
+
+  await updateUser(id, { email: 'a.nice.api.template' }, httpStatus.BAD_REQUEST);
+});
+
+test('Update user - password', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  const user = await updateUser(id, { password: 'new password' });
+  validateUser(user);
+  await signin(baseUser, httpStatus.UNAUTHORIZED);
+  await signin({ ...baseUser, password: 'new password' });
+
+  await updateUser(id, { password: 'short' }, httpStatus.BAD_REQUEST);
+  await updateUser(id, { password: 'long'.repeat(50) }, httpStatus.BAD_REQUEST);
+});
+
+
+test('Update user - me', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+
+  const user = await updateUser('me', { email: 'a.new@email.com' });
+  expect(user.email).toBe('a.new@email.com');
+  user.email = baseUser.email;
+  validateUser(user);
+});
+
+test('Update user - multiple fields', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  const user = await updateUser(id, {
+    email: 'a.new@email.com',
+    name: 'LeChatErrant',
+    password: 'new password',
+  });
+  expect(user.name).toBe('LeChatErrant');
+  expect(user.email).toBe('a.new@email.com');
+  await signin(baseUser, httpStatus.UNAUTHORIZED);
+  await signin({ email: 'a.new@email.com', password: 'new password' });
+});
+
+test('Update user - empty payload', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  const user = await updateUser(id, {});
+  validateUser(user);
+});
+
+test('Update user - access others forbidden unless admin', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+
+  await updateUser('otherUserId', { password: 'YOU HAVE BEEN HACKED' }, httpStatus.FORBIDDEN);
+});
+
+test('Update user - admin', async () => {
+  // Self
+  // Me
+  // Other
+  // Unknown
 });
