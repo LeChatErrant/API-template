@@ -42,8 +42,7 @@ router.patch('/:userId', validate(UserUpdateDto), userMiddleware, handler(async 
 
 router.delete('/:userId', userMiddleware, handler(async (req, res) => {
   await controllers.deleteUser(req.params.userId);
-  const users = await controllers.listUsers();
-  res.send(users);
+  res.sendStatus(httpStatus.NO_CONTENT);
 }));
 
 export default router;

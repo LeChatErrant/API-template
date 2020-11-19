@@ -62,7 +62,6 @@ export async function updateUser(id: string, payload: UserUpdateDto) {
 export async function deleteUser(id: string) {
   try {
     await db.user.delete({ where: { id } });
-    return listUsers();
   } catch (error) {
     throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
   }
