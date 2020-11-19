@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import logger from './appLogger';
 
-const client = new PrismaClient({
+const db = new PrismaClient({
   log: [
     {
       emit: 'event',
@@ -14,7 +14,7 @@ const client = new PrismaClient({
   ],
 });
 
-client.$on('info', (e) => logger.info(e.message));
-client.$on('warn', (e) => logger.warn(e.message));
+db.$on('info', (e) => logger.info(e.message));
+db.$on('warn', (e) => logger.warn(e.message));
 
-export default client;
+export default db;
