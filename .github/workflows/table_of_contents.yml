@@ -1,9 +1,11 @@
-name: Integration tests
+name: Generate Table of contents section
 
 on:
   push:
     branches-ignore:
       - gh-pages
+    paths:
+      - README.md
 
 jobs:
   integration-tests:
@@ -17,5 +19,16 @@ jobs:
         id: generate
         uses: LeChatErrant/table-of-contents-action@v0.0.1
 
-      - name: Debug
-        run: echo ${{ steps.generate.outputs.changes }}
+      - name: Push if necessary
+        if: {{ steps.generate.changes }} == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+
+      - name: Push changes
+        if: {{ steps.generate.changes }} == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
