@@ -19,7 +19,7 @@ jobs:
         id: generate
         uses: LeChatErrant/table-of-contents-action@v0.0.1
 
-      - name: Push if necessary
+      - name: Commit
         if: {{ steps.generate.outputs.changes }} == 'true'
         run: |
           git config --local user.email "action@github.com"
