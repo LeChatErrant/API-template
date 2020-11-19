@@ -17,7 +17,7 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 
 ## Architecture
 
-![Architecture](/.github/assets/topology.png)
+![Architecture](.github/assets/topology.png)
 |---|
 | *Top level architecture* |
 
@@ -159,7 +159,27 @@ You can run the linter manually and fix errors with `npm run lint`
 
 ## Testing policy
 
+#### Unitary tests
+
 > Coming soon
+
+#### Integration tests
+
+Application routes are tested with [jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest)
+
+With a database launched, use `npm run integration` to test the application
+
+![Integration tests](.github/assets/integration.png)
+
+Code coverage is displayed at the end to make sure the application is truly tested
+
+##### TDD
+
+If you are familiar with TDD (Test Driven Development), you can try `npm run integration:watch`
+
+It will launch jest watcher, continuously launching tests as you code, and displaying a nice CLI to have more control over the test suite
+
+![TDD](.github/assets/TDD.png)
 
 ## Continuous integration
 
@@ -169,7 +189,7 @@ Linter, unitary tests and integration tests are executed automatically at each c
 
 A pull request needs a **full green CI** and at least one other developer to **approve** those changes before being merged
 
-![Pipeline](/.github/assets/pipeline.png)
+![Pipeline](.github/assets/pipeline.png)
 
 ## Automated dependencies updates
 
@@ -179,7 +199,7 @@ It means
  * All last features will always be available
  * All security issues will be fixed as soon as possible, maintaining a cleaner `npm audit`
 
-![Dependency update](/.github/assets/dependabot.png)
+![Dependency update](.github/assets/dependabot.png)
 
 ## Logging
 
@@ -199,7 +219,7 @@ In production mode, logs are not written in `stdout`, only in files
 
 Additionally, all requests are automatically logged too, thanks to [morgan](https://www.npmjs.com/package/morgan) 
 
-![Logs](/.github/assets/logger.png)
+![Logs](.github/assets/logger.png)
 
 ## Documentation
 
