@@ -53,7 +53,7 @@ async function signin(user: any, statusCodeExpected = httpStatus.OK) {
   return body;
 }
 
-async function getUsers(statusCodeExpected = httpStatus.OK) {
+async function listUsers(statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .get('/users')
     .expect(statusCodeExpected);
@@ -77,6 +77,12 @@ async function updateUser(userId: string, payload: any, statusCodeExpected = htt
     .expect(statusCodeExpected);
 
   return body;
+}
+
+async function deleteUser(userId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
+  await request
+    .delete(`/users/${userId}`)
+    .expect(statusCodeExpected);
 }
 
 /*  Signup  */
@@ -203,13 +209,13 @@ test.todo('Signin - admin');
 /*  Get users */
 
 test('Get users - auth', async () => {
-  await getUsers(httpStatus.UNAUTHORIZED);
+  await listUsers(httpStatus.UNAUTHORIZED);
 });
 
 test('Get users - forbidden unless admin', async () => {
   await signup(baseUser);
   await signin(baseUser);
-  await getUsers(httpStatus.FORBIDDEN);
+  await listUsers(httpStatus.FORBIDDEN);
 });
 
 test.todo('Get users - empty');
@@ -336,6 +342,48 @@ test('Update user - access others forbidden unless admin', async () => {
 });
 
 test('Update user - admin', async () => {
+  // Self
+  // Me
+  // Other
+  // Unknown
+});
+
+test('Delete user - auth', async () => {
+  const { id } = await signup(baseUser);
+  await deleteUser(id, httpStatus.UNAUTHORIZED);
+
+  const users = await db.user.findMany();
+  expect(users).toHaveLength(1);
+});
+
+test('Delete user', async () => {
+  await signup(baseUser);
+  const { id } = await signin(baseUser);
+
+  await deleteUser(id);
+  const users = await db.user.findMany();
+  expect(users).toHaveLength(0);
+});
+
+test('Delete user - me', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+
+  await deleteUser('me');
+  const users = await db.user.findMany();
+  expect(users).toHaveLength(0);
+});
+
+test('Delete user - access others forbidden unless admin', async () => {
+  await signup(baseUser);
+  await signin(baseUser);
+
+  await deleteUser('otherUserId', httpStatus.FORBIDDEN);
+  const users = await db.user.findMany();
+  expect(users).toHaveLength(1);
+});
+
+test('Delete user - admin', async () => {
   // Self
   // Me
   // Other
