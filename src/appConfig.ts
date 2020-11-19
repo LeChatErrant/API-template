@@ -13,6 +13,8 @@ export const config = {
   port: env('PORT').asPortNumber(),
   sessionSecret: env('SESSION_SECRET').asString(),
   mode: env('MODE').asEnum(Object.values(MODES)),
+  defaultAdminEmail: env('DEFAULT_ADMIN_EMAIL').asString(),
+  defaultAdminPassword: env('DEFAULT_ADMIN_PASSWORD').asString(),
   dbUrl: env('DB_URL').asString(),
   saltRounds: 12,
 };
