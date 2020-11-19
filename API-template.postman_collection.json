@@ -33,6 +33,60 @@
 			"response": []
 		},
 		{
+			"name": "Signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test.test@epitech.eu\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API}}/users/signin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SIgnin - admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"admin@api-template.com\",\n\t\"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API}}/users/signin",
+					"host": [
+						"{{API}}"
+					],
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Users",
 			"request": {
 				"method": "GET",
@@ -107,33 +161,6 @@
 					"path": [
 						"users",
 						"me"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Signin",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\": \"test.test@epitech.eu\",\n\t\"password\": \"password\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{API}}/users/signin",
-					"host": [
-						"{{API}}"
-					],
-					"path": [
-						"users",
-						"signin"
 					]
 				}
 			},

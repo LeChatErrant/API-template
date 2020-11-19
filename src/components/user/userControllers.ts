@@ -42,7 +42,12 @@ export async function getUser(id: string) {
   return buildUserRo(user);
 }
 
-export async function updateUser(id: string, fields: UserUpdateDto) {
+export async function updateUser(id: string, payload: UserUpdateDto) {
+  const fields = payload;
+  if (payload.password) {
+    fields.password = await hashPassword(payload.password);
+  }
+
   try {
     const user = await db.user.update({
       where: { id },
@@ -57,7 +62,6 @@ export async function updateUser(id: string, fields: UserUpdateDto) {
 export async function deleteUser(id: string) {
   try {
     await db.user.delete({ where: { id } });
-    return listUsers();
   } catch (error) {
     throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
   }

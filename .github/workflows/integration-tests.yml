@@ -28,8 +28,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build the app
-      run: npm run build
+    - name: Launch database
+      run: source .envrc; npm run dev:db
 
     - name: Run integration tests
-      run: npm run integration
+      run: source .envrc; npm run integration

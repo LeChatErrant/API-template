@@ -8,6 +8,8 @@ services:
       - PORT
       - SESSION_SECRET
       - MODE
+      - DEFAULT_ADMIN_EMAIL
+      - DEFAULT_ADMIN_PASSWORD
       - DB_URL
       - REDIS_PORT
       - REDIS_HOST
