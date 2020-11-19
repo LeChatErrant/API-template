@@ -1,0 +1,21 @@
+name: Integration tests
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Generate table of content
+        id: generate
+        uses: LeChatErrant/table-of-contents-action@v0.0.1
+
+      - name: Debug
+        run: echo ${{ steps.generate.outputs.changes }}
