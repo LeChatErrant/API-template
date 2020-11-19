@@ -1,6 +1,6 @@
 # API-template
 ![Lint](https://github.com/LeChatErrant/API-template/workflows/Lint/badge.svg)
-![Unitary Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
+![Unit tests](https://github.com/LeChatErrant/API-template/workflows/Unit%20tests/badge.svg)
 ![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
 ![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
@@ -159,7 +159,7 @@ You can run the linter manually and fix errors with `npm run lint`
 
 ## Testing policy
 
-#### Unitary tests
+#### Unit tests
 
 > Coming soon
 
@@ -185,7 +185,7 @@ It will launch jest watcher, continuously launching tests as you code, and displ
 
 Every modification in the codebase is controlled with *continuous integration* (CI).
 
-Linter, unitary tests and integration tests are executed automatically at each commit to ensure code quality and avoid regressions
+Linter, unit tests and integration tests are executed automatically at each commit to ensure code quality and avoid regressions
 
 A pull request needs a **full green CI** and at least one other developer to **approve** those changes before being merged
 
