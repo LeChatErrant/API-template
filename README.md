@@ -15,6 +15,9 @@ It gives your project a clean base to start and follows development good practic
 
 Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, kubernetes, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
 
+<!--ts-->
+<!--te-->
+
 ## Architecture
 
 ![Architecture](.github/assets/topology.png)
