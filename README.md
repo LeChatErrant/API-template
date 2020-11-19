@@ -80,7 +80,7 @@ and comes along with a great documentation and powerful tooling (such as **autom
 
 It's simple : you code faster, and if you're doing something wrong, the typescript compiler will scream on you at build time
 
-##### Schema
+#### Schema
 
 With Prisma, schema is written in PSL (Prisma Schema Language). It makes you model pretty straightforward
 
@@ -111,7 +111,7 @@ enum Role {
 }
 ```
 
-##### Generation
+#### Generation
 
 Prisma is a generated ORM.
 
@@ -127,7 +127,7 @@ It can be achieved through `npm run generate`
 |---|
 | *Client workflow from [prisma documentation](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/generating-prisma-client)* |
 
-##### Migrations
+#### Migrations
 
 Changing your database model is not changing what's in your database. That's why you need *migrations*: migrations describe those changes in your database.
 
@@ -205,27 +205,62 @@ Additionally, all requests are automatically logged too, thanks to [morgan](http
 
 > Coming soon
 
-##### Postman
+#### Postman
 
 A [postman collection](/API-template.postman_collection.json) is available to test application routes
 
 ## Error handling
 
-##### Error responses
+Non-ok replies, custom errors and crashes will all be intercepted by the central *error-middleware*
 
-All errors from the app are catched with an *error middleware*, and forwarded to the user.
+It means all errors are treated and formatted the same way, then forwarded to the user.
 
-This middleware catch [http-errors](https://www.npmjs.com/package/http-errors), so you can safely throw in your routes using this module
+#### RO
 
-> eg: Simply write `throw createError(401, 'You must be logged in')` to reply with a `401` response
+Every responses going out of the API shall inherits from the same interface: the RO (Response Object)
 
-Any unknown errors are logged on `stdout` (to give hints to developers) and are converted into a `500` response
+As you can see, the RO interface leave space to a unified error format
 
-##### Async handler
+```typescript
+interface Ro {
+  error?: {
+    statusCode: number;
+    message: string;
+  };
+}
+```
 
-Express doesn't handle errors thrown in an async context. It means that even with an error middleware, errors won't be catched if they are thrown from an async handler
+It ensures maximal coherence and the thanks of the front-end team
 
-To avoid this problem, all handler are wrapped in an [express-async-handler](https://www.npmjs.com/package/express-async-handler)
+#### Non-OK responses
+
+To reply with an error status, we're using the [http-errors](https://www.npmjs.com/package/http-errors) module
+
+Simply write
+```javascript
+import createError from 'http-errors'
+
+throw createError(401, 'You must be logged in')
+```
+to reply with a `401` response. That's all.
+
+The error middleware will got you covered
+
+#### Crashes
+
+If any of your route crashes, for a reason or another, the error will still be catched by the error middleware.
+
+It will be printed to error output (to help developers solving the issue), and converted into a `500 - Internal server error` response
+
+#### Async handler
+
+**Express doesn't handle errors thrown in an async context**. It means that even with an error middleware, errors won't be catched if they are thrown from an async handler, and your app will crash
+
+I know
+
+It's insane
+
+To avoid this problem, handlers need to be wrapped in [express-async-handler](https://www.npmjs.com/package/express-async-handler)
 
 ```javascript
 router.post('/signin', handler(async (req, res) => {
@@ -233,21 +268,11 @@ router.post('/signin', handler(async (req, res) => {
 }));
 ```
 
-##### Not found
-
-A middleware handling not found routes is present, formatting a NotFound error passed the error middleware, as every other errors
-
-##### Unhandled errors
-
-It happens to have some left unhandled promise rejections or uncaught exceptions
-
-Don't worry, your application won't crash : they are handled too and are logged to `stdout`
-
 ## User management
 
 The template comes with basic user management logic
 
-##### Routes
+#### Routes
 
 | Method | Route | Description |
 | --- | --- | --- |
@@ -258,13 +283,9 @@ The template comes with basic user management logic
 | `PATCH` | `/users/:id` | Update user |
 | `DELETE` | `/users/:id` | Delete user |
 
-##### Security
+All passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-Passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
-
-Passwords need to have a length of at least 8 bytes
-
-##### Route protection
+#### Route protection
 
 Some routes need the user to be logged
 
@@ -279,20 +300,16 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 There is an other middleware to do some more advanced checking : the *userMiddleware*
 
 The *userMiddleware* is used to protect routes accessing specific user resources. It :
- * Make sure the user is logged in
- * Make sure `userId` is present in the URL (eg: `GET` `/users/:userId/someResource`)
- * Make sure the `userId` is the id of the current user **or** that the user is admin
- * Allow using *me* as `userId` (eg: `GET` `/users/me/someResource`)
+ * Makes sure the user is logged in
+ * Makes sure `userId` is present in the URL (eg: `GET` `/users/:userId/someResource`)
+ * Makes sure the `userId` is the id of the current user **or** that the user is admin
+ * Allows using ***me*** as `userId` (eg: `GET` `/users/me/someResource`)
 
-> You can compose middlewares thanks to the [compose-middleware](https://www.npmjs.com/package/compose-middleware) module.
->
-> It allows you some fancy syntax such as `export default compose([authMiddleware, userMiddleware]);`
->
-> Here, I make sure the used is logged **before** checking who he is by reusing the authMiddleware
+Basically, it ensures nobody can access other users information, unless admin
 
 ## Role system
 
-##### Roles
+#### Roles
 
 The template has a *role* system
 
@@ -302,11 +319,13 @@ Two roles are available :
 
 When a new user signup, he is attributed the role of *USER*
 
+A default *ADMIN* user is created at the app start (credentials can be configured in environment variables)
+
 *ADMIN* can access other user resources and some private routes
 
 For example, the `GET` `/users` route to list all users (useful for monitoring or to create an admin console) is not available for a *USER* but is available for an *ADMIN*
 
-##### Route protection
+#### Route protection
 
 You can make a route accessible only by an *ADMIN* with the *adminMiddleware*. Admin middleware ensure the user is logged in and got the *ADMIN* role
 
