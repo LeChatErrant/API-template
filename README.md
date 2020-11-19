@@ -1,6 +1,6 @@
 # API-template
 ![Lint](https://github.com/LeChatErrant/API-template/workflows/Lint/badge.svg)
-![Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
+![Unitary Tests](https://github.com/LeChatErrant/API-template/workflows/Tests/badge.svg)
 ![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
 ![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
@@ -9,29 +9,21 @@ Simple production-ready API template
 
 ### Notes
 
-The purpose of this template is to provide a typesafe production ready webserver and a fully setup dev-environment with the most possible tooling
+The purpose of this template is to provide a typesafe production ready webserver and a fully setup environment with the best development tools
+
+It gives your project a clean base to start and follows development good practices, essentially focusing on maintenability and extensibility
+
+Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, kubernetes, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
 
 ## Architecture
 
 ![Architecture](/.github/assets/topology.png)
+|---|
+| *Top level architecture* |
 
 ## Configuration
 
 Application is configured through *environment variables*
-
-##### Modes
-
-The environment variable `MODE` can be set either to *local*, *dev*, or *prod*
-
- * Local mode is used for local development. It will use development database (at *localhost:5432*) and is using local storage for sessions
- * Dev mode is used for 'dev' stage. It will use database on *db:5432* and is using redis storage for sessions
- * Prod mode is used for 'production' stage. It will use database on *db:5432*, is using redis storage for sessions, is not writting logs to standard output and uses secured cookies
-
-## Development environment
-
-The template comes with a nicely configured development environment
-
-##### Configuration
 
 Pre-configured environment variables are available in the [.envrc](/.envrc) file. Use it to configure your application during development
 
@@ -41,65 +33,58 @@ If, for any reason, you don't want to / you can't use direnv, simply `source .en
 
 > Even environment variables are typed and validated thanks to [env-var](https://www.npmjs.com/package/env-var)
 
-##### Database
+## Development
 
-You can run a simple development database by running `npm run dev:db`
+The template comes with a nicely configured development environment
 
-It will launch a single local database exposed on port `5432`
+1. Make sure the [.envrc](/.envrc) is loaded
+2. If no database is running, simply launch one locally with `npm run dev:db`
+3. Run `npm run dev`
 
-##### Local mode
+The development mode will continuously watch your files to reload the API as you code, and will even regenerate the ORM on schema's changes!
 
-During development, simply run `npm run dev` to launch dev mode (don't forget to set `MODE` at *local*)
+## Database
 
-It will continuously watch your files to reload the API as you code, and will even regenerate the ORM on schema's changes!
+The database used is [postgreSQL](https://www.postgresql.org/). It's stable, maintained, and will fit most general usecases.
 
-> Dev mode is configured to use the dev database by default
->
-> Local storage is used for sessions when `MODE` is set at *local*, so you don't even need to launch redis
-
-##### Prisma studio
-
-You can access and edit your database in a web interface by running `npm run db:studio`
+You can access and edit your database with a live web interface by running `npm run db:studio`
 
 ![Prisma studio](.github/assets/studio.png)
 
-## Deployed mode
+## Production
 
-The whole stack is launched with *docker-compose*
+The whole containerized stack can be launched with *docker-compose*
 
-To launch in deployed mode, don't forget to change the environment variable `MODE` to *dev* or *prod*
+Run `docker-compose up --build` to launch redis, the database and the API connected altogether, or specify which service you desire
 
-Run `docker-compose up --build` to launch redis, the database and the API, connected altogether
+Environment variables are forwarded in containers, so don't forget to change root credentials, db url, and to set MODE at dev or prod
 
 > Notice that your database is made persistent through a docker volume
 
 ## Language
 
-The API is written in [typescript](https://www.typescriptlang.org/)
+The API is fully written in [typescript](https://www.typescriptlang.org/)
 
 It benefits from the javascript ecosystem, but help to scale large codebase with a strong typing, and avoid many runtime errors
 
 It is configured through [tsconfig.json](/tsconfig.json)
 
-## Database
-
-The database used is [postgreSQL](https://www.postgresql.org/)
-
-It's stable, maintained, used everywhere, and will fit 99% of the usecases
-
-It's generally seen as the most advanced SQL databse
-
 ## ORM
 
-An ORM (Object Relational Mapping) is used to abstract communication with the database, and to avoid security issues
+An ORM (Object Relational Mapping) is used to abstract communication with the database, to convert the relational representation into data structures understood in code and to avoid several security issues
 
 I choosed [Prisma](https://www.prisma.io/), which is in my mind the most convenient ORM among all
 
-It guaranties type safety from your database model, is very-well designed, and comes along with a great documentation and useful tooling (such as automatic migrations or web database editor).
+It guaranties type-safety directly from your database model, drastically increasing auto-completion and jump-to-definition features,
+and comes along with a great documentation and powerful tooling (such as **automatic migrations** or **web database IDE**).
+
+It's simple : you code faster, and if you're doing something wrong, the typescript compiler will scream on you at build time
 
 ##### Schema
 
 With Prisma, schema is written in PSL (Prisma Schema Language). It makes you model pretty straightforward
+
+The model is the unique source of truth, from which you define the shape of the data, create migrations and generate the whole data access layer
 
 ```prisma
 generator client {
@@ -130,13 +115,13 @@ enum Role {
 
 Prisma is a generated ORM.
 
-Each time you modify the [schema.prisma](/prisma/schema.prisma), you need to regenerate your ORM (to get new types for example)
+Each time you modify the [schema.prisma](/prisma/schema.prisma), you need to regenerate your ORM (to have up-to-date methods and types)
 
 It can be achieved through `npm run generate`
 
 > Notice that launching the dev mode will watch for any changed to reload the ORM automatically
 >
-> You won't need to execute `npm run generate` manually, even in production mode
+> You **won't need** to execute `npm run generate` manually, even in production mode, but it's still good to know
 
 | ![Prisma client](https://i.imgur.com/aRJmVFY.png) |
 |---|
@@ -144,15 +129,19 @@ It can be achieved through `npm run generate`
 
 ##### Migrations
 
-Changing your database model is not changing what's in your database. That's why you need *migrations*
-
-Migrations describe changes in your database.
+Changing your database model is not changing what's in your database. That's why you need *migrations*: migrations describe those changes in your database.
 
 Generate it with `npm run db:migrate` once you're satisfied with your new model
 > It will be generated in [prisma/migration](/prisma/migrations)
 
+Don't forget: migrations are part of your code and need to be pushed with it
+
 Once generated, apply it on your database with `npm run db:up`
-> Be careful! It's not automated as it is a potentially *destructive* operation (eg: removing user table)
+> Be careful! It is a potentially *destructive* operation (eg: removing user table)
+>
+> Triple check before destroying your production database
+
+Migrations are automatically applied on your database when launching the dev mode or docker-compose thanks to npm scripts, so once again it's not a command you need to type all days ;)
 
 | ![Prisma migrations](https://i.imgur.com/OImder6.png) |
 |---|
@@ -174,48 +163,25 @@ You can run the linter manually and fix errors with `npm run lint`
 
 ## Continuous integration
 
-Every modification in the codebase is controlled with *continuous integration*.
+Every modification in the codebase is controlled with *continuous integration* (CI).
 
 Linter, unitary tests and integration tests are executed automatically at each commit to ensure code quality and avoid regressions
+
+A pull request needs a **full green CI** and at least one other developer to **approve** those changes before being merged
 
 ![Pipeline](/.github/assets/pipeline.png)
 
 ## Automated dependencies updates
 
-All dependencies are maintained up-to-date automatically, and the continuous integration checks for breaking update
+All dependencies are maintained up-to-date automatically, with the continuous integration ensuring no breaking update is merged
 
 It means
- * All last features are always available
+ * All last features will always be available
  * All security issues will be fixed as soon as possible, maintaining a cleaner `npm audit`
 
 ![Dependency update](/.github/assets/dependabot.png)
 
-## Containerization
-
-The template comes with a [*Dockerfile*](/Dockerfile) and a [*docker-compose.yml*](/docker-compose.yml)
-
-##### Services
-
-Docker-compose launches 3 services:
- * Database
- * Redis
- * Application
-
-##### Persistence
-
-It creates a binded mount on logs directory to make logs persistent and available from outside the container
-
-It creates a volume on `/var/lib/postgresql/data` to make database storage persistent
-
-##### Security
-
-Database and redis are not exposed to the world directly and are made reachable from the application thanks to docker sub network
-
-Database and redis are secured with password and
-
-The application is not running as `root` user inside the docker
-
-## Logger
+## Logging
 
 The application comes with a custom logger made with [winston](https://www.npmjs.com/package/winston).
 
@@ -231,19 +197,17 @@ In production mode, logs are not written in `stdout`, only in files
 >
 > It reduces the IO usage too
 
-The route logger middleware [morgan](https://www.npmjs.com/package/morgan) is integrated too, and is automatically logging all responses from the server
+Additionally, all requests are automatically logged too, thanks to [morgan](https://www.npmjs.com/package/morgan) 
 
 ![Logs](/.github/assets/logger.png)
 
 ## Documentation
 
-##### Swagger
-
 > Coming soon
 
 ##### Postman
 
-A [postman collection](/App.postman_collection.json) is available to test application routes
+A [postman collection](/API-template.postman_collection.json) is available to test application routes
 
 ## Error handling
 
