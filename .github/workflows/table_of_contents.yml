@@ -20,14 +20,14 @@ jobs:
         uses: LeChatErrant/table-of-contents-action@v0.0.1
 
       - name: Push if necessary
-        if: {{ steps.generate.changes }} == 'true'
+        if: {{ steps.generate.outputs.changes }} == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
 
       - name: Push changes
-        if: {{ steps.generate.changes }} == 'true'
+        if: {{ steps.generate.outputs.changes }} == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
