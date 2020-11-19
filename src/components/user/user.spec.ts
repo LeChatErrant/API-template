@@ -4,16 +4,18 @@ import { Role } from '@prisma/client';
 
 import app from '../../app';
 import db from '../../appDatabase';
+import { config } from '../../appConfig';
+import seedAdminUser from '../../utils/seedAdminUser';
 
 let request = supertest.agent(app);
 
+// Reset session before each test
 beforeEach(() => {
-  // Reset session before each test
   request = supertest.agent(app);
 });
 
+// Clean db after each test
 afterEach(async () => {
-  // Clean db after each test
   await db.user.deleteMany({});
 });
 
@@ -23,14 +25,19 @@ const baseUser = {
   password: 'password',
 };
 
+const adminUser = {
+  email: config.defaultAdminEmail,
+  password: config.defaultAdminPassword,
+};
+
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-function validateUser(user: any, role = Role.USER) {
+function validateUser(user: any) {
   expect(user.email).toBe(baseUser.email);
   expect(user.name).toBe(baseUser.name);
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
   expect(user.createdAt).toBeDefined();
-  expect(user.role).toBe(role);
+  expect(user.role).toBe(Role.USER);
 }
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -204,7 +211,12 @@ test('Signin - hiding password length informations', async () => {
   await signin({ ...baseUser, password: 'long'.repeat(50) }, httpStatus.UNAUTHORIZED);
 });
 
-test.todo('Signin - admin');
+test('Signin - admin', async () => {
+  await seedAdminUser();
+
+  const user = await signin(adminUser);
+  expect(user.role).toBe(Role.ADMIN);
+});
 
 /*  Get users */
 
@@ -251,11 +263,20 @@ test('Get user - access others forbidden unless admin', async () => {
   await getUser('otherUserId', httpStatus.FORBIDDEN);
 });
 
-test('Get user - admin', () => {
-  // Self
-  // Me
-  // Other
-  // Unknown
+test('Get user - admin', async () => {
+  await seedAdminUser();
+  const { id } = await signin(adminUser);
+
+  const admin = await getUser(id);
+  expect(admin.id).toBe(id);
+
+  expect(await getUser('me')).toMatchObject(admin);
+
+  const { id: userId } = await signup(baseUser);
+  const user = await getUser(userId);
+  validateUser(user);
+
+  await getUser('unknownUserId', httpStatus.NOT_FOUND);
 });
 
 /*  Update user */
@@ -342,10 +363,21 @@ test('Update user - access others forbidden unless admin', async () => {
 });
 
 test('Update user - admin', async () => {
-  // Self
-  // Me
-  // Other
-  // Unknown
+  await seedAdminUser();
+  const { id } = await signin(adminUser);
+
+  await updateUser(id, { password: 'new password' });
+  await signin(adminUser, httpStatus.UNAUTHORIZED);
+  await signin({ ...adminUser, password: 'new password' });
+
+  const admin = await updateUser('me', { name: 'root' });
+  expect(admin.name).toBe('root');
+
+  const { id: userId } = await signup(baseUser);
+  const { name } = await updateUser(userId, { name: 'I have all rights' });
+  expect(name).toBe('I have all rights');
+
+  await updateUser('unknownUserId', {}, httpStatus.NOT_FOUND);
 });
 
 test('Delete user - auth', async () => {
@@ -384,8 +416,17 @@ test('Delete user - access others forbidden unless admin', async () => {
 });
 
 test('Delete user - admin', async () => {
-  // Self
-  // Me
-  // Other
-  // Unknown
+  await seedAdminUser();
+  const user = await signup(baseUser);
+  const admin = await signin(adminUser);
+  expect(await db.user.findMany()).toHaveLength(2);
+
+  await deleteUser(user.id);
+  expect(await db.user.findMany()).toHaveLength(1);
+
+  await deleteUser('unknownUserId', httpStatus.NOT_FOUND);
+  expect(await db.user.findMany()).toHaveLength(1);
+
+  await deleteUser(admin.id);
+  expect(await db.user.findMany()).toHaveLength(0);
 });
