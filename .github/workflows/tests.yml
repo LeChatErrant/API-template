@@ -10,6 +10,7 @@ on:
       - prisma/**
       - src/**
       - tsconfig.json
+      - jest.config.js
       - .github/workflows/integration-tests.yml
 
 jobs:
