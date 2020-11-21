@@ -18,6 +18,9 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 Table of Contents
 =================
 
+<details>
+<summary>Details</summary>
+
 <!--ts-->
    * [API-template](#api-template)
    * [Notes](#notes)
@@ -56,6 +59,8 @@ Table of Contents
       * [Request validation](#request-validation)
       * [Contributors](#contributors)
 <!--te-->
+
+</details>
 
 > Generated using [table-of-contents-action](https://github.com/LeChatErrant/table-of-contents-action), made by [LeChatErrant](https://github.com/LeChatErrant)
 
