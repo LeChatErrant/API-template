@@ -55,9 +55,6 @@ Table of Contents
          * [Route protection](#route-protection-1)
       * [Request validation](#request-validation)
       * [Contributors](#contributors)
-
-<!-- Added by: runner, at: Sat Nov 21 01:15:19 UTC 2020 -->
-
 <!--te-->
 
 > Generated using [table-of-contents-action](https://github.com/LeChatErrant/table-of-contents-action), made by [LeChatErrant](https://github.com/LeChatErrant)
