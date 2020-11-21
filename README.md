@@ -16,6 +16,44 @@ It gives your project a clean base to start and follows development good practic
 Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, kubernetes, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
 
 <!--ts-->
+   * [API-template](#api-template)
+         * [Notes](#notes)
+      * [Architecture](#architecture)
+      * [Configuration](#configuration)
+      * [Development](#development)
+      * [Database](#database)
+      * [Production](#production)
+      * [Language](#language)
+      * [ORM](#orm)
+            * [Schema](#schema)
+            * [Generation](#generation)
+            * [Migrations](#migrations)
+      * [Linter](#linter)
+      * [Testing policy](#testing-policy)
+            * [Unit tests](#unit-tests)
+            * [Integration tests](#integration-tests)
+               * [TDD](#tdd)
+      * [Continuous integration](#continuous-integration)
+      * [Automated dependencies updates](#automated-dependencies-updates)
+      * [Logging](#logging)
+      * [Documentation](#documentation)
+            * [Postman](#postman)
+      * [Error handling](#error-handling)
+            * [RO](#ro)
+            * [Non-OK responses](#non-ok-responses)
+            * [Crashes](#crashes)
+            * [Async handler](#async-handler)
+      * [User management](#user-management)
+            * [Routes](#routes)
+            * [Route protection](#route-protection)
+      * [Role system](#role-system)
+            * [Roles](#roles)
+            * [Route protection](#route-protection-1)
+      * [Request validation](#request-validation)
+         * [Contributors](#contributors)
+
+<!-- Added by: runner, at: Sat Nov 21 00:13:36 UTC 2020 -->
+
 <!--te-->
 
 ## Architecture
