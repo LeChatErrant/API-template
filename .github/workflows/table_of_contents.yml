@@ -2,8 +2,6 @@ name: Generate Table of contents section
 
 on:
   push:
-    branches:
-      - master
     paths:
       - README.md
       - .github/workflows/table_of_contents.yml
