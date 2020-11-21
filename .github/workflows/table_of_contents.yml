@@ -19,10 +19,10 @@ jobs:
         uses: LeChatErrant/table-of-contents-action@v1
 
       - name: Debug
-        run: echo ${{ steps.generate.outputs.changes }}
+        run: echo steps.generate.outputs.changes
 
       - name: Debug 2
-        if: ${{ steps.generate.outputs.changes }} == 'true'
+        if: steps.generate.outputs.changes == 'true'
         run: echo "DAB"
 
 
