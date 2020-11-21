@@ -7,7 +7,7 @@
 
 Simple production-ready API template
 
-### Notes
+# Notes
 
 The purpose of this template is to provide a typesafe production ready webserver and a fully setup environment with the best development tools
 
