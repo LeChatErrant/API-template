@@ -18,16 +18,8 @@ jobs:
         id: generate
         uses: LeChatErrant/table-of-contents-action@v1
 
-      - name: Debug
-        run: echo steps.generate.outputs.changes
-
-      - name: Debug 2
-        if: steps.generate.outputs.changes == 'true'
-        run: echo "DAB"
-
-
       - name: Commit
-        if: ${{ steps.generate.outputs.changes }} == 'true'
+        if: steps.generate.outputs.changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -35,7 +27,7 @@ jobs:
           git commit -m "doc: README.md table of contents updated [AUTO]"
 
       - name: Push changes
-        if: ${{ steps.generate.outputs.changes }} == 'true'
+        if: steps.generate.outputs.changes == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
