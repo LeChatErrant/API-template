@@ -7,7 +7,7 @@ on:
       - .github/workflows/table_of_contents.yml
 
 jobs:
-  integration-tests:
+  table-of-contents:
     runs-on: ubuntu-latest
 
     steps:
