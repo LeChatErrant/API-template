@@ -60,7 +60,7 @@ Table of Contents
 
 <!--te-->
 
-> This table of contents was automatically generated using [table-of-contents-action](https://github.com/LeChatErrant/table-of-contents-action), made by [LeChatErrant](https://github.com/LeChatErrant)
+> Generated using [table-of-contents-action](https://github.com/LeChatErrant/table-of-contents-action), made by [LeChatErrant](https://github.com/LeChatErrant)
 
 ## Architecture
 
