@@ -2,14 +2,12 @@ name: Generate Table of contents section
 
 on:
   push:
-    branches:
-      - master
     paths:
       - README.md
       - .github/workflows/table_of_contents.yml
 
 jobs:
-  integration-tests:
+  table-of-contents:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +16,7 @@ jobs:
 
       - name: Generate table of content
         id: generate
-        uses: LeChatErrant/table-of-contents-action@v0.0.1
+        uses: LeChatErrant/table-of-contents-action@v1
 
       - name: Commit
         if: ${{ steps.generate.outputs.changes }} == 'true'
