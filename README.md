@@ -20,7 +20,7 @@ Table of Contents
 
 <!--ts-->
    * [API-template](#api-template)
-         * [Notes](#notes)
+   * [Notes](#notes)
    * [Table of Contents](#table-of-contents)
       * [Architecture](#architecture)
       * [Configuration](#configuration)
@@ -56,7 +56,7 @@ Table of Contents
       * [Request validation](#request-validation)
       * [Contributors](#contributors)
 
-<!-- Added by: runner, at: Sat Nov 21 01:07:44 UTC 2020 -->
+<!-- Added by: runner, at: Sat Nov 21 01:09:21 UTC 2020 -->
 
 <!--te-->
 
