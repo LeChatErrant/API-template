@@ -25,6 +25,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
+          git commit -m "doc: README.md table of contents updated [AUTO]"
 
       - name: Push changes
         if: {{ steps.generate.outputs.changes }} == 'true'
