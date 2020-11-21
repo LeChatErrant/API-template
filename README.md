@@ -7,13 +7,16 @@
 
 Simple production-ready API template
 
-### Notes
+# Notes
 
 The purpose of this template is to provide a typesafe production ready webserver and a fully setup environment with the best development tools
 
 It gives your project a clean base to start and follows development good practices, essentially focusing on maintenability and extensibility
 
 Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, kubernetes, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
+
+Table of Contents
+=================
 
 <!--ts-->
    * [API-template](#api-template)
@@ -121,7 +124,7 @@ and comes along with a great documentation and powerful tooling (such as **autom
 
 It's simple : you code faster, and if you're doing something wrong, the typescript compiler will scream on you at build time
 
-#### Schema
+### Schema
 
 With Prisma, schema is written in PSL (Prisma Schema Language). It makes you model pretty straightforward
 
@@ -152,7 +155,7 @@ enum Role {
 }
 ```
 
-#### Generation
+### Generation
 
 Prisma is a generated ORM.
 
@@ -168,7 +171,7 @@ It can be achieved through `npm run generate`
 |---|
 | *Client workflow from [prisma documentation](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/generating-prisma-client)* |
 
-#### Migrations
+### Migrations
 
 Changing your database model is not changing what's in your database. That's why you need *migrations*: migrations describe those changes in your database.
 
@@ -200,11 +203,11 @@ You can run the linter manually and fix errors with `npm run lint`
 
 ## Testing policy
 
-#### Unit tests
+### Unit tests
 
 > Coming soon
 
-#### Integration tests
+### Integration tests
 
 Application routes are tested with [jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest)
 
@@ -214,7 +217,7 @@ With a database launched, use `npm run integration` to test the application
 
 Code coverage is displayed at the end to make sure the application is truly tested
 
-##### TDD
+#### TDD
 
 If you are familiar with TDD (Test Driven Development), you can try `npm run integration:watch`
 
@@ -266,7 +269,7 @@ Additionally, all requests are automatically logged too, thanks to [morgan](http
 
 > Coming soon
 
-#### Postman
+### Postman
 
 A [postman collection](/API-template.postman_collection.json) is available to test application routes
 
@@ -276,7 +279,7 @@ Non-ok replies, custom errors and crashes will all be intercepted by the central
 
 It means all errors are treated and formatted the same way, then forwarded to the user.
 
-#### RO
+### RO
 
 Every responses going out of the API shall inherits from the same interface: the RO (Response Object)
 
@@ -293,7 +296,7 @@ interface Ro {
 
 It ensures maximal coherence and the thanks of the front-end team
 
-#### Non-OK responses
+### Non-OK responses
 
 To reply with an error status, we're using the [http-errors](https://www.npmjs.com/package/http-errors) module
 
@@ -307,13 +310,13 @@ to reply with a `401` response. That's all.
 
 The error middleware will got you covered
 
-#### Crashes
+### Crashes
 
 If any of your route crashes, for a reason or another, the error will still be catched by the error middleware.
 
 It will be printed to error output (to help developers solving the issue), and converted into a `500 - Internal server error` response
 
-#### Async handler
+### Async handler
 
 **Express doesn't handle errors thrown in an async context**. It means that even with an error middleware, errors won't be catched if they are thrown from an async handler, and your app will crash
 
@@ -333,7 +336,7 @@ router.post('/signin', handler(async (req, res) => {
 
 The template comes with basic user management logic
 
-#### Routes
+### Routes
 
 | Method | Route | Description |
 | --- | --- | --- |
@@ -346,7 +349,7 @@ The template comes with basic user management logic
 
 All passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-#### Route protection
+### Route protection
 
 Some routes need the user to be logged
 
@@ -370,7 +373,7 @@ Basically, it ensures nobody can access other users information, unless admin
 
 ## Role system
 
-#### Roles
+### Roles
 
 The template has a *role* system
 
@@ -386,7 +389,7 @@ A default *ADMIN* user is created at the app start (credentials can be configure
 
 For example, the `GET` `/users` route to list all users (useful for monitoring or to create an admin console) is not available for a *USER* but is available for an *ADMIN*
 
-#### Route protection
+### Route protection
 
 You can make a route accessible only by an *ADMIN* with the *adminMiddleware*. Admin middleware ensure the user is logged in and got the *ADMIN* role
 
@@ -432,6 +435,6 @@ router.get('/users/signup', validate(UserSignupDto), handler(async (req, res) =>
 }));
 ```
 
-### Contributors
+## Contributors
 
 ![GitHub Logo](https://github.com/LeChatErrant.png?size=30) &nbsp; [LeChatErrant](https://github.com/LeChatErrant) - creator and maintainer
