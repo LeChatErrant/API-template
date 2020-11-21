@@ -16,7 +16,7 @@ jobs:
 
       - name: Generate table of content
         id: generate
-        uses: LeChatErrant/table-of-contents-action@v1.0.0
+        uses: LeChatErrant/table-of-contents-action@v1
 
       - name: Commit
         if: ${{ steps.generate.outputs.changes }} == 'true'
