@@ -21,6 +21,7 @@ Table of Contents
 <!--ts-->
    * [API-template](#api-template)
          * [Notes](#notes)
+   * [Table of Contents](#table-of-contents)
       * [Architecture](#architecture)
       * [Configuration](#configuration)
       * [Development](#development)
@@ -55,7 +56,7 @@ Table of Contents
       * [Request validation](#request-validation)
          * [Contributors](#contributors)
 
-<!-- Added by: runner, at: Sat Nov 21 00:13:36 UTC 2020 -->
+<!-- Added by: runner, at: Sat Nov 21 00:49:42 UTC 2020 -->
 
 <!--te-->
 
