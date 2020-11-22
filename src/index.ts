@@ -14,5 +14,5 @@ process.on('unhandledRejection', (e) => console.error(e));
 (async function main() {
   await waitApp();
   await seedAdminUser();
-  app.listen(port, () => logger.info(`Server listening on port ${port}...`));
+  app.listen(port, () => logger.info(`Server listening on port ${port} on mode ${config.mode}...`));
 }());
