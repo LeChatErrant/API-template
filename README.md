@@ -45,6 +45,7 @@ Table of Contents
       * [Logging](#logging)
       * [Documentation](#documentation)
          * [Postman](#postman)
+      * [Request validation](#request-validation)
       * [Error handling](#error-handling)
          * [RO](#ro)
          * [Non-OK responses](#non-ok-responses)
@@ -56,7 +57,6 @@ Table of Contents
       * [Role system](#role-system)
          * [Roles](#roles)
          * [Route protection](#route-protection-1)
-      * [Request validation](#request-validation)
       * [Contributors](#contributors)
 <!--te-->
 
