@@ -5,8 +5,10 @@ import session, { MemoryStore, Store } from 'express-session';
 import logger from './appLogger';
 import { redisConfig } from './appConfig';
 
+// eslint-disable-next-line import/no-mutable-exports
 let store: Store | MemoryStore;
-let redisClient: redis.RedisClient | null = null;
+// eslint-disable-next-line import/no-mutable-exports
+export let redisClient: redis.RedisClient | null = null;
 
 if (redisConfig.enabled) {
   redisClient = redis.createClient({
@@ -22,4 +24,4 @@ if (redisConfig.enabled) {
   store = new MemoryStore();
 }
 
-export default { store, redisClient };
+export default store;

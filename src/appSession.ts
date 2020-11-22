@@ -20,5 +20,5 @@ export default session({
   cookie: { httpOnly: true, secure: config.mode === MODES.PROD },
   resave: false,
   saveUninitialized: false,
-  store: store.store,
+  store,
 });

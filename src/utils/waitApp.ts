@@ -1,5 +1,5 @@
 import db from '../appDatabase';
-import store from '../appStore';
+import { redisClient } from '../appStore';
 import logger from '../appLogger';
 import { config } from '../appConfig';
 
@@ -9,7 +9,7 @@ export default async function waitApp() {
   await db
     .$connect()
     .then(() => {
-      logger.info(`Connected to database at url ${config.dbUrl}`);
+      logger.info('Connected to database !');
     })
     .catch((error) => {
       logger.error(error);
@@ -18,17 +18,17 @@ export default async function waitApp() {
     });
 
   /*  Redis */
-  if (store.redisClient) {
+  if (redisClient) {
     logger.info('Waiting redis...');
     await new Promise<void>((resolve) => {
       const interval = setInterval(() => {
-        const isConnected = store.redisClient?.ping();
+        const isConnected = redisClient?.ping();
         if (isConnected) {
           clearInterval(interval);
           resolve();
         }
       }, 1000);
     });
-    logger.info('Redis connected !');
+    logger.info('Connected to redis !');
   }
 }
