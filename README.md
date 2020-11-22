@@ -278,6 +278,42 @@ Additionally, all requests are automatically logged too, thanks to [morgan](http
 
 A [postman collection](/API-template.postman_collection.json) is available to test application routes
 
+## Request validation
+
+Requests body parameters are validated thanks to [class-validator](https://www.npmjs.com/package/class-validator)
+
+Simply define the DTO (Data Transfer Object) schema for your route
+
+```typescript
+import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
+
+export class UserSignupDto {
+  @IsEmail()
+  email!: string;
+
+  @IsString()
+  @IsOptional()
+  name!: string;
+
+  @IsString()
+  @MinLength(8)
+  password!: string;
+}
+```
+
+Then, you can validate incoming DTOs thanks to *validationMiddleware* and type your controllers
+
+```typescript
+async function signupController(payload: UserSignupDto) {
+  /*  Signup logic, with typed payload  */
+}
+
+router.get('/users/signup', validate(UserSignupDto), handler(async (req, res) => {
+  /*  Here, you are sure all constraints from your DTO are respected. You can safely pass it to your controller */
+  await signupController(req.body);
+}));
+```
+
 ## Error handling
 
 Non-ok replies, custom errors and crashes will all be intercepted by the central *error-middleware*
@@ -401,42 +437,6 @@ You can make a route accessible only by an *ADMIN* with the *adminMiddleware*. A
 ```javascript
 router.get('/users', adminMiddleware, handler(async (req, res) => {
   /*  Here, you are sure the user got ADMIN role  */
-}));
-```
-
-## Request validation
-
-Requests body parameters are validated thanks to [class-validator](https://www.npmjs.com/package/class-validator)
-
-Simply define the DTO (Data Transfer Object) schema for your route
-
-```typescript
-import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
-
-export class UserSignupDto {
-  @IsEmail()
-  email!: string;
-
-  @IsString()
-  @IsOptional()
-  name!: string;
-
-  @IsString()
-  @MinLength(8)
-  password!: string;
-}
-```
-
-Then, you can validate incoming DTOs thanks to *validationMiddleware* and type your controllers
-
-```typescript
-async function signupController(payload: UserSignupDto) {
-  /*  Signup logic, with typed payload  */
-}
-
-router.get('/users/signup', validate(UserSignupDto), handler(async (req, res) => {
-  /*  Here, you are sure all constraints from your DTO are respected. You can safely pass it to your controller */
-  await signupController(req.body);
 }));
 ```
 
