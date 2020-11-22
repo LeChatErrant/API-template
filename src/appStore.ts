@@ -5,11 +5,11 @@ import session, { MemoryStore, Store } from 'express-session';
 import logger from './appLogger';
 import { redisConfig } from './appConfig';
 
-// eslint-disable-next-line import/no-mutable-exports
 let store: Store | MemoryStore;
+let redisClient: redis.RedisClient | null = null;
 
 if (redisConfig.enabled) {
-  const redisClient = redis.createClient({
+  redisClient = redis.createClient({
     host: redisConfig.host,
     port: redisConfig.port,
     password: redisConfig.password,
@@ -18,9 +18,8 @@ if (redisConfig.enabled) {
 
   const RedisStore = connectRedis(session);
   store = new RedisStore({ client: redisClient });
-  logger.info('Connecting to Redis...');
 } else {
   store = new MemoryStore();
 }
 
-export default store;
+export default { store, redisClient };
