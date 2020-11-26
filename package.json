@@ -10,8 +10,8 @@
   "scripts": {
     "build": "tsc",
     "test": "MODE=test && exit 0",
-    "integration": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --detectOpenHandles --forceExit",
-    "integration:watch": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --detectOpenHandles --forceExit --watch",
+    "integration": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit",
+    "integration:watch": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit --watch",
     "start": "npm run db:up && node dist",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",

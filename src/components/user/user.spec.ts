@@ -3,7 +3,7 @@ import httpStatus from 'http-status-codes';
 import { Role } from '@prisma/client';
 
 import app from '../../app';
-import db from '../../appDatabase';
+import db, { clearTestResources } from '../../appDatabase';
 import { config } from '../../appConfig';
 import seedAdminUser from '../../utils/seedAdminUser';
 
@@ -16,7 +16,7 @@ beforeEach(() => {
 
 // Clean db after each test
 afterEach(async () => {
-  await db.user.deleteMany({});
+  await clearTestResources();
 });
 
 const baseUser = {
