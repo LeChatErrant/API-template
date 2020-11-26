@@ -32,5 +32,8 @@ jobs:
     - name: Launch database
       run: source .envrc; npm run dev:db
 
+    - name: Launch redis
+      run: source .envrc; npm run dev:redis
+
     - name: Run integration tests
       run: source .envrc; npm run integration

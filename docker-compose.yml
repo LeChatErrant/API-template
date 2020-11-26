@@ -7,12 +7,12 @@ services:
     environment:
       - PORT
       - SESSION_SECRET
-      - MODE
+      - MODE=dev
       - DEFAULT_ADMIN_EMAIL
       - DEFAULT_ADMIN_PASSWORD
-      - DB_URL
+      - DB_URL=postgresql://$DB_USER:$DB_PASS@db:$DB_PORT/$DB_NAME
       - REDIS_PORT
-      - REDIS_HOST
+      - REDIS_HOST=redis
       - REDIS_PASS
     ports:
       - "${PORT}:${PORT}"
@@ -27,7 +27,7 @@ services:
     command:
       - db:studio
     environment:
-      - DB_URL
+      - DB_URL=postgresql://$DB_USER:$DB_PASS@db:$DB_PORT/$DB_NAME
       - STUDIO_PORT
     ports:
       - "${STUDIO_PORT}:${STUDIO_PORT}"

@@ -7,7 +7,7 @@ const customFormat = winston.format.printf(({
 }) => `${timestamp} | ${level}: ${message}`);
 
 const logger = winston.createLogger({
-  level: 'http',
+  level: 'debug',
   format: winston.format.combine(
     winston.format.colorize(),
     winston.format.timestamp(),
