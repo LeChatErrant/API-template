@@ -20,7 +20,7 @@ export async function signup(payload: UserSignupDto) {
 }
 
 export async function signin(payload: UserSigninDto) {
-  const user = await db.user.findOne({
+  const user = await db.user.findUnique({
     where: { email: payload.email },
   });
   if (!user || !await verifyPassword(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
@@ -35,7 +35,7 @@ export async function listUsers() {
 }
 
 export async function getUser(id: string) {
-  const user = await db.user.findOne({
+  const user = await db.user.findUnique({
     where: { id },
   });
   if (!user) throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
