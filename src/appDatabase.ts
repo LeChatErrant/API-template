@@ -1,4 +1,4 @@
-import { ModelName, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import logger from './appLogger';
 import { config, MODES } from './appConfig';
 
@@ -23,11 +23,11 @@ db.$on('warn', (e) => logger.warn(e.message));
  * It allows to track and delete only test resources, thanks to the following middleware
  */
 const testResources = Object
-  .values(ModelName)
+  .values(Prisma.ModelName)
   .reduce((acc, val) => ({
     ...acc,
     [val]: [],
-  }), {} as {[key in ModelName]: string[]});
+  }), {} as {[key in Prisma.ModelName]: string[]});
 
 /**
  * This middleware stores every resources IDs into `testResources`
