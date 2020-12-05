@@ -31,12 +31,4 @@ if (config.mode !== MODES.PROD) {
   logger.add(new winston.transports.Console());
 }
 
-/*
-logger.stream = {
-  write: (message) => {
-    logger.http(message)
-  },
-};
-*/
-
 export default logger;
