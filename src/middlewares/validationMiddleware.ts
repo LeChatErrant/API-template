@@ -36,7 +36,7 @@ function validationMiddleware<T>(type: ClassType<T>): RequestHandler {
     const parsedBody = plainToClass(type, req.body);
     const errors = await validate(parsedBody);
     if (errors.length !== 0) {
-      const message = errors.join('');
+      const message = errors.join('').trimEnd();
       next(createError(httpStatus.BAD_REQUEST, message));
     } else {
       req.body = parsedBody;
