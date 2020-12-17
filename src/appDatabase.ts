@@ -40,10 +40,7 @@ if (config.mode === MODES.TEST) {
   logger.info('Using test-resources garbage collector prisma middleware');
   db.$use(async (params, next) => {
     const result = await next(params);
-    const { action, model } = params as {
-      model?: Prisma.ModelName;
-      action: Prisma.PrismaAction;
-    };
+    const { action, model } = params;
 
     if (!model) {
       return result;
