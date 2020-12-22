@@ -8,9 +8,9 @@ import { hashPassword } from './hash';
 export default async function seedAdminUser() {
   logger.info('Seeding root user...');
 
-  const alreadyExists = !!await db.user.findUnique({
+  const alreadyExists = !!await db.user.findFirst({
     where: {
-      email: config.defaultAdminEmail,
+      role: Role.ADMIN,
     },
   });
 
