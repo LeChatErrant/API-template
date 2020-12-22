@@ -1,4 +1,4 @@
-name: Build
+name: Build image
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
       - .github/workflows/build.yml
 
 jobs:
-  build:
+  build-image:
     runs-on: ubuntu-latest
 
     steps:
