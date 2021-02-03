@@ -14,9 +14,21 @@ model User {
   username  String?
   role      Role     @default(USER)
   createdAt DateTime @default(now())
+  Post      Post[]
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
+  title     String
+  content   String
+
+  @@unique([authorId, title])
 }
