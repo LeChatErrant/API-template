@@ -12,7 +12,7 @@ import { UserRo } from './userTypes';
 export function buildUserRo(user: User): UserRo {
   return {
     id: user.id,
-    name: user.name,
+    username: user.username,
     email: user.email,
     createdAt: user.createdAt,
     role: user.role,

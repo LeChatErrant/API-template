@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"test.test@epitech.eu\",\n\t\"name\": \"Test account\",\n\t\"password\": \"password\"\n}",
+					"raw": "{\n\t\"email\": \"test.test@epitech.eu\",\n\t\"username\": \"Test account\",\n\t\"password\": \"password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -166,6 +166,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

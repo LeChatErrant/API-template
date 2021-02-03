@@ -21,7 +21,7 @@ afterEach(async () => {
 
 const baseUser = {
   email: 'test.test@epitech.eu',
-  name: 'Test account',
+  username: 'Test account',
   password: 'password',
 };
 
@@ -33,7 +33,7 @@ const adminUser = {
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function validateUser(user: any) {
   expect(user.email).toBe(baseUser.email);
-  expect(user.name).toBe(baseUser.name);
+  expect(user.username).toBe(baseUser.username);
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
   expect(user.createdAt).toBeDefined();
@@ -111,12 +111,12 @@ test('Signup - user already exists', async () => {
   await signup(baseUser, httpStatus.CONFLICT);
 });
 
-test('Signup - name can be omitted', async () => {
-  const { name, ...userWithoutName } = baseUser;
+test('Signup - username can be omitted', async () => {
+  const { username, ...userWithoutName } = baseUser;
   const user = await signup(userWithoutName);
 
   expect(user.email).toBe(baseUser.email);
-  expect(user.name).toBeNull();
+  expect(user.username).toBeNull();
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
 });
@@ -283,16 +283,16 @@ test('Get user - admin', async () => {
 
 test('Update user - auth', async () => {
   const { id } = await signup(baseUser);
-  await updateUser(id, { name: 'LeChatErrant' }, httpStatus.UNAUTHORIZED);
+  await updateUser(id, { username: 'LeChatErrant' }, httpStatus.UNAUTHORIZED);
 });
 
-test('Update user - name', async () => {
+test('Update user - username', async () => {
   await signup(baseUser);
   const { id } = await signin(baseUser);
 
-  const user = await updateUser(id, { name: 'LeChatErrant' });
-  expect(user.name).toBe('LeChatErrant');
-  user.name = baseUser.name;
+  const user = await updateUser(id, { username: 'LeChatErrant' });
+  expect(user.username).toBe('LeChatErrant');
+  user.username = baseUser.username;
   validateUser(user);
 });
 
@@ -338,10 +338,10 @@ test('Update user - multiple fields', async () => {
 
   const user = await updateUser(id, {
     email: 'a.new@email.com',
-    name: 'LeChatErrant',
+    username: 'LeChatErrant',
     password: 'new password',
   });
-  expect(user.name).toBe('LeChatErrant');
+  expect(user.username).toBe('LeChatErrant');
   expect(user.email).toBe('a.new@email.com');
   await signin(baseUser, httpStatus.UNAUTHORIZED);
   await signin({ email: 'a.new@email.com', password: 'new password' });
@@ -370,12 +370,12 @@ test('Update user - admin', async () => {
   await signin(adminUser, httpStatus.UNAUTHORIZED);
   await signin({ ...adminUser, password: 'new password' });
 
-  const admin = await updateUser('me', { name: 'root' });
-  expect(admin.name).toBe('root');
+  const admin = await updateUser('me', { username: 'root' });
+  expect(admin.username).toBe('root');
 
   const { id: userId } = await signup(baseUser);
-  const { name } = await updateUser(userId, { name: 'I have all rights' });
-  expect(name).toBe('I have all rights');
+  const { username } = await updateUser(userId, { username: 'I have all rights' });
+  expect(username).toBe('I have all rights');
 
   await updateUser('unknownUserId', {}, httpStatus.NOT_FOUND);
 });

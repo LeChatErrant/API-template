@@ -11,7 +11,7 @@ export class UserSignupDto {
 
   @IsString()
   @IsOptional()
-  name!: string;
+  username!: string;
 
   @IsString()
   @MinLength(8)
@@ -34,7 +34,7 @@ export class UserUpdateDto {
 
   @IsString()
   @IsOptional()
-  name!: string;
+  username!: string;
 
   @IsString()
   @MinLength(8)
@@ -46,7 +46,7 @@ export class UserUpdateDto {
 export interface UserRo extends Ro {
   id: string;
   email: string;
-  name: string | null;
+  username: string | null;
   role: Role;
   createdAt: Date;
 }

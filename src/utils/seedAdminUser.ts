@@ -23,7 +23,7 @@ export default async function seedAdminUser() {
   await db.user.create({
     data: {
       role: Role.ADMIN,
-      name: 'root',
+      username: 'root',
       email: config.defaultAdminEmail,
       password: hashedPassword,
     },
