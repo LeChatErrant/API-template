@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@prisma/cli": "^2.12.1",
-    "@prisma/client": "^2.15.0",
+    "@prisma/client": "^2.16.0",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
