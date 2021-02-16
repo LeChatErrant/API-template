@@ -15,7 +15,7 @@ export default async function seedAdminUser() {
   });
 
   if (alreadyExists) {
-    logger.info('Root user already exists');
+    logger.info('Root user already exists. Skipping database seeding');
     return;
   }
 
