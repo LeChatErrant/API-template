@@ -5,10 +5,10 @@
   "scripts": {
     "pre-commit": "npm run lint:ci && npm run db:format",
     "build": "tsc",
-    "start": "npm run db:up && node dist",
+    "start": "npm run db:deploy && node dist",
     "test": "MODE=test && exit 0",
-    "integration": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit",
-    "integration:watch": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit --watch",
+    "integration": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit",
+    "integration:watch": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit --watch",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",
     "dev": "concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
