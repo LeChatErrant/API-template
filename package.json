@@ -2,28 +2,28 @@
   "name": "app",
   "version": "1.0.0",
   "description": "",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:ci && npm run db:format"
-    }
-  },
   "scripts": {
+    "pre-commit": "npm run lint:ci && npm run db:format",
     "build": "tsc",
+    "start": "npm run db:deploy && node dist",
     "test": "MODE=test && exit 0",
-    "integration": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit",
-    "integration:watch": "MODE=test && npm run db:up && jest --passWithNoTests --coverage --runInBand --forceExit --watch",
-    "start": "npm run db:up && node dist",
+    "integration": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit",
+    "integration:watch": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit --watch",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",
-    "dev": "npm run db:up && concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
-    "generate": "prisma generate",
-    "db": "npm run db:migrate && npm run db:up",
-    "db:migrate": "prisma migrate save --create-db --experimental",
-    "db:up": "prisma migrate up --create-db --experimental",
+    "dev": "concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
+    "prisma:generate": "prisma generate",
+    "db:migrate:help": "prisma migrate --help",
+    "db:migrate": "prisma migrate dev --preview-feature",
+    "db:migrate:draft": "prisma migrate dev --create-only --preview-feature",
+    "db:reset": "prisma migrate reset --preview-feature",
+    "db:deploy": "prisma migrate deploy --preview-feature",
+    "db:deploy:status": "prisma migrate status --preview-feature",
     "db:format": "prisma format",
     "db:studio": "prisma studio --port ${STUDIO_PORT}",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
-    "lint:ci": "eslint './src/**/*.{ts,tsx}'"
+    "lint:ci": "eslint './src/**/*.{ts,tsx}'",
+    "postinstall": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -52,7 +52,6 @@
     "ts-node-dev": "^1.1.1"
   },
   "dependencies": {
-    "@prisma/cli": "^2.12.1",
     "@prisma/client": "^2.16.1",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
@@ -65,6 +64,7 @@
     "http-errors": "^1.8.0",
     "http-status-codes": "^2.1.4",
     "morgan": "^1.10.0",
+    "prisma": "^2.16.1",
     "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.1.5",
