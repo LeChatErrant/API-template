@@ -13,7 +13,6 @@ const router = express.Router();
 
 router.get(
   '/users/:userId/posts',
-  ownershipMiddleware,
   handler(async (req, res) => {
     const posts = await controllers.listPosts(req.params.userId);
     res.send(posts);
@@ -32,7 +31,6 @@ router.post(
 
 router.get(
   '/users/:userId/posts/:postId',
-  ownershipMiddleware,
   postMiddleware,
   handler(async (req, res) => {
     const post = await controllers.getPost(res.locals.post);

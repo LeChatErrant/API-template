@@ -12,17 +12,17 @@ import authMiddleware from './authMiddleware';
  * Additionally, it allows to add the 'me' logic on routes
  * (enabling to use `me` as userId to refer to your own user)
 
- * Basically, it does 3 things :
+ * In summary, it does 3 things :
  *  - It checks if the user is logged in
  *  - It checks if the user has the right to access the requested resources
  *     - If the user has the role USER, he can only access his own resources
  *     - If the user has the role ADMIN, he can access resources from every users
- *  - It enables using 'me' as userId, to refer to the user logged (ex: GET /users/me)
+ *  - It enables using 'me' as userId, to refer to the user currently logged (ex: GET /users/me)
  *
  * @throws 400 - Bad request | If the route parameters are missing
  * @throws 401 - Unauthorized | If not logged in
- * @throws 401 - Unauthorized | If the user making the request
- * is not allowed to access the targeted user
+ * @throws 401 - Unauthorized | If the user making the request is not allowed to
+ * access the targeted user
  *
  * @example
  * router.get('/users/:userId', ownershipMiddleware, ...);
