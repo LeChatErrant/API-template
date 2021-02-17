@@ -54,9 +54,6 @@ Table of Contents
       * [User management](#user-management)
          * [Routes](#routes)
          * [Route protection](#route-protection)
-      * [Role system](#role-system)
-         * [Roles](#roles)
-         * [Route protection](#route-protection-1)
       * [Contributors](#contributors)
 <!--te-->
 
@@ -76,7 +73,7 @@ Application is configured through *environment variables*
 
 Pre-configured environment variables are available in the [.envrc](/.envrc) file. Use it to configure your application during development
 
-.envrc files are automatically loaded by [direnv](https://direnv.net/). I strongly recommand installing it along with its shell hook, to have an isolated development environment
+.envrc files are automatically loaded by [direnv](https://direnv.net/). I strongly recommand installing it, **along with its shell hook**, to have an isolated development environment
 
 If, for any reason, you don't want to / you can't use direnv, simply `source .envrc` to load environment variables into your shell
 
@@ -185,18 +182,20 @@ Generate it with `npm run db:migrate` once you're satisfied with your new model
 
 Don't forget: migrations are part of your code and need to be pushed with it
 
-Once generated, apply it on your database with `npm run db:up`
+`db:migrate` automatically apply migrations on your current database. In fact, this command shall only be used when working locally, to create new migrations
+
+Once migrations are generated and pushed to your codebase, you can apply it on you production database with `npm run db:up`
 > Be careful! It is a potentially *destructive* operation (eg: removing user table)
 >
 > Triple check before destroying your production database
 
 Migrations are automatically applied on your database when launching the dev mode or docker-compose thanks to npm scripts, so once again it's not a command you need to type all days ;)
 
+I recommand reading more on Prisma Migration tool here : [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)
+
 | ![Prisma migrations](https://i.imgur.com/OImder6.png) |
 |---|
 | *Migration workflow from [prisma documentation](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate)* |
-
-> `npm run db` will generate **and** apply migrations in once
 
 ## Linter
 
@@ -216,7 +215,7 @@ You can run the linter manually and fix errors with `npm run lint`
 
 Application routes are tested with [jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest)
 
-With a database launched, use `npm run integration` to test the application
+With a database and redis launched (`npm run dev:db && npm run dev:redis`), use `npm run integration` to test the application
 
 ![Integration tests](.github/assets/integration.png)
 
@@ -278,6 +277,8 @@ Additionally, all requests are automatically logged too, thanks to [morgan](http
 
 A [postman collection](/API-template.postman_collection.json) is available to test application routes
 
+![Postman](.github/assets/postman.png)
+
 ## Request validation
 
 Requests body parameters are validated thanks to [class-validator](https://www.npmjs.com/package/class-validator)
@@ -308,10 +309,14 @@ async function signupController(payload: UserSignupDto) {
   /*  Signup logic, with typed payload  */
 }
 
-router.get('/users/signup', validate(UserSignupDto), handler(async (req, res) => {
-  /*  Here, you are sure all constraints from your DTO are respected. You can safely pass it to your controller */
-  await signupController(req.body);
-}));
+router.get(
+  '/users/signup',
+  validate(UserSignupDto),
+  handler(async (req, res) => {
+    /*  Here, you are sure all constraints from your DTO are respected. You can safely pass it to your controller */
+    await signupController(req.body);
+  })
+);
 ```
 
 ## Error handling
@@ -402,43 +407,19 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 }));
 ```
 
-There is an other middleware to do some more advanced checking : the *userMiddleware*
-
-The *userMiddleware* is used to protect routes accessing specific user resources. It :
- * Makes sure the user is logged in
- * Makes sure `userId` is present in the URL (eg: `GET` `/users/:userId/someResource`)
- * Makes sure the `userId` is the id of the current user **or** that the user is admin
- * Allows using ***me*** as `userId` (eg: `GET` `/users/me/someResource`)
+There is an other middleware to do some more advanced checking : the *ownershipMiddleware*
 
 Basically, it ensures nobody can access other users information, unless admin
 
-## Role system
+Additionally, it allows to add the 'me' logic on routes (enabling to use `me` as userId to refer to your own user)
 
-### Roles
+In summary, it does 3 things :
+ - It checks if the user is logged in
+ - It checks if the user has the right to access the requested resources
+   - If the user has the role `USER`, he can only access his own resources
+   - If the user has the role `ADMIN`, he can access resources from every users
+ - It enables using 'me' as `userId`, to refer to the user currently logged (ex: `GET` `/users/me`)
 
-The template has a *role* system
-
-Two roles are available :
- * USER
- * ADMIN
-
-When a new user signup, he is attributed the role of *USER*
-
-A default *ADMIN* user is created at the app start (credentials can be configured in environment variables)
-
-*ADMIN* can access other user resources and some private routes
-
-For example, the `GET` `/users` route to list all users (useful for monitoring or to create an admin console) is not available for a *USER* but is available for an *ADMIN*
-
-### Route protection
-
-You can make a route accessible only by an *ADMIN* with the *adminMiddleware*. Admin middleware ensure the user is logged in and got the *ADMIN* role
-
-```javascript
-router.get('/users', adminMiddleware, handler(async (req, res) => {
-  /*  Here, you are sure the user got ADMIN role  */
-}));
-```
 
 ## Contributors
 

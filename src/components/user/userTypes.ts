@@ -11,7 +11,7 @@ export class UserSignupDto {
 
   @IsString()
   @IsOptional()
-  username!: string;
+  username?: string;
 
   @IsString()
   @MinLength(8)
@@ -30,17 +30,17 @@ export class UserSigninDto {
 export class UserUpdateDto {
   @IsEmail()
   @IsOptional()
-  email!: string;
+  email?: string;
 
   @IsString()
   @IsOptional()
-  username!: string;
+  username?: string;
 
   @IsString()
   @MinLength(8)
   @MaxLength(64)
   @IsOptional()
-  password!: string;
+  password?: string;
 }
 
 export interface UserRo extends Ro {
