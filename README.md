@@ -402,9 +402,9 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 }));
 ```
 
-There is an other middleware to do some more advanced checking : the *userMiddleware*
+There is an other middleware to do some more advanced checking : the *ownershipMiddleware*
 
-The *userMiddleware* is used to protect routes accessing specific user resources. It :
+The *ownershipMiddleware* is used to protect routes accessing specific user resources. It :
  * Makes sure the user is logged in
  * Makes sure `userId` is present in the URL (eg: `GET` `/users/:userId/someResource`)
  * Makes sure the `userId` is the id of the current user **or** that the user is admin

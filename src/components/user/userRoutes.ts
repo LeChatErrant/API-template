@@ -2,11 +2,12 @@ import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
-import userMiddleware from '../../middlewares/userMiddleware';
+import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
 import adminMiddleware from '../../middlewares/adminMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
 import * as controllers from './userControllers';
+import userMiddleware from './userMiddleware';
 import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 
 const router = express.Router();
@@ -44,9 +45,10 @@ router.post(
 
 router.get(
   '/users/:userId',
+  ownershipMiddleware,
   userMiddleware,
   handler(async (req, res) => {
-    const user = await controllers.getUser(req.params.userId);
+    const user = await controllers.getUser(res.locals.user);
     res.send(user);
   }),
 );
@@ -54,18 +56,20 @@ router.get(
 router.patch(
   '/users/:userId',
   validate(UserUpdateDto),
+  ownershipMiddleware,
   userMiddleware,
   handler(async (req, res) => {
-    const user = await controllers.updateUser(req.params.userId, req.body);
+    const user = await controllers.updateUser(res.locals.user, req.body);
     res.send(user);
   }),
 );
 
 router.delete(
   '/users/:userId',
+  ownershipMiddleware,
   userMiddleware,
   handler(async (req, res) => {
-    await controllers.deleteUser(req.params.userId);
+    await controllers.deleteUser(res.locals.user);
     res.sendStatus(httpStatus.NO_CONTENT);
   }),
 );

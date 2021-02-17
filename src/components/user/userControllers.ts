@@ -1,5 +1,6 @@
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
+import { User } from '@prisma/client';
 
 import db from '../../appDatabase';
 import { hashPassword, verifyPassword } from '../../utils/hash';
@@ -35,34 +36,23 @@ export async function listUsers() {
   return users.map((user) => buildUserRo(user));
 }
 
-export async function getUser(id: string) {
-  const user = await db.user.findUnique({
-    where: { id },
-  });
-  if (!user) throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
+export async function getUser(user: User) {
   return buildUserRo(user);
 }
 
-export async function updateUser(id: string, payload: UserUpdateDto) {
+export async function updateUser(user: User, payload: UserUpdateDto) {
   const fields = payload;
   if (payload.password) {
     fields.password = await hashPassword(payload.password);
   }
 
-  try {
-    const user = await db.user.update({
-      where: { id },
-      data: fields,
-    });
-    return buildUserRo(user);
-  } catch (error) {
-    throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
-  }
+  const updatedUser = await db.user.update({
+    where: { id: user.id },
+    data: fields,
+  });
+  return buildUserRo(updatedUser);
 }
 
-export async function deleteUser(id: string) {
-  const user = await db.user.findUnique({ where: { id } });
-  if (!user) throw createError(httpStatus.NOT_FOUND, `User ${id} doesn't exist`);
-
-  await db.user.delete({ where: { id } });
+export async function deleteUser(user: User) {
+  await db.user.delete({ where: { id: user.id } });
 }

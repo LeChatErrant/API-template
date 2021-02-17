@@ -2,8 +2,7 @@ import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
-import adminMiddleware from '../../middlewares/adminMiddleware';
-import userMiddleware from '../../middlewares/userMiddleware';
+import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
 import postMiddleware from './postMiddleware';
@@ -14,7 +13,7 @@ const router = express.Router();
 
 router.get(
   '/users/:userId/posts',
-  adminMiddleware,
+  ownershipMiddleware,
   handler(async (req, res) => {
     const posts = await controllers.listPosts(req.params.userId);
     res.send(posts);
@@ -24,7 +23,7 @@ router.get(
 router.post(
   '/users/:userId/posts',
   validate(PostCreateDto),
-  userMiddleware,
+  ownershipMiddleware,
   handler(async (req, res) => {
     const post = await controllers.createNewPost(req.params.userId, req.body);
     res.status(httpStatus.CREATED).send(post);
@@ -33,7 +32,7 @@ router.post(
 
 router.get(
   '/users/:userId/posts/:postId',
-  userMiddleware,
+  ownershipMiddleware,
   postMiddleware,
   handler(async (req, res) => {
     const post = await controllers.getPost(res.locals.post);
@@ -44,7 +43,7 @@ router.get(
 router.patch(
   '/users/:userId/posts/:postId',
   validate(PostUpdateDto),
-  userMiddleware,
+  ownershipMiddleware,
   postMiddleware,
   handler(async (req, res) => {
     const post = await controllers.updatePost(res.locals.post, req.body);
@@ -54,7 +53,7 @@ router.patch(
 
 router.delete(
   '/users/:userId/posts/:postId',
-  userMiddleware,
+  ownershipMiddleware,
   postMiddleware,
   handler(async (req, res) => {
     await controllers.deletePost(res.locals.post);
