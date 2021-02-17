@@ -28,7 +28,7 @@ model Post {
   authorId  String
   createdAt DateTime @default(now())
   title     String
-  content   String
+  content   String   @db.Text
 
   @@unique([authorId, title])
 }
