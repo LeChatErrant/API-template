@@ -54,9 +54,6 @@ Table of Contents
       * [User management](#user-management)
          * [Routes](#routes)
          * [Route protection](#route-protection)
-      * [Role system](#role-system)
-         * [Roles](#roles)
-         * [Route protection](#route-protection-1)
       * [Contributors](#contributors)
 <!--te-->
 
