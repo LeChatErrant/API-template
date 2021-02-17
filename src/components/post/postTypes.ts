@@ -1,13 +1,24 @@
-import { IsString, MaxLength } from 'class-validator';
+import { IsOptional, IsString, MaxLength } from 'class-validator';
+
 import { Ro } from '../../appRo';
 
-export class NewPostDto {
+export class PostCreateDto {
   @IsString()
   @MaxLength(50)
   title!: string;
 
   @IsString()
   content!: string;
+}
+
+export class PostUpdateDto {
+  @IsString()
+  @MaxLength(50)
+  @IsOptional()
+  title?: string;
+
+  @IsString()
+  content?: string;
 }
 
 export interface PostRo extends Ro {

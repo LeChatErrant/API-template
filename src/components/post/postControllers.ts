@@ -1,9 +1,10 @@
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
+import { Post } from '@prisma/client';
 
 import db from '../../appDatabase';
 
-import type { NewPostDto } from './postTypes';
+import type { PostCreateDto, PostUpdateDto } from './postTypes';
 import { buildPostRo } from './postHelpers';
 
 export async function listPosts(authorId: string) {
@@ -14,7 +15,7 @@ export async function listPosts(authorId: string) {
   return posts.map((post) => buildPostRo(post));
 }
 
-export async function createNewPost(authorId: string, payload: NewPostDto) {
+export async function createNewPost(authorId: string, payload: PostCreateDto) {
   const alreadyExists = !!await db.post.findUnique({
     where: {
       authorId_title: {
@@ -37,10 +38,18 @@ export async function createNewPost(authorId: string, payload: NewPostDto) {
   return buildPostRo(post);
 }
 
-export async function getPost(authorId: string, postId: string) {
-  const post = await db.post.findFirst({
-    where: { id: postId, authorId },
-  });
-  if (!post) throw createError(httpStatus.NOT_FOUND, `Post ${postId} doesn't exist on user ${authorId}`);
+export async function getPost(post: Post) {
   return buildPostRo(post);
+}
+
+export async function updatePost(post: Post, payload: PostUpdateDto) {
+  const updatedPost = await db.post.update({
+    where: { id: post.id },
+    data: payload,
+  });
+  return buildPostRo(updatedPost);
+}
+
+export async function deletePost(post: Post) {
+  await db.post.delete({ where: { id: post.id } });
 }

@@ -3,11 +3,12 @@ import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
 import adminMiddleware from '../../middlewares/adminMiddleware';
+import userMiddleware from '../../middlewares/userMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
+import postMiddleware from './postMiddleware';
 import * as controllers from './postControllers';
-import { NewPostDto } from './postTypes';
-import userMiddleware from '../../middlewares/userMiddleware';
+import { PostCreateDto, PostUpdateDto } from './postTypes';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get(
 
 router.post(
   '/users/:userId/posts',
-  validate(NewPostDto),
+  validate(PostCreateDto),
   userMiddleware,
   handler(async (req, res) => {
     const post = await controllers.createNewPost(req.params.userId, req.body);
@@ -33,9 +34,31 @@ router.post(
 router.get(
   '/users/:userId/posts/:postId',
   userMiddleware,
+  postMiddleware,
   handler(async (req, res) => {
-    const post = await controllers.getPost(req.params.userId, req.params.postId);
+    const post = await controllers.getPost(res.locals.post);
     res.send(post);
+  }),
+);
+
+router.patch(
+  '/users/:userId/posts/:postId',
+  validate(PostUpdateDto),
+  userMiddleware,
+  postMiddleware,
+  handler(async (req, res) => {
+    const post = await controllers.updatePost(res.locals.post, req.body);
+    res.send(post);
+  }),
+);
+
+router.delete(
+  '/users/:userId/posts/:postId',
+  userMiddleware,
+  postMiddleware,
+  handler(async (req, res) => {
+    await controllers.deletePost(res.locals.post);
+    res.sendStatus(httpStatus.NO_CONTENT);
   }),
 );
 
