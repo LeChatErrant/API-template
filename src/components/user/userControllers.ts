@@ -8,15 +8,16 @@ import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 import { buildUserRo } from './userHelpers';
 
 export async function signup(payload: UserSignupDto) {
-  const hashedPassword = await hashPassword(payload.password);
-  try {
-    const user = await db.user.create({
-      data: { ...payload, password: hashedPassword },
-    });
-    return buildUserRo(user);
-  } catch (error) {
+  const alreadyExists = !!await db.user.findUnique({ where: { email: payload.email } });
+  if (alreadyExists) {
     throw createError(httpStatus.CONFLICT, `A user with email ${payload.email} already exists`);
   }
+
+  const hashedPassword = await hashPassword(payload.password);
+  const user = await db.user.create({
+    data: { ...payload, password: hashedPassword },
+  });
+  return buildUserRo(user);
 }
 
 export async function signin(payload: UserSigninDto) {
