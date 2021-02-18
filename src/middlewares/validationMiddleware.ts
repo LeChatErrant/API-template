@@ -34,7 +34,7 @@ import { ClassType } from 'class-transformer/ClassTransformer';
 function validate<T>(type: ClassType<T>): RequestHandler {
   return handler(async (req, res, next) => {
     const parsedBody = plainToClass(type, req.body);
-    const errors = await classValidator(parsedBody);
+    const errors = await classValidator(parsedBody, { whitelist: true });
     if (errors.length !== 0) {
       const message = errors.join('').trimEnd();
       next(createError(httpStatus.BAD_REQUEST, message));
