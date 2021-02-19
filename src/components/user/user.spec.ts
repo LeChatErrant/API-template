@@ -1,3 +1,5 @@
+/*  eslint-disable  @typescript-eslint/no-explicit-any  */
+
 import supertest from 'supertest';
 import httpStatus from 'http-status-codes';
 import { Role } from '@prisma/client';
@@ -9,6 +11,17 @@ import seedAdminUser from '../../utils/seedAdminUser';
 
 let request = supertest.agent(app);
 
+const baseUser = {
+  email: 'test@test.test',
+  username: 'Test account',
+  password: 'password',
+};
+
+const adminUser = {
+  email: config.defaultAdminEmail,
+  password: config.defaultAdminPassword,
+};
+
 // Reset session before each test
 beforeEach(() => {
   request = supertest.agent(app);
@@ -19,29 +32,7 @@ afterEach(async () => {
   await clearTestResources();
 });
 
-const baseUser = {
-  email: 'test.test@epitech.eu',
-  username: 'Test account',
-  password: 'password',
-};
-
-const adminUser = {
-  email: config.defaultAdminEmail,
-  password: config.defaultAdminPassword,
-};
-
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-function validateUser(user: any) {
-  expect(user.email).toBe(baseUser.email);
-  expect(user.username).toBe(baseUser.username);
-  expect(user.password).toBeUndefined();
-  expect(user.id).toBeDefined();
-  expect(user.createdAt).toBeDefined();
-  expect(user.role).toBe(Role.USER);
-}
-
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
+export async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
   const { body } = await request
     .post('/users/signup')
     .send(user)
@@ -50,8 +41,7 @@ async function signup(user: any, statusCodeExpected = httpStatus.CREATED) {
   return body;
 }
 
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-async function signin(user: any, statusCodeExpected = httpStatus.OK) {
+export async function signin(user: any, statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .post('/users/signin')
     .send(user)
@@ -60,7 +50,7 @@ async function signin(user: any, statusCodeExpected = httpStatus.OK) {
   return body;
 }
 
-async function listUsers(statusCodeExpected = httpStatus.OK) {
+export async function listUsers(statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .get('/users')
     .expect(statusCodeExpected);
@@ -68,7 +58,7 @@ async function listUsers(statusCodeExpected = httpStatus.OK) {
   return body;
 }
 
-async function getUser(userId: string, statusCodeExpected = httpStatus.OK) {
+export async function getUser(userId: string, statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .get(`/users/${userId}`)
     .expect(statusCodeExpected);
@@ -76,8 +66,7 @@ async function getUser(userId: string, statusCodeExpected = httpStatus.OK) {
   return body;
 }
 
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-async function updateUser(userId: string, payload: any, statusCodeExpected = httpStatus.OK) {
+export async function updateUser(userId: string, payload: any, statusCodeExpected = httpStatus.OK) {
   const { body } = await request
     .patch(`/users/${userId}`)
     .send(payload)
@@ -86,10 +75,19 @@ async function updateUser(userId: string, payload: any, statusCodeExpected = htt
   return body;
 }
 
-async function deleteUser(userId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
+export async function deleteUser(userId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
   await request
     .delete(`/users/${userId}`)
     .expect(statusCodeExpected);
+}
+
+function validateUser(user: any) {
+  expect(user.email).toBe(baseUser.email);
+  expect(user.username).toBe(baseUser.username);
+  expect(user.password).toBeUndefined();
+  expect(user.id).toBeDefined();
+  expect(user.createdAt).toBeDefined();
+  expect(user.role).toBe(Role.USER);
 }
 
 /*  Signup  */
@@ -145,7 +143,7 @@ test('Signup - email length 8 minimum', async () => {
   await signup(falseUser, httpStatus.BAD_REQUEST);
 
   falseUser.password = '12345678';
-  await signup(falseUser, httpStatus.CREATED);
+  await signup(falseUser);
 });
 
 test('Signup - email length 64 maximum', async () => {
@@ -155,7 +153,7 @@ test('Signup - email length 64 maximum', async () => {
   await signup(falseUser, httpStatus.BAD_REQUEST);
 
   falseUser.password = 'a'.repeat(64);
-  await signup(falseUser, httpStatus.CREATED);
+  await signup(falseUser);
 });
 
 /*  Signin  */
