@@ -11,7 +11,7 @@ on:
       - prisma/**
       - src/**
       - tsconfig.json
-      - .github/workflows/build.yml
+      - .github/workflows/build_docker_image.yml
 
 jobs:
   build-image:
