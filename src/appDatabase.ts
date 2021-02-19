@@ -68,10 +68,9 @@ export async function clearTestResources() {
     .map(async ([model, ids]) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
-      const { count } = await db[model.toLowerCase()].deleteMany({
+      await db[model.toLowerCase()].deleteMany({
         where: { id: { in: ids } },
       });
-      logger.info(`Deleted ${count} ${model}`);
       ids.splice(0, ids.length);
     }));
 }
