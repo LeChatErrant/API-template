@@ -26,8 +26,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: lechaterrant/api-template/app
-        registry: docker.pkg.github.com
+        repository: lechaterrant/api-template
+        registry: ghcr.io
         tag_with_ref: true
         tag_with_sha: true
         add_git_labels: true
