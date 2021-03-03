@@ -1,13 +1,12 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
-import supertest from 'supertest';
 import httpStatus from 'http-status-codes';
 
-import app from '../../app';
-import db, { clearTestResources } from '../../appDatabase';
-import { signin, signup } from '../user/user.spec';
+import Requester from '../../appRequester';
+import db from '../../appDatabase';
+import logger from '../../appLogger';
 
-let request = supertest.agent(app);
+const app = new Requester();
 
 const user = {
   email: 'test@test.test',
@@ -30,26 +29,21 @@ const basePost = {
 
 // Reset session before each test, create two user and log in
 beforeEach(async () => {
-  request = supertest.agent(app);
+  logger.debug('');
+  logger.debug(`Running test '${expect.getState().currentTestName}'`);
 
-  user.id = (await signup(user)).id;
-  await signin(user);
-  otherUser.id = (await signup(otherUser)).id;
+  app.resetSession();
+
+  user.id = (await app.signup(user)).id;
+  await app.signin(user);
+  otherUser.id = (await app.signup(otherUser)).id;
 });
 
 // Clean db after each test
 afterEach(async () => {
-  await clearTestResources();
+  await db.post.deleteMany();
+  await db.user.deleteMany();
 });
-
-export async function createPost(userId: string, payload: any, statusCodeExpected = httpStatus.OK) {
-  const { body } = await request
-    .post(`/users/${userId}/posts`)
-    .send(payload)
-    .expect(statusCodeExpected);
-
-  return body;
-}
 
 function validatePost(post: any) {
   expect(post.id).toBeDefined();
@@ -62,36 +56,37 @@ function validatePost(post: any) {
 /*  Create post */
 
 test('Create post', async () => {
-  const post = await createPost('me', basePost);
+  const post = await app.createPost('me', basePost);
   validatePost(post);
 });
 
 test('Create post - Title already exist', async () => {
-  await createPost('me', basePost);
-  await createPost('me', basePost, httpStatus.CONFLICT);
+  await app.createPost('me', basePost);
+  await app.createPost('me', basePost, httpStatus.CONFLICT);
 });
 
 test('Create post - Same title, different user', async () => {
-  const post = await createPost('me', basePost);
+  const post = await app.createPost('me', basePost);
   validatePost(post);
 
-  await signin(otherUser);
-  const { authorId } = await createPost('me', basePost);
+  await app.signin(otherUser);
+  const { authorId } = await app.createPost('me', basePost);
   expect(authorId).toBe(otherUser.id);
 });
 
 test('Create post - Title max length (50)', async () => {
-  await createPost('me', {
+  await app.createPost('me', {
     ...basePost,
     title: 'a'.repeat(51),
   }, httpStatus.BAD_REQUEST);
 
-  const post = await createPost('me', {
+  const post = await app.createPost('me', {
     ...basePost,
     title: 'a'.repeat(50),
   });
+  expect(post.title).toHaveLength(50);
 });
 
 test('Create post - Ownership', async () => {
-  await createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
+  await app.createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
 });
