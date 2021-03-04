@@ -51,9 +51,10 @@ Table of Contents
          * [Non-OK responses](#non-ok-responses)
          * [Crashes](#crashes)
          * [Async handler](#async-handler)
-      * [User management](#user-management)
-         * [Routes](#routes)
-         * [Route protection](#route-protection)
+      * [Route protection](#route-protection)
+         * [Authentification](#authentification)
+         * [Ownership](#ownership)
+         * [Me](#me)
       * [Contributors](#contributors)
 <!--te-->
 
