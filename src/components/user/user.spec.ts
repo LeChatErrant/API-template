@@ -247,10 +247,6 @@ test('Get user - access others forbidden unless admin', async () => {
   await app.getUser('otherUserId', httpStatus.FORBIDDEN);
 });
 
-test('Get user - auth', async () => {
-  await app.getUser('me', httpStatus.UNAUTHORIZED);
-});
-
 test('Get user - admin', async () => {
   await seedAdminUser();
   const { id } = await app.signin(adminUser);
