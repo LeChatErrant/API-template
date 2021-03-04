@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import type { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 import { Role } from '@prisma/client';

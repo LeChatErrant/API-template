@@ -1,10 +1,10 @@
+import type { RequestHandler } from 'express';
+import type { ClassType } from 'class-transformer/ClassTransformer';
 import { plainToClass } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
-import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 import handler from 'express-async-handler';
-import { ClassType } from 'class-transformer/ClassTransformer';
 
 /**
  * Validate the request body
