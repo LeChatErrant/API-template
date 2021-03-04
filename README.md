@@ -55,9 +55,10 @@ Table of Contents
          * [Non-OK responses](#non-ok-responses)
          * [Crashes](#crashes)
          * [Async handler](#async-handler)
-      * [User management](#user-management)
-         * [Routes](#routes)
-         * [Route protection](#route-protection)
+      * [Route protection](#route-protection)
+         * [Authentification](#authentification)
+         * [Ownership](#ownership)
+         * [Me](#me)
       * [Contributors](#contributors)
 <!--te-->
 
@@ -382,24 +383,9 @@ router.post('/signin', handler(async (req, res) => {
 }));
 ```
 
-## User management
+## Route protection
 
-The template comes with basic user management logic
-
-### Routes
-
-| Method | Route | Description |
-| --- | --- | --- |
-| `GET` | `/users` | User list |
-| `POST` | `/users/signup` | Signup |
-| `POST` | `/users/signin` | Signin |
-| `GET` | `/users/:id` | User information |
-| `PATCH` | `/users/:id` | Update user |
-| `DELETE` | `/users/:id` | Delete user |
-
-All passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
-
-### Route protection
+### Authentification
 
 Some routes need the user to be logged
 
@@ -411,19 +397,26 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 }));
 ```
 
-There is an other middleware to do some more advanced checking : the *ownershipMiddleware*
+### Ownership
 
-Basically, it ensures nobody can access other users information, unless admin
-
-Additionally, it allows to add the 'me' logic on routes (enabling to use `me` as userId to refer to your own user)
+The Ownership middleware scopes an entity to a specific user
+Basically, it ensures nobody except the user owning the resource can access it, unless admin
 
 In summary, it does 3 things :
  - It checks if the user is logged in
  - It checks if the user has the right to access the requested resources
    - If the user has the role `USER`, he can only access his own resources
    - If the user has the role `ADMIN`, he can access resources from every users
- - It enables using 'me' as `userId`, to refer to the user currently logged (ex: `GET` `/users/me`)
 
+### Me
+
+All API routes are under the 'me' middleware
+
+It enables using 'me' as *userId* in route parameters
+
+```javascript
+router.get('users/:userId');
+```
 
 ## Contributors
 

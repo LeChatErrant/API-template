@@ -18,6 +18,7 @@ export class PostUpdateDto {
   title?: string;
 
   @IsString()
+  @IsOptional()
   content?: string;
 }
 

@@ -8,20 +8,22 @@ import session from './appSession';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
+import meMiddleware from './middlewares/meMiddleware';
 
 /*  Express server  */
 const app = express();
 
+/*  Express session */
+app.use(session);
+
 /*  Middlewares */
-app.use(requestLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(meMiddleware);
+app.use(requestLogger);
 
 /*  Proxy rules */
 app.set('trust proxy', true);
-
-/*  Express session */
-app.use(session);
 
 /*  Routes  */
 app.use(router);

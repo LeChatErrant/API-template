@@ -2,8 +2,9 @@ import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
-import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
+import authMiddleware from '../../middlewares/authMiddleware';
 import adminMiddleware from '../../middlewares/adminMiddleware';
+import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
 import * as controllers from './userControllers';
@@ -40,6 +41,23 @@ router.post(
       role: user.role,
     };
     res.send(user);
+  }),
+);
+
+router.post(
+  '/users/signout',
+  authMiddleware,
+  handler(async (req, res) => {
+    await new Promise<void>((resolve, reject) => {
+      req.session.destroy((err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+    res.sendStatus(httpStatus.NO_CONTENT);
   }),
 );
 

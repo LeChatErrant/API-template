@@ -1,5 +1,5 @@
-import createError from 'http-errors';
 import type { ErrorRequestHandler } from 'express';
+import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
 
 import logger from '../appLogger';
