@@ -7,6 +7,10 @@
 
 Simple production-ready API template
 
+
+Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 ;)
+
+
 # Notes
 
 The purpose of this template is to provide a typesafe production ready webserver and a fully setup environment with the best development tools
