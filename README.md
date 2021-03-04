@@ -378,26 +378,9 @@ router.post('/signin', handler(async (req, res) => {
 }));
 ```
 
-## User management
+## Route protection
 
-The template comes with basic user management logic
-
-### Routes
-
-| Method | Route | Description |
-| --- | --- | --- |
-| `GET` | `/users` | User list |
-| `POST` | `/users/signup` | Signup |
-| `POST` | `/users/signin` | Signin |
-| `GET` | `/users/:id` | User information |
-| `PATCH` | `/users/:id` | Update user |
-| `DELETE` | `/users/:id` | Delete user |
-
-All passwords are stored hashed in the database. The algorithm in use is [bcrypt](https://www.npmjs.com/package/bcrypt)
-
-### Route protection
-
-#### Authentification
+### Authentification
 
 Some routes need the user to be logged
 
@@ -409,7 +392,7 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 }));
 ```
 
-#### Ownership
+### Ownership
 
 The Ownership middleware scopes an entity to a specific user
 Basically, it ensures nobody except the user owning the resource can access it, unless admin
@@ -420,6 +403,15 @@ In summary, it does 3 things :
    - If the user has the role `USER`, he can only access his own resources
    - If the user has the role `ADMIN`, he can access resources from every users
 
+### Me
+
+All API routes are under the 'me' middleware
+
+It enables using 'me' as *userId* in route parameters
+
+```javascript
+router.get('users/:userId');
+```
 
 ## Contributors
 
