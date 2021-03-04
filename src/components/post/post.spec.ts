@@ -228,3 +228,37 @@ test('Update post - Title max length (50)', async () => {
 test('Update post - unknown post', async () => {
   await app.updatePost('me', 'unknown', {}, httpStatus.NOT_FOUND);
 });
+
+/*  Delete posts  */
+test('Delete post - auth', async () => {
+  const { id } = await app.createPost('me', basePost);
+  await app.signout();
+
+  await app.deletePost('me', id, httpStatus.UNAUTHORIZED);
+});
+
+test('Delete post', async () => {
+  const { id } = await app.createPost('me', basePost);
+
+  await app.deletePost('me', id);
+  await app.getPost('me', id, httpStatus.NOT_FOUND);
+  expect(await app.listPosts('me')).toHaveLength(0);
+});
+
+test('Delete post - multiple times', async () => {
+  const { id } = await app.createPost('me', basePost);
+
+  await app.deletePost('me', id);
+  await app.deletePost('me', id, httpStatus.NOT_FOUND);
+});
+
+test('Delete post - unknown post', async () => {
+  await app.deletePost('me', 'unknown', httpStatus.NOT_FOUND);
+});
+
+test('Delete post - ownership', async () => {
+  const { id } = await app.createPost('me', basePost);
+
+  await app.signin(otherUser);
+  await app.deletePost(user.id, id, httpStatus.FORBIDDEN);
+});

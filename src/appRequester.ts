@@ -124,4 +124,10 @@ export default class Requester {
 
     return body;
   }
+
+  async deletePost(userId: string, postId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
+    await this.request
+      .delete(`/users/${userId}/posts/${postId}`)
+      .expect(statusCodeExpected);
+  }
 }
