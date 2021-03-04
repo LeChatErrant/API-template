@@ -87,6 +87,62 @@ test('Create post - Title max length (50)', async () => {
   expect(post.title).toHaveLength(50);
 });
 
-test('Create post - Ownership', async () => {
+test('Create post - ownership', async () => {
   await app.createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
 });
+
+test('Create post - auth', async () => {
+  await app.signout();
+  await app.createPost('me', basePost, httpStatus.UNAUTHORIZED);
+});
+
+/*  List posts  */
+
+test('List posts - me + ordering', async () => {
+  let posts = await app.listPosts('me');
+  expect(posts).toHaveLength(0);
+
+  await app.createPost('me', basePost);
+  posts = await app.listPosts('me');
+  expect(posts).toHaveLength(1);
+  validatePost(posts[0]);
+
+  await app.createPost('me', {
+    ...basePost,
+    title: 'other title',
+  });
+  await app.createPost('me', {
+    ...basePost,
+    title: 'last title',
+  });
+  posts = await app.listPosts('me');
+  expect(posts).toHaveLength(3);
+  validatePost(posts[2]);
+  expect(posts[1].title).toBe('other title');
+  expect(posts[0].title).toBe('last title');
+});
+
+test('List posts - other user', async () => {
+  await app.signin(otherUser);
+  await app.createPost(otherUser.id, basePost);
+  await app.createPost(otherUser.id, { ...basePost, title: 'other title' });
+
+  await app.signin(user);
+  await app.createPost(user.id, basePost);
+
+  let posts = await app.listPosts('me');
+  expect(posts).toHaveLength(1);
+
+  posts = await app.listPosts(user.id);
+  expect(posts).toHaveLength(1);
+
+  posts = await app.listPosts(otherUser.id);
+  expect(posts).toHaveLength(2);
+});
+
+test('List posts - auth', async () => {
+  await app.signout();
+  await app.listPosts('me', httpStatus.UNAUTHORIZED);
+});
+
+/*  Get post  */

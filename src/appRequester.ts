@@ -52,6 +52,12 @@ export default class Requester {
     return body;
   }
 
+  async signout(statusCodeExpected = httpStatus.NO_CONTENT) {
+    await this.request
+      .post('/users/signout')
+      .expect(statusCodeExpected);
+  }
+
   async listUsers(statusCodeExpected = httpStatus.OK) {
     const { body } = await this.request
       .get('/users')
@@ -87,6 +93,14 @@ export default class Requester {
     const { body } = await this.request
       .post(`/users/${userId}/posts`)
       .send(payload)
+      .expect(statusCodeExpected);
+
+    return body;
+  }
+
+  async listPosts(userId: string, statusCodeExpected = httpStatus.OK) {
+    const { body } = await this.request
+      .get(`/users/${userId}/posts`)
       .expect(statusCodeExpected);
 
     return body;
