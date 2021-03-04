@@ -105,4 +105,12 @@ export default class Requester {
 
     return body;
   }
+
+  async getPost(userId: string, postId: string, statusCodeExpected = httpStatus.OK) {
+    const { body } = await this.request
+      .get(`/users/${userId}/posts/${postId}`)
+      .expect(statusCodeExpected);
+
+    return body;
+  }
 }

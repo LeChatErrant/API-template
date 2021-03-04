@@ -5,6 +5,7 @@ import httpStatus from 'http-status-codes';
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
 import logger from '../../appLogger';
+import seedAdminUser from '../../utils/seedAdminUser';
 
 const app = new Requester();
 
@@ -55,6 +56,11 @@ function validatePost(post: any) {
 
 /*  Create post */
 
+test('Create post - auth', async () => {
+  await app.signout();
+  await app.createPost('me', basePost, httpStatus.UNAUTHORIZED);
+});
+
 test('Create post', async () => {
   const post = await app.createPost('me', basePost);
   validatePost(post);
@@ -91,12 +97,12 @@ test('Create post - ownership', async () => {
   await app.createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
 });
 
-test('Create post - auth', async () => {
-  await app.signout();
-  await app.createPost('me', basePost, httpStatus.UNAUTHORIZED);
-});
-
 /*  List posts  */
+
+test('List posts - auth', async () => {
+  await app.signout();
+  await app.listPosts('me', httpStatus.UNAUTHORIZED);
+});
 
 test('List posts - me + ordering', async () => {
   let posts = await app.listPosts('me');
@@ -140,9 +146,39 @@ test('List posts - other user', async () => {
   expect(posts).toHaveLength(2);
 });
 
-test('List posts - auth', async () => {
+/*  Get post  */
+
+test('Get post - auth', async () => {
+  const { id } = await app.createPost(user.id, basePost);
+
   await app.signout();
-  await app.listPosts('me', httpStatus.UNAUTHORIZED);
+  await app.getPost(user.id, id, httpStatus.UNAUTHORIZED);
 });
 
-/*  Get post  */
+test('Get post', async () => {
+  const { id } = await app.createPost(user.id, basePost);
+  validatePost(await app.getPost(user.id, id));
+  validatePost(await app.getPost('me', id));
+});
+
+test('Get post - other user', async () => {
+  const { id } = await app.createPost(user.id, basePost);
+
+  await app.signin(otherUser);
+  const post = await app.getPost(user.id, id);
+  validatePost(post);
+});
+
+test('Get post - wrong user', async () => {
+  const { id } = await app.createPost(user.id, basePost);
+  await app.getPost(otherUser.id, id, httpStatus.NOT_FOUND);
+});
+
+test('Get post - unknown user', async () => {
+  const { id } = await app.createPost(user.id, basePost);
+  await app.getPost('unknown', id, httpStatus.NOT_FOUND);
+});
+
+test('Get post - unknown post', async () => {
+  await app.getPost('me', 'unknown', httpStatus.NOT_FOUND);
+});
