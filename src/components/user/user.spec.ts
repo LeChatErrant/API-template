@@ -186,21 +186,21 @@ test('Signin - admin', async () => {
   expect(user.role).toBe(Role.ADMIN);
 });
 
-/*  Get users */
+/*  List users */
 
-test('Get users - auth', async () => {
+test('List users - auth', async () => {
   await app.listUsers(httpStatus.UNAUTHORIZED);
 });
 
-test('Get users - forbidden unless admin', async () => {
+test('List users - forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
   await app.listUsers(httpStatus.FORBIDDEN);
 });
 
-test.todo('Get users - empty');
-test.todo('Get users - order');
-test.todo('Get users - pagination');
+test.todo('List users - empty');
+test.todo('List users - order');
+test.todo('List users - pagination');
 
 /*  Get user  */
 
