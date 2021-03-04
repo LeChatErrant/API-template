@@ -8,11 +8,13 @@ import validate from '../../middlewares/validationMiddleware';
 import postMiddleware from './postMiddleware';
 import * as controllers from './postControllers';
 import { PostCreateDto, PostUpdateDto } from './postTypes';
+import authMiddleware from '../../middlewares/authMiddleware';
 
 const router = express.Router();
 
 router.get(
   '/users/:userId/posts',
+  authMiddleware,
   handler(async (req, res) => {
     const posts = await controllers.listPosts(req.params.userId);
     res.send(posts);
@@ -31,6 +33,7 @@ router.post(
 
 router.get(
   '/users/:userId/posts/:postId',
+  authMiddleware,
   postMiddleware,
   handler(async (req, res) => {
     const post = await controllers.getPost(res.locals.post);
