@@ -17,7 +17,7 @@ import authMiddleware from './authMiddleware';
  *
  * @throws 400 - Bad request | If the route parameters are missing
  * @throws 401 - Unauthorized | If not logged in
- * @throws 401 - Forbidden | If the user making the request is not allowed to
+ * @throws 403 - Forbidden | If the user making the request is not allowed to
  * access the targeted user
  *
  * @example

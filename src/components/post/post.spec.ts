@@ -5,7 +5,6 @@ import httpStatus from 'http-status-codes';
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
 import logger from '../../appLogger';
-import seedAdminUser from '../../utils/seedAdminUser';
 
 const app = new Requester();
 
@@ -130,11 +129,11 @@ test('List posts - me + ordering', async () => {
 
 test('List posts - other user', async () => {
   await app.signin(otherUser);
-  await app.createPost(otherUser.id, basePost);
-  await app.createPost(otherUser.id, { ...basePost, title: 'other title' });
+  await app.createPost('me', basePost);
+  await app.createPost('me', { ...basePost, title: 'other title' });
 
   await app.signin(user);
-  await app.createPost(user.id, basePost);
+  await app.createPost('me', basePost);
 
   let posts = await app.listPosts('me');
   expect(posts).toHaveLength(1);
@@ -181,4 +180,51 @@ test('Get post - unknown user', async () => {
 
 test('Get post - unknown post', async () => {
   await app.getPost('me', 'unknown', httpStatus.NOT_FOUND);
+});
+
+/*  Update post  */
+
+test('Update post - auth', async () => {
+  await app.createPost('me', basePost);
+});
+
+test('Update post', async () => {
+  const { id } = await app.createPost('me', basePost);
+
+  let post = await app.updatePost('me', id, {});
+  validatePost(post);
+
+  post = await app.updatePost('me', id, {
+    title: 'New title',
+  });
+  expect(post.id).toBe(id);
+  expect(post.title).toBe('New title');
+  expect(post.content).toBe(basePost.content);
+
+  post = await app.updatePost('me', id, {
+    content: 'New content',
+  });
+  expect(post.id).toBe(id);
+  expect(post.title).toBe('New title');
+  expect(post.content).toBe('New content');
+
+  post = await app.updatePost('me', id, basePost);
+  validatePost(post);
+});
+
+test('Update post - ownership', async () => {
+  const { id } = await app.createPost('me', basePost);
+
+  await app.signin(otherUser);
+  await app.updatePost(user.id, id, { title: '' }, httpStatus.FORBIDDEN);
+});
+
+test('Update post - Title max length (50)', async () => {
+  const { id } = await app.createPost('me', basePost);
+  await app.updatePost('me', id, { title: 'a'.repeat(50) });
+  await app.updatePost('me', id, { title: 'a'.repeat(51) }, httpStatus.BAD_REQUEST);
+});
+
+test('Update post - unknown post', async () => {
+  await app.updatePost('me', 'unknown', {}, httpStatus.NOT_FOUND);
 });

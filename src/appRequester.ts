@@ -113,4 +113,15 @@ export default class Requester {
 
     return body;
   }
+
+  async updatePost(
+    userId: string, postId: string, payload: any, statusCodeExpected = httpStatus.OK,
+  ) {
+    const { body } = await this.request
+      .patch(`/users/${userId}/posts/${postId}`)
+      .send(payload)
+      .expect(statusCodeExpected);
+
+    return body;
+  }
 }
