@@ -9,6 +9,8 @@ import validate from '../../middlewares/validationMiddleware';
 import * as controllers from './userControllers';
 import userMiddleware from './userMiddleware';
 import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
+import logger from '../../appLogger';
+import authMiddleware from '../../middlewares/authMiddleware';
 
 const router = express.Router();
 
@@ -40,6 +42,23 @@ router.post(
       role: user.role,
     };
     res.send(user);
+  }),
+);
+
+router.post(
+  '/users/signout',
+  authMiddleware,
+  handler(async (req, res) => {
+    await new Promise<void>((resolve, reject) => {
+      req.session.destroy((err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+    res.sendStatus(httpStatus.NO_CONTENT);
   }),
 );
 
