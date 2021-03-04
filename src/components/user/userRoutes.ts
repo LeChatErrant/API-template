@@ -2,15 +2,14 @@ import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
-import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
+import authMiddleware from '../../middlewares/authMiddleware';
 import adminMiddleware from '../../middlewares/adminMiddleware';
+import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
 import * as controllers from './userControllers';
 import userMiddleware from './userMiddleware';
 import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
-import logger from '../../appLogger';
-import authMiddleware from '../../middlewares/authMiddleware';
 
 const router = express.Router();
 
