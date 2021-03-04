@@ -186,6 +186,22 @@ test('Signin - admin', async () => {
   expect(user.role).toBe(Role.ADMIN);
 });
 
+/*  Signout */
+
+test('Signout', async () => {
+  await app.signup(baseUser);
+  await app.signin(baseUser);
+
+  await app.getUser('me');
+
+  await app.signout();
+  await app.getUser('me', httpStatus.UNAUTHORIZED);
+});
+
+test('Signout - Not logged in', async () => {
+  await app.signout(httpStatus.UNAUTHORIZED);
+});
+
 /*  List users */
 
 test('List users - auth', async () => {
@@ -229,6 +245,10 @@ test('Get user - access others forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
   await app.getUser('otherUserId', httpStatus.FORBIDDEN);
+});
+
+test('Get user - auth', async () => {
+  await app.getUser('me', httpStatus.UNAUTHORIZED);
 });
 
 test('Get user - admin', async () => {
