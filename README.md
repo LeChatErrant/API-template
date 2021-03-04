@@ -397,6 +397,8 @@ All passwords are stored hashed in the database. The algorithm in use is [bcrypt
 
 ### Route protection
 
+#### Authentification
+
 Some routes need the user to be logged
 
 You can protect such routes with the *authMiddleware*
@@ -407,18 +409,16 @@ router.get('/some-confidential-informations', authMiddleware, handler(async (req
 }));
 ```
 
-There is an other middleware to do some more advanced checking : the *ownershipMiddleware*
+#### Ownership
 
-Basically, it ensures nobody can access other users information, unless admin
-
-Additionally, it allows to add the 'me' logic on routes (enabling to use `me` as userId to refer to your own user)
+The Ownership middleware scopes an entity to a specific user
+Basically, it ensures nobody except the user owning the resource can access it, unless admin
 
 In summary, it does 3 things :
  - It checks if the user is logged in
  - It checks if the user has the right to access the requested resources
    - If the user has the role `USER`, he can only access his own resources
    - If the user has the role `ADMIN`, he can access resources from every users
- - It enables using 'me' as `userId`, to refer to the user currently logged (ex: `GET` `/users/me`)
 
 
 ## Contributors

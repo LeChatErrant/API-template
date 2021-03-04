@@ -6,8 +6,8 @@ import { Role } from '@prisma/client';
 import authMiddleware from './authMiddleware';
 
 /**
- * This middleware prevent resources owned by an user to be
- * accessed by anyone other than this specific user and users with role ADMIN
+ * This middleware scopes an entity to a specific user
+ * It ensures nobody except the user owning the resource can access it, unless admin
  *
  * In summary, it does 2 things :
  *  - It checks if the user is logged in
