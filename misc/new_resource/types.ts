@@ -4,4 +4,7 @@ export interface Option {
   default: boolean;
 }
 
-export type Options = { [name: string]: Option};
+export type Options = {
+  database_model: Option;
+  tests: Option;
+};
