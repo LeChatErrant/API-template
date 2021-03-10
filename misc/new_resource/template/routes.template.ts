@@ -1,13 +1,13 @@
 import { capitalize } from '../utils';
 
-const routeTemplate = (singular: string, plural: string) => `
+const routesTemplate = (singular: string, plural: string) => `\
 import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
 import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
-import validate from '../../middlewares/validationMiddleware';
 import authMiddleware from '../../middlewares/authMiddleware';
+import validate from '../../middlewares/validationMiddleware';
 
 import ${singular}Middleware from './${singular}Middleware';
 import * as controllers from './${singular}Controllers';
@@ -16,51 +16,51 @@ import { ${capitalize(singular)}CreateDto, ${capitalize(singular)}UpdateDto } fr
 const router = express.Router();
 
 router.get(
-  '/${plural}',
+  '/users/:userId/${plural}',
   authMiddleware,
   handler(async (req, res) => {
     const ${plural} = await controllers.list${capitalize(plural)}(req.params.userId);
-    res.send(posts);
+    res.send(${plural});
   }),
 );
 
-router.post(
-  '/users/:userId/posts',
-  validate(PostCreateDto),
+router.${singular}(
+  '/users/:userId/${plural}',
+  validate(${capitalize(singular)}CreateDto),
   ownershipMiddleware,
   handler(async (req, res) => {
-    const post = await controllers.createNewPost(req.params.userId, req.body);
-    res.status(httpStatus.CREATED).send(post);
+    const ${singular} = await controllers.createNew${capitalize(singular)}(req.params.userId, req.body);
+    res.status(httpStatus.CREATED).send(${singular});
   }),
 );
 
 router.get(
-  '/users/:userId/posts/:postId',
+  '/users/:userId/${plural}/:${singular}Id',
   authMiddleware,
-  postMiddleware,
+  ${singular}Middleware,
   handler(async (req, res) => {
-    const post = await controllers.getPost(res.locals.post);
-    res.send(post);
+    const ${singular} = await controllers.get${capitalize(singular)}(res.locals.${singular});
+    res.send(${singular});
   }),
 );
 
 router.patch(
-  '/users/:userId/posts/:postId',
-  validate(PostUpdateDto),
+  '/users/:userId/${plural}/:${singular}Id',
+  validate(${capitalize(singular)}UpdateDto),
   ownershipMiddleware,
-  postMiddleware,
+  ${singular}Middleware,
   handler(async (req, res) => {
-    const post = await controllers.updatePost(res.locals.post, req.body);
-    res.send(post);
+    const ${singular} = await controllers.update${capitalize(singular)}(res.locals.${singular}, req.body);
+    res.send(${singular});
   }),
 );
 
 router.delete(
-  '/users/:userId/posts/:postId',
+  '/users/:userId/${plural}/:${singular}Id',
   ownershipMiddleware,
-  postMiddleware,
+  ${singular}Middleware,
   handler(async (req, res) => {
-    await controllers.deletePost(res.locals.post);
+    await controllers.delete${capitalize(singular)}(res.locals.${singular});
     res.sendStatus(httpStatus.NO_CONTENT);
   }),
 );
@@ -68,4 +68,4 @@ router.delete(
 export default router;
 `;
 
-export default routeTemplate;
+export default routesTemplate;

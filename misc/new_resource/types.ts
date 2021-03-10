@@ -5,6 +5,5 @@ export interface Option {
 }
 
 export type Options = {
-  database_model: Option;
   tests: Option;
 };
