@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import routesTemplate from './template/routes.template';
 import controllersTemplate from './template/controllers.template';
+import middlewareTemplate from './template/middleware.template';
 
 const componentPath = path.join(__dirname, '..', '..', 'src', 'components');
 
@@ -22,6 +23,11 @@ export function templateNewResource(singular: string, plural: string) {
   fs.writeFileSync(
     path.join(resourcePath, `${singular}Controllers.ts`),
     controllersTemplate(singular, plural),
+  );
+
+  fs.writeFileSync(
+    path.join(resourcePath, `${singular}Middleware.ts`),
+    middlewareTemplate(singular, plural),
   );
 
   return true;
