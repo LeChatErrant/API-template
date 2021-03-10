@@ -25,7 +25,7 @@ const userMiddleware = handler(async (req, res, next) => {
 
   const user = await db.user.findUnique({ where: { id: userId } });
   if (!user) {
-    next(createError(httpStatus.NOT_FOUND, `User ${userId} doesn't exist`));
+    next(createError(httpStatus.NOT_FOUND, `User ${userId} not found`));
   } else {
     res.locals.user = user;
     next();
