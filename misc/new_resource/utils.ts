@@ -24,8 +24,7 @@ export async function npmRun(script: string, args: string[] = []) {
   });
 
   return new Promise<void>((resolve, reject) => {
-    npm.commands['run-script']([script, ...args], (error, result) => {
-      console.log(result);
+    npm.commands['run-script']([script, ...args], (error) => {
       if (error) {
         reject(error);
       } else {
