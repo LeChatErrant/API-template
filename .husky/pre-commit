@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run lint:ci && npm run db:format
+npm run lint:ci && npm run prisma:format
