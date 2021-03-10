@@ -1,22 +1,25 @@
+import { capitalize } from '../utils';
+
+const routeTemplate = (singular: string, plural: string) => `
 import express from 'express';
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
 import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
-import authMiddleware from '../../middlewares/authMiddleware';
 import validate from '../../middlewares/validationMiddleware';
+import authMiddleware from '../../middlewares/authMiddleware';
 
-import postMiddleware from './postMiddleware';
-import * as controllers from './postControllers';
-import { PostCreateDto, PostUpdateDto } from './postTypes';
+import ${singular}Middleware from './${singular}Middleware';
+import * as controllers from './${singular}Controllers';
+import { ${capitalize(singular)}CreateDto, ${capitalize(singular)}UpdateDto } from './${singular}Types';
 
 const router = express.Router();
 
 router.get(
-  '/users/:userId/posts',
+  '/${plural}',
   authMiddleware,
   handler(async (req, res) => {
-    const posts = await controllers.listPosts(req.params.userId);
+    const ${plural} = await controllers.list${capitalize(plural)}(req.params.userId);
     res.send(posts);
   }),
 );
@@ -63,3 +66,6 @@ router.delete(
 );
 
 export default router;
+`;
+
+export default routeTemplate;
