@@ -4,11 +4,14 @@ import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
 
+import { capitalize, npmRun } from './utils';
 import routesTemplate from './template/routes.template';
 import controllersTemplate from './template/controllers.template';
 import middlewareTemplate from './template/middleware.template';
 import prismaTemplate from './template/prisma.template';
-import { capitalize, npmRun } from './utils';
+import typesTemplate from './template/types.template';
+import helpersTemplate from './template/helpers.template';
+import specTemplate from './template/spec.template';
 
 const projectPath = path.join(__dirname, '..', '..');
 const componentPath = path.join(projectPath, 'src', 'components');
@@ -60,6 +63,9 @@ export async function templateNewResource(singular: string, plural: string) {
   createTemplatedFile(resourcePath, `${singular}Routes.ts`, routesTemplate(singular, plural));
   createTemplatedFile(resourcePath, `${singular}Controllers.ts`, controllersTemplate(singular, plural));
   createTemplatedFile(resourcePath, `${singular}Middleware.ts`, middlewareTemplate(singular, plural));
+  createTemplatedFile(resourcePath, `${singular}Types.ts`, typesTemplate(singular));
+  createTemplatedFile(resourcePath, `${singular}Helpers.ts`, helpersTemplate(singular));
+  createTemplatedFile(resourcePath, `${singular}.spec.ts`, specTemplate(singular));
 
   return true;
 }
