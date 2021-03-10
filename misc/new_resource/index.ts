@@ -24,7 +24,7 @@ async function main() {
 
   const spinner = new clui.Spinner('Generating new API resource...');
   spinner.start();
-  const success = templateNewResource(resourceName, resourceNamePluralized);
+  const success = await templateNewResource(resourceName, resourceNamePluralized);
   spinner.stop();
 
   if (!success) {
