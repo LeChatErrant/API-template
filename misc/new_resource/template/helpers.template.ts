@@ -7,7 +7,8 @@ import type { ${capitalize(singular)}Ro } from './${singular}Types';
 
 /**
  * Build a ${singular} Response Object (RO) with only the fields to be shown to the user
- * Can be used to compute or add extra informations to the ${singular} object, useful for front-end display
+ * Can be used to compute or add extra informations to the ${singular}
+ * object, useful for front-end display
  *
  * @param ${singular} The ${singular} object to format
  * @returns A ${singular} Response Object ready to be sent into API responses

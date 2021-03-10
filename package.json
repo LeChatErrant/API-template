@@ -21,6 +21,7 @@
     "db:reset": "prisma migrate reset --preview-feature",
     "db:deploy": "prisma migrate deploy --preview-feature",
     "db:deploy:status": "prisma migrate status --preview-feature",
+    "db:push": "prisma db push --preview-feature",
     "db:studio": "prisma studio --port ${STUDIO_PORT}",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'",
