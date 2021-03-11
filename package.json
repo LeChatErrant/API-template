@@ -47,7 +47,7 @@
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
-    "chalk": "^2.4.2",
+    "chalk": "^4.1.0",
     "clui": "^0.3.6",
     "concurrently": "^6.0.0",
     "eslint": "^7.21.0",
