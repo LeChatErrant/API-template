@@ -65,7 +65,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "misc/**/*.ts"
+    "misc/**/*.ts",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules"

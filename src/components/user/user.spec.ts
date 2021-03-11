@@ -307,7 +307,6 @@ test('Update user - password', async () => {
   await app.updateUser(id, { password: 'long'.repeat(50) }, httpStatus.BAD_REQUEST);
 });
 
-
 test('Update user - me', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
