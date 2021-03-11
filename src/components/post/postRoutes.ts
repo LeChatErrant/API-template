@@ -3,12 +3,12 @@ import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 
 import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
+import authMiddleware from '../../middlewares/authMiddleware';
 import validate from '../../middlewares/validationMiddleware';
 
 import postMiddleware from './postMiddleware';
 import * as controllers from './postControllers';
 import { PostCreateDto, PostUpdateDto } from './postTypes';
-import authMiddleware from '../../middlewares/authMiddleware';
 
 const router = express.Router();
 

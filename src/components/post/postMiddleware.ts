@@ -19,13 +19,13 @@ import db from '../../appDatabase';
 const postMiddleware = handler(async (req, res, next) => {
   const { userId, postId } = req.params;
   if (!userId || !postId) {
-    next(createError(httpStatus.BAD_REQUEST, 'Missing route parameters "authorId" and/or "postId"'));
+    next(createError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
     return;
   }
 
   const post = await db.post.findFirst({ where: { id: postId, authorId: userId } });
   if (!post) {
-    next(createError(httpStatus.NOT_FOUND, `Post ${postId} of user ${userId} doesn't exist`));
+    next(createError(httpStatus.NOT_FOUND, `Post ${postId} of user ${userId} not found`));
   } else {
     res.locals.post = post;
     next();
