@@ -15,51 +15,55 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: master
-          fetch-depth: 0
-          persist-credentials: false
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 0
+        persist-credentials: false
 
-      - name: Validate release version
-        id: validate
+    - name: Validate release version
+      id: validate
+      script: |
+        version=${{github.event.inputs.version}}
+        regex='^([0-9]+\.){0,2}([0-9]+)$'
+
+        if [[ $version =~ $regex ]]; then
+          echo '::set-output valid=true'
+        else
+          echo '::set-output valid=false'
+        fi
+
+    - name: Update changelog
+      if: steps.validate.outputs.valid == 'true'
+      run: sed -i '1a\\n## ${{github.event.inputs.version}}\n'"$(git log --no-decorate --no-merges --pretty=format:"- %s" origin/master -- | sed '$!s/$/\\n/' | tr -d '\n')" CHANGELOG.md
+
+    - name: Create release
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
-          version=${{github.event.inputs.version}}
-          regex='^([0-9]+\.){0,2}([0-9]+)$'
+          try {
+            const { owner, repo } = context.repo();
+            core.debug(`Identified repository ${owner}/${repo}`);
 
-          if [[ $version =~ $regex ]]; then
-            echo '::set-output valid=true'
-          else
-            echo '::set-output valid=false'
-          fi
+            const version = core.getInput('version', { required: true });
+            core.info(`Creating release ${version}`);
 
-      - name: Create release
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            try {
-              const { owner, repo } = context.repo();
-              core.debug(`Identified repository ${owner}/${repo}`);
+            const draft = core.getInput('draft', { required: true });
+            core.debug(`Draft mode : ${draft}`);
 
-              const version = core.getInput('version', { required: true });
-              core.info(`Creating release ${version}`);
-
-              const draft = core.getInput('draft', { required: true });
-              core.debug(`Draft mode : ${draft}`);
-
-              const res = await github.repos.createRelease({
-                owner,
-                repo,
-                prerelease: false,
-                draft: draft,
-                name: version,
-                tag_name: version,
-                body: 'WIP',
-              });
-              core.debug(res);
-            } catch (error) {
-              core.setFailed(error.message);
-            }
+            const res = await github.repos.createRelease({
+              owner,
+              repo,
+              prerelease: false,
+              draft: draft,
+              name: version,
+              tag_name: version,
+              body: 'WIP',
+            });
+            core.debug(res);
+          } catch (error) {
+            core.setFailed(error.message);
+          }
