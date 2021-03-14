@@ -23,31 +23,23 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
 
-    - name: Validate release version
-      id: validate
-      run: |
-        version=${{github.event.inputs.version}}
-        regex='^([0-9]+\.){0,2}([0-9]+)$'
-
-        if [[ $version =~ $regex ]]; then
-          echo '::set-output valid=true'
-        else
-          echo '::set-output valid=false'
-        fi
-
     - name: Create release
-      if: steps.validate.outputs.valid
       uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         version: ${{github.event.inputs.version}}
         draft: ${{github.event.inputs.draft}}
         script: |
+          const regex = new RegExp('^([0-9]+\.){0,2}([0-9]+)$');
+
           try {
             const { owner, repo } = context.repo;
             core.debug(`Identified repository ${owner}/${repo}`);
 
             const version = core.getInput('version', { required: true });
+            if (!regex.test(version)) {
+              throw new Error(`${version} is not a valid versionning`);
+            }
             core.info(`Creating release ${version}`);
 
             const draft = core.getInput('draft', { required: true }).toLowerCase() === true;
