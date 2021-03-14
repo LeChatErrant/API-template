@@ -34,7 +34,7 @@ jobs:
 
           try {
             const { owner, repo } = context.repo;
-            core.debug(`Identified repository ${owner}/${repo}`);
+            core.info(`Identified repository ${owner}/${repo}`);
 
             const version = core.getInput('version', { required: true });
             if (!regex.test(version)) {
@@ -43,7 +43,7 @@ jobs:
             core.info(`Creating release ${version}`);
 
             const draft = core.getInput('draft', { required: true }).toLowerCase() === true;
-            core.debug(`Draft mode : ${draft}`);
+            core.info(`Draft mode : ${draft}`);
 
             const res = await github.repos.createRelease({
               owner,
@@ -54,7 +54,7 @@ jobs:
               tag_name: version,
               body: 'WIP',
             });
-            core.debug(res);
+            core.info(res);
           } catch (error) {
             core.setFailed(error.message);
           }
