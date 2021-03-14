@@ -45,13 +45,13 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           try {
-            const { owner, repo } = context.repo();
+            const { owner, repo } = context.repo;
             core.debug(`Identified repository ${owner}/${repo}`);
 
             const version = core.getInput('version', { required: true });
             core.info(`Creating release ${version}`);
 
-            const draft = core.getInput('draft', { required: true });
+            const draft = core.getInput('draft', { required: true }).toLowerCase() === true;
             core.debug(`Draft mode : ${draft}`);
 
             const res = await github.repos.createRelease({
