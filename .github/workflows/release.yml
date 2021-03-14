@@ -1,0 +1,65 @@
+name: Create new github release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version
+        required: true
+      draft:
+        description: True to create a draft (unpublished) release
+        default: false
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate release version
+        id: validate
+        script: |
+          version=${{github.event.inputs.version}}
+          regex='^([0-9]+\.){0,2}([0-9]+)$'
+
+          if [[ $version =~ $regex ]]; then
+            echo '::set-output valid=true'
+          else
+            echo '::set-output valid=false'
+          fi
+
+      - name: Create release
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            try {
+              const { owner, repo } = context.repo();
+              core.debug(`Identified repository ${owner}/${repo}`);
+
+              const version = core.getInput('version', { required: true });
+              core.info(`Creating release ${version}`);
+
+              const draft = core.getInput('draft', { required: true });
+              core.debug(`Draft mode : ${draft}`);
+
+              const res = await github.repos.createRelease({
+                owner,
+                repo,
+                prerelease: false,
+                draft: draft,
+                name: version,
+                tag_name: version,
+                body: 'WIP',
+              });
+              core.debug(res);
+            } catch (error) {
+              core.setFailed(error.message);
+            }
