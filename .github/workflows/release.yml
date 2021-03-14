@@ -35,12 +35,8 @@ jobs:
           echo '::set-output valid=false'
         fi
 
-    - name: Update changelog
-      if: steps.validate.outputs.valid == 'true'
-      run: sed -i '1a\\n## ${{github.event.inputs.version}}\n'"$(git log --no-decorate --no-merges --pretty=format:"- %s" origin/master -- | sed '$!s/$/\\n/' | tr -d '\n')" CHANGELOG.md
-
     - name: Create release
-      if: steps.validate.outputs.valid == 'true'
+      if: steps.validate.outputs.valid
       uses: actions/github-script@v3
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
