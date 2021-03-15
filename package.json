@@ -50,7 +50,7 @@
     "chalk": "^4.1.0",
     "clui": "^0.3.6",
     "concurrently": "^6.0.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^5.1.3",
