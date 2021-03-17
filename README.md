@@ -10,6 +10,11 @@ Production-ready API template
 
 # The "templated" project
 
+<details>
+<summary>Details</summary>
+
+<!--ts-->
+
 ## Who
 
 > First of all, hello. I'm [LeChatErrant](https://github.com/LeChatErrant), software engineer studying at Epitech Paris, creator and maintainer of [API-template](https://github.com/LeChatErrant/API-template)
@@ -45,6 +50,7 @@ Those **decisions** are often poorly made at first and lead to multiple refacto,
  - Team changes
 
 That's why I archived every **mistakes I learned from** and every **choices made** in this project. 
+<!--te-->
 
 # Notes
 
