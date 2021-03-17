@@ -7,11 +7,8 @@
 
 Production-ready API template
 
-
-# The "templated" project
-
 <details>
-<summary>About the "templated" project</summary>
+<summary><b>About the "templated" project</b></summary>
 
 <!--ts-->
 
