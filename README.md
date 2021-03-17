@@ -11,7 +11,7 @@ Production-ready API template
 # The "templated" project
 
 <details>
-<summary>Details</summary>
+<summary>About the "templated" project</summary>
 
 <!--ts-->
 
@@ -50,7 +50,9 @@ Those **decisions** are often poorly made at first and lead to multiple refacto,
  - Team changes
 
 That's why I archived every **mistakes I learned from** and every **choices made** in this project. 
+
 <!--te-->
+</details>
 
 # Notes
 
