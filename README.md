@@ -5,11 +5,46 @@
 ![Dependabot](https://badgen.net/dependabot/LeChatErrant/API-template?icon=dependabot)
 ![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
 
-Simple production-ready API template
+Production-ready API template
 
+
+# The "templated" project
+
+## Who
+
+> First of all, hello. I'm [LeChatErrant](https://github.com/LeChatErrant), software engineer studying at Epitech Paris, creator and maintainer of [API-template](https://github.com/LeChatErrant/API-template)
+>
+> I'm currently working at [Tresorio](https://tresorio.com/), a green cloud-computing startup, at the position of lead-developer of the cloud-rendering branch (distributed computing for 3D animation)
+>
+> Passionate by the design of backend software and distributed systems, I'm aiming to offer tools to help building the most complete architecture possible
 
 Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 ;)
 
+## What
+
+The "templated" project is divided into 4 parts :
+ - [API-template](https://github.com/LeChatErrant/API-template)
+ - back-office-template (coming soon)
+ - [devops-template](https://github.com/LeChatErrant/API-template)
+ - cli (wip)
+
+## Why
+
+**Starting a whole new project from scratch is painfully.** You have to
+ - Choose between multiple technologies
+ - Write nasty configurations
+ - Adopt a coding style
+ - Enforce good practices
+ - Setup a lot of tooling
+ - Make sure future developers will follows established guidelines, to keep the project maintainable
+
+Those **decisions** are often poorly made at first and lead to multiple refacto, since
+ - Your skills evolves along with the project
+ - You learn new technologies / ways to achieve something
+ - Most of the decisions taken become invalid are the project grows
+ - Team changes
+
+That's why I archived every **mistakes I learned from** and every **choices made** in this project. 
 
 # Notes
 
@@ -17,7 +52,7 @@ The purpose of this template is to provide a typesafe production ready webserver
 
 It gives your project a clean base to start and follows development good practices, essentially focusing on maintenability and extensibility
 
-Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, kubernetes, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
+Lastly, it aims to save developers a lot of time since all nasty configurations are already set up (typescript, eslint, jest, docker, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
 
 Table of Contents
 =================
