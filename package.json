@@ -6,7 +6,7 @@
     "pre-commit": "npm run lint:ci && npm run prisma:format",
     "resource:new": "ts-node misc/new_resource",
     "build": "tsc",
-    "start": "npm run db:deploy && node dist",
+    "start": "npm run db:deploy && node dist/src",
     "test": "MODE=test && exit 0",
     "integration": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit --silent",
     "integration:watch": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --forceExit --watch --silent",
