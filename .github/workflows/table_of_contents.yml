@@ -17,3 +17,5 @@ jobs:
       with:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         FOLDING: true
+        COMMIT_NAME: GitHub Action
+        COMMIT_EMAIL: action@github.com
