@@ -54,7 +54,7 @@ jobs:
             const draft = core.getInput('draft', { required: true }).toLowerCase() === 'true';
             core.info(`Draft mode : ${draft}`);
 
-            const body = fs.readFileSync('CHANGELOG.md');
+            const body = fs.readFileSync('CHANGELOG.md').toString();
 
             const res = await github.repos.createRelease({
               owner,
