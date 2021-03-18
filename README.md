@@ -62,49 +62,9 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 Table of Contents
 =================
 
-<details>
-<summary>Details</summary>
+<!-- START doctoc -->
+<!-- END doctoc -->
 
-<!--ts-->
-   * [API-template](#api-template)
-   * [Notes](#notes)
-   * [Table of Contents](#table-of-contents)
-      * [Architecture](#architecture)
-      * [Configuration](#configuration)
-      * [Development](#development)
-      * [Database](#database)
-      * [Production](#production)
-      * [Language](#language)
-      * [ORM](#orm)
-         * [Schema](#schema)
-         * [Generation](#generation)
-         * [Migrations](#migrations)
-      * [Linter](#linter)
-      * [Testing policy](#testing-policy)
-         * [Unit tests](#unit-tests)
-         * [Integration tests](#integration-tests)
-            * [TDD](#tdd)
-      * [Continuous integration](#continuous-integration)
-      * [Automated dependencies updates](#automated-dependencies-updates)
-      * [Logging](#logging)
-      * [Documentation](#documentation)
-         * [Postman](#postman)
-      * [Request validation](#request-validation)
-      * [Error handling](#error-handling)
-         * [RO](#ro)
-         * [Non-OK responses](#non-ok-responses)
-         * [Crashes](#crashes)
-         * [Async handler](#async-handler)
-      * [Route protection](#route-protection)
-         * [Authentification](#authentification)
-         * [Ownership](#ownership)
-         * [Me](#me)
-      * [Contributors](#contributors)
-<!--te-->
-
-</details>
-
-> Generated using [table-of-contents-action](https://github.com/LeChatErrant/table-of-contents-action), made by [LeChatErrant](https://github.com/LeChatErrant)
 
 ## Architecture
 
