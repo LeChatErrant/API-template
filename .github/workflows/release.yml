@@ -8,7 +8,7 @@ on:
         required: true
       draft:
         description: True to create a draft (unpublished) release
-        default: 'false'
+        default: 'true'
         required: true
 
 jobs:
