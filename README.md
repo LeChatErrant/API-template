@@ -62,8 +62,45 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 Table of Contents
 =================
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details>
+<summary>Table of Contents</summary>
+
+- [Architecture](#architecture)
+- [Configuration](#configuration)
+- [Development](#development)
+- [Database](#database)
+- [Production](#production)
+- [Language](#language)
+- [ORM](#orm)
+  - [Schema](#schema)
+  - [Generation](#generation)
+  - [Migrations](#migrations)
+- [Linter](#linter)
+- [Testing policy](#testing-policy)
+  - [Unit tests](#unit-tests)
+  - [Integration tests](#integration-tests)
+    - [TDD](#tdd)
+- [Continuous integration](#continuous-integration)
+- [Automated dependencies updates](#automated-dependencies-updates)
+- [Logging](#logging)
+- [Documentation](#documentation)
+  - [Postman](#postman)
+- [Request validation](#request-validation)
+- [Error handling](#error-handling)
+  - [RO](#ro)
+  - [Non-OK responses](#non-ok-responses)
+  - [Crashes](#crashes)
+  - [Async handler](#async-handler)
+- [Route protection](#route-protection)
+  - [Authentification](#authentification)
+  - [Ownership](#ownership)
+  - [Me](#me)
+- [Contributors](#contributors)
+
+</details>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Architecture
 
