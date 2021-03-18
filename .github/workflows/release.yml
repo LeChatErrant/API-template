@@ -29,7 +29,7 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
         output: CHANGELOG.md
         exclude_labels: duplicate,question,invalid,wontfix,dependencies
-        future_release: true
+        future_release: ${{github.event.inputs.version}}
 
     - name: Create release
       uses: actions/github-script@v3
