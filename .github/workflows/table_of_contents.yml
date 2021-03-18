@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Generate table of content
-        id: generate
-        uses: technote-space/toc-generator@v4
-        with:
-          GITHUB_TOKEN: {{secrets.GITHUB_TOKEN}}
-          FOLDING: true
+    - name: Generate table of content
+      id: generate
+      uses: technote-space/toc-generator@v4
+      with:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        FOLDING: true
