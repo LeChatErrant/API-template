@@ -24,7 +24,7 @@ jobs:
         persist-credentials: false
 
     - name: Generate changelog
-      uses: LeChatErrant/auto-changelog-action@1.0
+      uses: charmixer/auto-changelog-action@v1
       with:
         token: ${{secrets.GITHUB_TOKEN}}
         output: CHANGELOG.md
