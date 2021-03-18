@@ -30,6 +30,8 @@ jobs:
         version: ${{github.event.inputs.version}}
         draft: ${{github.event.inputs.draft}}
         script: |
+          const fs = require('fs');
+
           const regex = new RegExp('^([0-9]+\.){0,2}([0-9]+)$');
 
           try {
