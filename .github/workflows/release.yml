@@ -30,6 +30,7 @@ jobs:
         output: CHANGELOG.md
         exclude_labels: duplicate,question,invalid,wontfix,dependencies
         future_release: true
+        since_tag: ${{github.event.inputs.version}}
 
     - name: Create release
       uses: actions/github-script@v3
