@@ -23,6 +23,13 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
 
+    - name: Generate changelog
+      uses: charmixer/auto-changelog-action@v1
+      with:
+        token: ${{secrets.GITHUB_TOKEN}}
+        output: CHANGELOG.md
+        exclude_labels: duplicate,question,invalid,wontfix,dependencies
+
     - name: Create release
       uses: actions/github-script@v3
       with:
@@ -47,6 +54,8 @@ jobs:
             const draft = core.getInput('draft', { required: true }).toLowerCase() === 'true';
             core.info(`Draft mode : ${draft}`);
 
+            const body = fs.readFileSync('CHANGELOG.md');
+
             const res = await github.repos.createRelease({
               owner,
               repo,
@@ -54,7 +63,7 @@ jobs:
               draft: draft,
               name: version,
               tag_name: version,
-              body: 'WIP',
+              body,
             });
             core.info(JSON.stringify(res));
           } catch (error) {
