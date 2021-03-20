@@ -5,13 +5,17 @@
 ![Dependabot](https://badgen.net/dependabot/LeChatErrant/API-template?icon=dependabot)
 ![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/LeChatErrant/API-template)
 
+___
+
 # What is it ?
 
-> First of all, hello. I'm [LeChatErrant](https://github.com/LeChatErrant), software engineer studying at Epitech Paris, creator and maintainer of [API-template](https://github.com/LeChatErrant/API-template)
+> First of all, hello ! I'm [LeChatErrant](https://github.com/LeChatErrant), software engineer studying at Epitech Paris, creator and maintainer of [API-template](https://github.com/LeChatErrant/API-template)
 >
 > I'm currently working at [Tresorio](https://tresorio.com/), a green cloud-computing startup, at the position of lead-developer of the cloud-rendering branch (distributed computing for 3D animation)
 >
 > Passionate by the design of backend software and distributed systems, I'm aiming to offer tools to help building the most complete architecture possible
+
+___
 
 The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
 
