@@ -42,6 +42,10 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 
 Documentation can be found on the [wiki](https://github.com/LeChatErrant/API-template/wiki)
 
+# Features
+
+ - wip
+
 # Work in progress
 
  - [ ] CLI to create, extend and manage API resources
