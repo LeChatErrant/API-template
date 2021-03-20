@@ -27,8 +27,20 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 
 # Table of contents
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details>
+<summary>Table of Contents</summary>
+
+- [Getting started](#getting-started)
+- [How to reuse this template](#how-to-reuse-this-template)
+- [Guide](#guide)
+- [Work in progress](#work-in-progress)
+- [How to contribute](#how-to-contribute)
+  - [Contributors](#contributors)
+
+</details>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Getting started
 
