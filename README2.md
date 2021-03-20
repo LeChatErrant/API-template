@@ -53,8 +53,9 @@ Documentation can be found on the [wiki](https://github.com/LeChatErrant/API-tem
 # Work in progress
 
  - [ ] CLI to create, extend and manage API resources
+ - [ ] Unit tests
  - [ ] Auto generated code documentation
- - [ ] Prisma seeders
+ - [ ] Integration with Prisma seeders
  - [ ] Back office template
 
 # How to contribute
