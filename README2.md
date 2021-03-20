@@ -13,6 +13,11 @@
 
 Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 :wink:
 
+| ![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif) |
+|---|
+| Development mode | 
+
+
 # Table of contents
 
 <!-- START doctoc -->
@@ -26,7 +31,7 @@ It gives your project a clean base to start and follows development good practic
 
 Lastly, it aims to save developers a lot of time since all nasty configurations are already written (typescript, eslint, jest, docker, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
 
-> This project is fully integrated with [devops-template](https://github.com/LeChatErrant/devops-template) (work still in progress), which provide a full infrastructure on K8S along with its tooling
+> This project is fully integrated with [devops-template](https://github.com/LeChatErrant/devops-template) **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
 
 # Getting started
 
