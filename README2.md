@@ -11,9 +11,9 @@
 >
 > Passionate by the design of backend software and distributed systems, I'm aiming to offer tools to help building the most complete architecture possible
 
-Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 :wink:
-
 ![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif)
+
+Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 :wink:
 
 # Table of contents
 
@@ -22,11 +22,11 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 
 # What is it ?
 
-The purpose of this template is to provide a typesafe, production ready web API, and a full development environment with the best tooling possible
+The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
 
-It gives your project a clean base to start and follows development good practices, essentially focusing on maintenability and extensibility
+It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintenability** and **extensibility**
 
-Lastly, it aims to save developers a lot of time since all nasty configurations are already written (typescript, eslint, jest, docker, CI, ...) and technologies are already chosen (language, testing framework, database, ORM, ...)
+Lastly, it aims to save developers a lot of time since all **nasty configurations** are already written (typescript, eslint, jest, docker, CI, ...) and **technologies** are already chosen (language, testing framework, database, ORM, ...)
 
 > This project is fully integrated with [devops-template](https://github.com/LeChatErrant/devops-template) **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
 
@@ -45,10 +45,6 @@ This repository is **templated** : try using it as a base for your own projects 
 # Guide
 
 Documentation can be found on the [wiki](https://github.com/LeChatErrant/API-template/wiki)
-
-# Features
-
- - wip
 
 # Work in progress
 
