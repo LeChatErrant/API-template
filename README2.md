@@ -41,7 +41,9 @@ Lastly, it aims to save developers a lot of time since all nasty configurations 
 
 # How to reuse this template
 
-[gif]
+This repository is **templated** : try using it as a base for your own projects by clicking on the **[Use this template](https://github.com/LeChatErrant/API-template/generate)**
+
+![Template](/.github/assets/template.gif)
 
 # Guide
 
