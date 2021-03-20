@@ -13,10 +13,7 @@
 
 Don't hesitate to share your improvements or to give me feedback on Discord at LeChatErrant#6074 :wink:
 
-| ![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif) |
-|---|
-| Development mode | 
-
+![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif)
 
 # Table of contents
 
