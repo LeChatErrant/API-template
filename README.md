@@ -51,7 +51,7 @@ This repository is **templated** : try using it as a base for your own projects 
 
 # Guide
 
-Documentation can be found on the [wiki](https://github.com/LeChatErrant/API-template/wiki)
+Documentation can be found on the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
 
 # Work in progress
 
@@ -63,7 +63,7 @@ Documentation can be found on the [wiki](https://github.com/LeChatErrant/API-tem
 
 # How to contribute
 
-1. Fork it (<https://github.com/LeChatErrant/API-template/fork>)
+1. Fork it (**<https://github.com/LeChatErrant/API-template/fork>**)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
