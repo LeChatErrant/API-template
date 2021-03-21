@@ -39,7 +39,7 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 
 # Getting started
 
-1. Make sure the **[.envrc](/.envrc)** is loaded (have a look [here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration))
+1. Make sure the **[.envrc](/.envrc)** is loaded (have a look **[here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration)**)
 2. If no database is running, simply launch one locally with `npm run dev:db`
 3. Run `npm run dev`
 
