@@ -43,15 +43,15 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 2. If no database is running, simply launch one locally with `npm run dev:db`
 3. Run `npm run dev`
 
+# Documentation
+
+Documentation can be found on the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
+
 # How to reuse this template
 
 This repository is **templated** : try using it as a base for your own projects by clicking on the **[Use this template](https://github.com/LeChatErrant/API-template/generate)**
 
 ![Template](/.github/assets/template.gif)
-
-# Guide
-
-Documentation can be found on the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
 
 # Work in progress
 
