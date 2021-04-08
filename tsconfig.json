@@ -65,7 +65,8 @@
   },
   "include": [
     "src/**/*.ts",
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "jest.config.js"
   ],
   "exclude": [
     "node_modules"
