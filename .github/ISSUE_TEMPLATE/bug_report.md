@@ -1,13 +1,17 @@
-# Bug Report
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: 
+  - bug
+assignees: ''
 
-## What is the expected behavior ?
+---
 
-Describe the expected behavior of the application, what should be printed in the logs ? What should appears in the application ?
+# Bug report
 
-## What is the current behavior ?
+## Actual behaviour
 
-Describe the current behavior of the application ? Is it a visual problem ? Is that a data problem ?
+## Expected behaviour
 
-## Step to reproduce the bug
-
-Explain the different step to reproduce that bug
+## Steps to reproduce
