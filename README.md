@@ -7,7 +7,6 @@
 
 # What is it ?
 
-
 The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
 
 It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintenability** and **extensibility**
@@ -28,8 +27,9 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 <summary>Table of Contents</summary>
 
 - [Getting started](#getting-started)
+- [CLI](#cli)
+- [Documentation](#documentation)
 - [How to reuse this template](#how-to-reuse-this-template)
-- [Guide](#guide)
 - [Work in progress](#work-in-progress)
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
@@ -43,9 +43,21 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 2. If no database is running, simply launch one locally with `npm run dev:db`
 3. Run `npm run dev`
 
+# CLI
+
+The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to initialize, develop and maintain your projects
+
+If you hate writing CRUD boilerplate code, this tool is for you :hearth:
+
+> The CLI is currently under heavy development, new features will be release soon
+> 
+> More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
+
+![CLI - Generate](.github/assets/cli-generate.gif)
+
 # Documentation
 
-Documentation can be found on the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
+Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
 
 # How to reuse this template
 
