@@ -6,6 +6,7 @@ import { Role } from '@prisma/client';
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
 import logger from '../../appLogger';
+import waitApp from '../../utils/waitApp';
 import { config } from '../../appConfig';
 import seedAdminUser from '../../utils/seedAdminUser';
 
@@ -21,6 +22,16 @@ const adminUser = {
   email: config.defaultAdminEmail,
   password: config.defaultAdminPassword,
 };
+
+// Wait for all external services (db, redis...)
+beforeAll(async () => {
+  await waitApp();
+});
+
+// Gracefully terminate prisma query engine
+afterAll(async () => {
+  await db.$disconnect();
+});
 
 // Reset session before each test
 beforeEach(() => {
@@ -202,7 +213,7 @@ test('Signout - Not logged in', async () => {
   await app.signout(httpStatus.UNAUTHORIZED);
 });
 
-/*  List users */
+/*  List users  */
 
 test('List users - auth', async () => {
   await app.listUsers(httpStatus.UNAUTHORIZED);
@@ -364,6 +375,8 @@ test('Update user - admin', async () => {
 
   await app.updateUser('unknownUserId', {}, httpStatus.NOT_FOUND);
 });
+
+/*  Delete user */
 
 test('Delete user - auth', async () => {
   const { id } = await app.signup(baseUser);
