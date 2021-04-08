@@ -1,5 +1,4 @@
 import app from './app';
-import db from './appDatabase';
 import logger from './appLogger';
 import { config } from './appConfig';
 import waitApp from './utils/waitApp';
@@ -17,7 +16,4 @@ main()
   .catch((error) => {
     logger.error(error);
     throw error;
-  })
-  .finally(async () => {
-    await db.$disconnect();
   });
