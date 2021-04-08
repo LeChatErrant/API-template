@@ -27,7 +27,7 @@
     "lint:ci": "eslint './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
-  "author": "",
+  "author": "LeChatErrant",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^2.20.1",
