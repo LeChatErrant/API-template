@@ -27,7 +27,11 @@
     "lint:ci": "eslint './src/**/*.{ts,tsx}'"
   },
   "keywords": [],
-  "author": "LeChatErrant",
+  "author": {
+    "name": "LeChatErrant",
+    "email": "guillaume.hector@epitech.eu",
+    "url": "https://github.com/LeChatErrant/"
+  },
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^2.20.1",
