@@ -66,7 +66,6 @@ This repository is **templated** : try using it as a base for your own projects 
 # Work in progress
 
  - [ ] CLI to create, extend and manage API resources
- - [ ] Unit tests
  - [ ] Auto generated code documentation
  - [ ] Integration with Prisma seeders
  - [ ] Back office template
