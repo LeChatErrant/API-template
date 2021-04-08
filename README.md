@@ -27,8 +27,9 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 <summary>Table of Contents</summary>
 
 - [Getting started](#getting-started)
+- [CLI](#cli)
+- [Documentation](#documentation)
 - [How to reuse this template](#how-to-reuse-this-template)
-- [Guide](#guide)
 - [Work in progress](#work-in-progress)
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
