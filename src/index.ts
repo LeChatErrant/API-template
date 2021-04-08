@@ -2,7 +2,6 @@ import app from './app';
 import logger from './appLogger';
 import { config } from './appConfig';
 import waitApp from './utils/waitApp';
-import closeApp from './utils/closeApp';
 import seedAdminUser from './utils/seedAdminUser';
 
 const { port } = config;
