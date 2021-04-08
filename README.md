@@ -7,7 +7,6 @@
 
 # What is it ?
 
-
 The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
 
 It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintenability** and **extensibility**
@@ -42,6 +41,16 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 1. Make sure the **[.envrc](/.envrc)** is loaded (have a look **[here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration)**)
 2. If no database is running, simply launch one locally with `npm run dev:db`
 3. Run `npm run dev`
+
+# CLI
+
+The template comes with a Command-Line Interface that helps you to initialize, develop and maintain your projects
+
+If you hate writing CRUD boilerplate code, this tool is for you :hearth:
+
+> The CLI is currently under heavy development, new features will be release soon
+
+![CLI - Generate](.github/assets/cli-generate.gif)
 
 # Documentation
 
