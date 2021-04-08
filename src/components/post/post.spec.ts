@@ -5,6 +5,7 @@ import httpStatus from 'http-status-codes';
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
 import logger from '../../appLogger';
+import waitApp from '../../utils/waitApp';
 
 const app = new Requester();
 
@@ -26,6 +27,16 @@ const basePost = {
   title: 'Lorem ipsum',
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 };
+
+// Wait for all external services (db, redis...)
+beforeAll(async () => {
+  await waitApp();
+});
+
+// Gracefully terminate prisma query engine
+afterAll(async () => {
+  await db.$disconnect();
+});
 
 // Reset session before each test, create two user and log in
 beforeEach(async () => {
@@ -182,7 +193,7 @@ test('Get post - unknown post', async () => {
   await app.getPost('me', 'unknown', httpStatus.NOT_FOUND);
 });
 
-/*  Update post  */
+/*  Update post */
 
 test('Update post - auth', async () => {
   await app.createPost('me', basePost);
@@ -230,6 +241,7 @@ test('Update post - unknown post', async () => {
 });
 
 /*  Delete posts  */
+
 test('Delete post - auth', async () => {
   const { id } = await app.createPost('me', basePost);
   await app.signout();
