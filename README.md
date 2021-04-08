@@ -45,13 +45,11 @@ Don't hesitate to share your improvements or to give me feedback on Discord at L
 
 # CLI
 
-The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to initialize, develop and maintain your projects
+The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to initialize, develop and maintain your projects. It saves you from writing boilerplate code 
 
-If you hate writing CRUD boilerplate code, this tool is for you :hearth:
-
-> The CLI is currently under heavy development, new features will be release soon
+> The CLI is currently under heavy development, new features will be release soon ❤️
 > 
-> More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
+> More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/Create-new-resource)**
 
 ![CLI - Generate](.github/assets/cli-generate.gif)
 
