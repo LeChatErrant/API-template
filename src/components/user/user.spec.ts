@@ -5,9 +5,9 @@ import { Role } from '@prisma/client';
 
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
+import logger from '../../appLogger';
 import { config } from '../../appConfig';
 import seedAdminUser from '../../utils/seedAdminUser';
-import logger from '../../appLogger';
 
 const app = new Requester();
 
