@@ -49,7 +49,7 @@ The template comes with a **[Command-Line Interface](https://github.com/LeChatEr
 
 > The CLI is currently under heavy development, new features will be release soon ❤️
 > 
-> More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/Create-new-resource)**
+> More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/CLI)**
 
 ![CLI - Generate](.github/assets/cli-generate.gif)
 
