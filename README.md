@@ -45,7 +45,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 # CLI
 
-The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to initialize, develop and maintain your projects. It saves you from writing boilerplate code 
+The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to **initialize**, **develop** and **maintain** your projects. It saves you from writing boilerplate code 
 
 > The CLI is currently under heavy development, new features will be release soon ❤️
 > 
