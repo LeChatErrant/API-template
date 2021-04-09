@@ -16,8 +16,8 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 ![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif)
 
 > This project is fully integrated with **[devops-template](https://github.com/LeChatErrant/devops-template)** **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
-
-Don't hesitate to share your improvements or to give feedback on **[Discord](https://discord.gg/4Djq9Qsc3e)** :wink:
+>
+> Don't hesitate to share your improvements or to give feedback on **[Discord](https://discord.gg/4Djq9Qsc3e)** :wink:
 
 # Table of contents
 
