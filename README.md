@@ -40,8 +40,9 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 # Getting started
 
 1. Make sure the **[.envrc](/.envrc)** is loaded (have a look **[here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration)**)
-2. If no database is running, simply launch one locally with `npm run dev:db`
-3. Run `npm run dev`
+2. Install dependencies with `npm install`
+3. If no database is running, simply launch one locally with `npm run dev:db`
+4. Run `npm run dev`
 
 # CLI
 
