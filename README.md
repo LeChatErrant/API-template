@@ -17,7 +17,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 > This project is fully integrated with **[devops-template](https://github.com/LeChatErrant/devops-template)** **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
 >
-> Don't hesitate to share your improvements or to give feedback on **[my Discord](LeChatErrant#6074)** :wink:
+> Don't hesitate to share your improvements or to give feedback on Discord (LeChatErrant#6074) :wink:
 
 # Table of contents
 
