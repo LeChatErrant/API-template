@@ -55,7 +55,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/connect-redis": "0.0.16",
-    "@types/express": "^4.17.11",
+    "@types/express": "^4.17.12",
     "@types/express-session": "^1.17.3",
     "@types/http-errors": "^1.8.0",
     "@types/jest": "^26.0.23",
