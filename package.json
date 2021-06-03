@@ -38,7 +38,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
-    "connect-redis": "^5.2.0",
+    "connect-redis": "^6.0.0",
     "env-var": "^7.0.1",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
