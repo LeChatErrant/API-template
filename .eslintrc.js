@@ -3,6 +3,7 @@ module.exports = {
     'airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
   ],
+  plugins: ['import'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
