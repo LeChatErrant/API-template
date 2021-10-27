@@ -1,6 +1,5 @@
 import type { RequestHandler } from 'express';
-import type { ClassType } from 'class-transformer/ClassTransformer';
-import { plainToClass } from 'class-transformer';
+import { ClassConstructor, plainToClass } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
@@ -31,7 +30,7 @@ import handler from 'express-async-handler';
 
  * router.post('/users/signup', validate(UserSignupDto), ...);
  */
-function validate<T>(type: ClassType<T>): RequestHandler {
+function validate<T>(type: ClassConstructor<T>): RequestHandler {
   return handler(async (req, res, next) => {
     const parsedBody = plainToClass(type, req.body);
     const errors = await classValidator(parsedBody, { whitelist: true });
