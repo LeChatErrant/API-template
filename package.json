@@ -70,7 +70,7 @@
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.25.2",
     "jest": "^26.6.3",
-    "supertest": "^6.1.4",
+    "supertest": "^6.1.6",
     "templated-project-cli": "^3.0.0",
     "ts-jest": "^26.5.6",
     "ts-node-dev": "^1.1.8"
