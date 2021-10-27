@@ -8,3 +8,4 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+    open-pull-requests-limit: 10
