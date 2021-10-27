@@ -41,7 +41,7 @@
     "connect-redis": "^6.0.0",
     "env-var": "^7.0.1",
     "express": "^4.17.1",
-    "express-async-handler": "^1.1.4",
+    "express-async-handler": "^1.2.0",
     "express-session": "^1.17.2",
     "http-errors": "^1.8.0",
     "http-status-codes": "^2.1.4",
