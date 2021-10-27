@@ -33,7 +33,8 @@ import handler from 'express-async-handler';
 function validate<T>(type: ClassConstructor<T>): RequestHandler {
   return handler(async (req, res, next) => {
     const parsedBody = plainToClass(type, req.body);
-    const errors = await classValidator(parsedBody, { whitelist: true });
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const errors = await classValidator(parsedBody as Object, { whitelist: true });
     if (errors.length !== 0) {
       const message = errors.join('').trimEnd();
       next(createError(httpStatus.BAD_REQUEST, message));
