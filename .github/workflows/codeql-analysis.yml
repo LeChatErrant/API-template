@@ -11,7 +11,7 @@ on:
       - src/**
       - tsconfig.json
       - jest.config.js
-      - .github/workflows/integration-tests.yml
+      - .github/workflows/codeql-analysis.yml
 
 jobs:
   analyze:
