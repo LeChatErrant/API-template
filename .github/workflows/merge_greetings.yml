@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Comment PR
-        uses: thollander/actions-comment-pull-request@master
+        uses: thollander/actions-comment-pull-request@v1
         with:
           message: '![Congratulations](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/congratulation.gif?raw=true)'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
