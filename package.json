@@ -39,7 +39,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "connect-redis": "^6.0.0",
-    "env-var": "^7.0.1",
+    "env-var": "^7.1.1",
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.2",
