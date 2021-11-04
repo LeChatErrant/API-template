@@ -12,9 +12,6 @@ on:
       - tsconfig.json
       - jest.config.js
       - .github/workflows/integration-tests.yml
-  pull_request:
-    types:
-      - opened
 
 jobs:
   integration-tests:

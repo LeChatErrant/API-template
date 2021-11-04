@@ -11,9 +11,6 @@ on:
       - tsconfig.json
       - .eslintrc.js
       - .github/workflows/lint.yml
-  pull_request:
-    types:
-      - opened
 
 jobs:
   lint:
