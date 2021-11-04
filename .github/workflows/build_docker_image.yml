@@ -16,6 +16,8 @@ on:
 jobs:
   build-docker-image:
     runs-on: ubuntu-latest
+    env:
+      branch: ${GITHUB_REF##*/}
 
     steps:
     - name: Set up Docker Buildx
@@ -32,4 +34,4 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: ${{ GITHUB_REF##*/ }}
+        tags: ${{GITHUB_REPOSITORY}}/${{ env.branch }}
