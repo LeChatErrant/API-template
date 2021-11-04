@@ -19,12 +19,9 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 >
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
 
-# Table of contents
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<details open="true">
-<summary>Table of Contents</summary>
+# Table of contents
 
 - [Getting started](#getting-started)
 - [CLI](#cli)
@@ -34,7 +31,6 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
 
-</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Getting started
