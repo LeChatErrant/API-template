@@ -18,3 +18,4 @@ jobs:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         COMMIT_NAME: GitHub Action
         COMMIT_EMAIL: action@github.com
+        TOC_TITLE: "# Table of contents"
