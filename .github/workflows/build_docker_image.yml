@@ -25,7 +25,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ${{ GITHUB_REPOSITORY }}
+        images: ${{ github.repository }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
