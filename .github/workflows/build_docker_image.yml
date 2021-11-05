@@ -37,9 +37,14 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         registry: ghcr.io
 
+    - name: Debug
+      run: |
+        echo ${{ steps.meta.outputs.tags }}
+        echo ${{ steps.meta.outputs.labels }}
+
     - name: Build and push the Docker image
       uses: docker/build-push-action@v2
       with:
         push: true
-#        tags: ${{ steps.meta.outputs.tags }}
-#        labels: ${{ steps.meta.outputs.labels }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
