@@ -40,6 +40,22 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 3. If no database is running, simply launch one locally with `npm run dev:db`
 4. Run `npm run dev`
 
+# Technologies
+
+ - [Typescript](https://www.typescriptlang.org/)
+ - [Express](https://expressjs.com/)
+ - [Prisma](https://www.prisma.io/)
+ - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+ - [Eslint](https://eslint.org/)
+ - [Jest](https://jestjs.io/)
+ - [Supertest](https://www.npmjs.com/package/supertest)
+ - [Husky](https://typicode.github.io/husky/#/)
+ - [Github action](https://github.com/features/actions)
+ - [Redis](https://redis.io/)
+ - [Docker](https://www.docker.com/)
+
+...and more
+
 # CLI
 
 The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/templated-project-cli)** that helps you to **initialize**, **develop** and **maintain** your projects. It saves you from writing boilerplate code 
