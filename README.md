@@ -24,6 +24,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 # Table of contents
 
 - [Getting started](#getting-started)
+- [Technologies](#technologies)
 - [CLI](#cli)
 - [Documentation](#documentation)
 - [How to reuse this template](#how-to-reuse-this-template)
