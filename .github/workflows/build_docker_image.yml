@@ -20,12 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Format branch name
-      run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-    - name: Format repository name
-      run: echo "REPOSITORY=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
-
     - name: Compute metadata for Docker image
       id: meta
       uses: docker/metadata-action@v3
