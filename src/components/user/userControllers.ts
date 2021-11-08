@@ -9,7 +9,7 @@ import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 import { buildUserRo } from './userHelpers';
 
 export async function signup(payload: UserSignupDto) {
-  const alreadyExists = !!await db.user.findUnique({ where:{ email: payload.email } });
+  const alreadyExists = !!await db.user.findUnique({ where: { email: payload.email } });
   if (alreadyExists) {
     throw createError(httpStatus.CONFLICT, `A user with email ${payload.email} already exists`);
   }
