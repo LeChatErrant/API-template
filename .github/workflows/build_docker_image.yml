@@ -29,18 +29,6 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: ${{ env.REPOSITORY }}
-#        images: lechaterrant/api-template
-#        images: ${{ github.repository }}
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: ghcr.io
 
     - name: Debug
       run: |
@@ -50,10 +38,21 @@ jobs:
         echo $GITHUB_REPOSITORY
         echo $REPOSITORY
 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: ghcr.io
+
     - name: Build and push the Docker image
       uses: docker/build-push-action@v2
       with:
         push: true
-#        tags: "lechaterrant/api-template:debug"
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
