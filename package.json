@@ -29,6 +29,9 @@
   "lint-staged": {
     "*.@(ts|js)": [
       "eslint --fix"
+    ],
+    "*": [
+      "npm run prisma:format"
     ]
   },
   "keywords": [],
