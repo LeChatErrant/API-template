@@ -47,7 +47,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
  - [Express](https://expressjs.com/)
  - [Prisma (ORM)](https://www.prisma.io/)
  - [Bcrypt (password hash)](https://www.npmjs.com/package/bcrypt)
- - [Eslint (linter)](https://eslint.org/)
+ - [Eslint (styling)](https://eslint.org/)
  - [Jest (testing)](https://jestjs.io/)
  - [Supertest (testing)](https://www.npmjs.com/package/supertest)
  - [Husky (pre commit hooks)](https://typicode.github.io/husky/#/)
