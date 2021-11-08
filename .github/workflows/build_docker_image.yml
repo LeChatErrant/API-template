@@ -21,11 +21,15 @@ jobs:
     - name: Format branch name
       run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
+    - name: Format repository name
+      run: echo "REPOSITORY=${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+
     - name: Compute metadata for Docker image
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: lechaterrant/api-template
+        images: ${{ env.REPOSITORY }}
+#        images: lechaterrant/api-template
 #        images: ${{ github.repository }}
 
     - name: Set up Docker Buildx
@@ -43,6 +47,7 @@ jobs:
         echo "${{ steps.meta.outputs.tags }}"
         echo "${{ steps.meta.outputs.labels }}"
         echo "${{ github.repository }}"
+        echo "${{ env.repository }}
 
     - name: Build and push the Docker image
       uses: docker/build-push-action@v2
