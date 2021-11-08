@@ -24,6 +24,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 # Table of contents
 
 - [Getting started](#getting-started)
+- [Technologies](#technologies)
 - [CLI](#cli)
 - [Documentation](#documentation)
 - [How to reuse this template](#how-to-reuse-this-template)
@@ -39,6 +40,22 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 2. Install dependencies with `npm install`
 3. If no database is running, simply launch one locally with `npm run dev:db`
 4. Run `npm run dev`
+
+# Technologies
+
+ - [Typescript](https://www.typescriptlang.org/)
+ - [Express](https://expressjs.com/)
+ - [Prisma](https://www.prisma.io/)
+ - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+ - [Eslint](https://eslint.org/)
+ - [Jest](https://jestjs.io/)
+ - [Supertest](https://www.npmjs.com/package/supertest)
+ - [Husky](https://typicode.github.io/husky/#/)
+ - [Github action](https://github.com/features/actions)
+ - [Redis](https://redis.io/)
+ - [Docker](https://www.docker.com/)
+
+...and more
 
 # CLI
 
