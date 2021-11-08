@@ -45,14 +45,14 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
  - [Typescript](https://www.typescriptlang.org/)
  - [Express](https://expressjs.com/)
- - [Prisma](https://www.prisma.io/)
- - [Bcrypt](https://www.npmjs.com/package/bcrypt)
- - [Eslint](https://eslint.org/)
- - [Jest](https://jestjs.io/)
- - [Supertest](https://www.npmjs.com/package/supertest)
- - [Husky](https://typicode.github.io/husky/#/)
- - [Github action](https://github.com/features/actions)
- - [Redis](https://redis.io/)
+ - [Prisma (ORM)](https://www.prisma.io/)
+ - [Bcrypt (password hash)](https://www.npmjs.com/package/bcrypt)
+ - [Eslint (linter)](https://eslint.org/)
+ - [Jest (testing)](https://jestjs.io/)
+ - [Supertest (testing)](https://www.npmjs.com/package/supertest)
+ - [Husky (pre commit hooks)](https://typicode.github.io/husky/#/)
+ - [Github action (CI/CD)](https://github.com/features/actions)
+ - [Redis (session management)](https://redis.io/)
  - [Docker](https://www.docker.com/)
 
 ...and more
