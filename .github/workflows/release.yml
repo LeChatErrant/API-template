@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Release version
+        description: "Release version (example : v3.2.0)"
         required: true
       draft:
-        description: True to create a draft (unpublished) release
-        default: 'false'
+        description: True to create a draft (unpublished) release, false to publish
+        default: 'true'
         required: true
 
 jobs:
