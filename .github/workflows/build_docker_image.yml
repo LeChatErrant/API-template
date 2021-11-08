@@ -32,11 +32,12 @@ jobs:
 
     - name: Debug
       run: |
-        echo "${{ steps.meta.outputs.tags }}"
-        echo "${{ steps.meta.outputs.labels }}"
-        echo "${{ github.repository }}"
-        echo $GITHUB_REPOSITORY
-        echo $REPOSITORY
+        echo "TAGS :" "${{ steps.meta.outputs.tags }}"
+        echo "LABELS :" "${{ steps.meta.outputs.labels }}"
+        echo "Repository (using github expression)" "${{ github.repository }}"
+        echo "Repository (using predefined env variable)" $GITHUB_REPOSITORY
+        echo "Repository (formated)" $REPOSITORY
+        echo "Branch (formated)" $BRANCH
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
