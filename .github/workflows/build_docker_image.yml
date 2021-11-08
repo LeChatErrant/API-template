@@ -28,7 +28,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ${{ env.REPOSITORY }}
+        images: ghcr.io/${{ env.REPOSITORY }}
 
     - name: Debug
       run: |
