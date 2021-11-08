@@ -46,6 +46,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: LeChatErrant/API-template
+        tags: lechaterrant/api-template
 #        tags: ${{ steps.meta.outputs.tags }}
 #        labels: ${{ steps.meta.outputs.labels }}
