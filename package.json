@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "pre-commit": "echo 'debug!!!!!!!!!!!!!!'",
     "cli": "templated-project-cli",
     "build": "tsc",
     "start": "npm run db:deploy && node dist",
@@ -25,6 +24,11 @@
     "db:studio": "prisma studio --port ${STUDIO_PORT}",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'debug!!!'"
+    }
   },
   "lint-staged": {
     "*.@(ts|js)": [
@@ -74,6 +78,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-plugin-import": "^2.25.2",
+    "husky": "^4.3.8",
     "jest": "^27.3.1",
     "lint-staged": "^11.2.6",
     "supertest": "^6.1.6",
