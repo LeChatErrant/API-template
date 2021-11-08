@@ -47,7 +47,7 @@ jobs:
         echo "${{ steps.meta.outputs.tags }}"
         echo "${{ steps.meta.outputs.labels }}"
         echo "${{ github.repository }}"
-        echo "${env.repository }}"
+        echo "${{ env.repository }}"
 
     - name: Build and push the Docker image
       uses: docker/build-push-action@v2
