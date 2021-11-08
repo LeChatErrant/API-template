@@ -30,7 +30,7 @@
     "*.@(ts|js)": [
       "eslint --fix"
     ],
-    "*": [
+    "prisma/schema.prisma": [
       "npm run prisma:format"
     ]
   },
