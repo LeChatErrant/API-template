@@ -9,7 +9,7 @@ import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
 import { buildUserRo } from './userHelpers';
 
 export async function signup(payload: UserSignupDto) {
-  const alreadyExists = !!await db.user.findUnique({ where: { email: payload.email } });
+  const alreadyExists = !!await db.user.findUnique({ where:{ email: payload.email } });
   if (alreadyExists) {
     throw createError(httpStatus.CONFLICT, `A user with email ${payload.email} already exists`);
   }
@@ -23,7 +23,7 @@ export async function signup(payload: UserSignupDto) {
 
 export async function signin(payload: UserSigninDto) {
   const user = await db.user.findUnique({
-    where: {email: payload.email},
+    where: { email: payload.email },
   });
   if (!user || !await verifyPassword(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
   return buildUserRo(user);
