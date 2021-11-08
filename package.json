@@ -33,7 +33,7 @@
   },
   "lint-staged": {
     "*.@(ts|js)": [
-      "npm lint"
+      "eslint --fix"
     ]
   },
   "keywords": [],
