@@ -42,6 +42,7 @@ jobs:
       run: |
         echo "${{ steps.meta.outputs.tags }}"
         echo "${{ steps.meta.outputs.labels }}"
+        echo "${{ github.repository }}"
 
     - name: Build and push the Docker image
       uses: docker/build-push-action@v2
