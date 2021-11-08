@@ -8,7 +8,7 @@ import type { PostCreateDto, PostUpdateDto } from './postTypes';
 import { buildPostRo } from './postHelpers';
 
 export async function listPosts(authorId: string) {
-  const posts = await db.post.findMany({ where:{ authorId },
+  const posts = await db.post.findMany({ where: { authorId },
     orderBy: { createdAt: 'desc' },
   });
   return posts.map((post) => buildPostRo(post));
