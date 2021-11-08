@@ -26,6 +26,16 @@
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|js)": [
+      "npm lint"
+    ]
+  },
   "keywords": [],
   "author": {
     "name": "LeChatErrant",
@@ -69,7 +79,9 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-plugin-import": "^2.25.2",
+    "husky": "^7.0.4",
     "jest": "^27.3.1",
+    "lint-staged": "^11.2.6",
     "supertest": "^6.1.6",
     "templated-project-cli": "^3.0.0",
     "ts-jest": "^27.0.7",

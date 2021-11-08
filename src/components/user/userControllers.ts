@@ -23,7 +23,7 @@ export async function signup(payload: UserSignupDto) {
 
 export async function signin(payload: UserSigninDto) {
   const user = await db.user.findUnique({
-    where: { email: payload.email },
+    where: { email: payload.email},
   });
   if (!user || !await verifyPassword(payload.password, user.password)) throw createError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
   return buildUserRo(user);
