@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'debug!!!'"
+      "pre-commit": "npm run prisma:format"
     }
   },
   "lint-staged": {
