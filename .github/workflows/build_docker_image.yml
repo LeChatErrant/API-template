@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'v*'
     paths:
       - Dockerfile
       - package.json
@@ -28,7 +30,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ghcr.io/${{ env.REPOSITORY }}
+        images: ghcr.io/${{ github.repository }}
 
     - name: Debug
       run: |
@@ -47,8 +49,6 @@ jobs:
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-#        username: ${{ secrets.DOCKER_USERNAME }}
-#        password: ${{ secrets.DOCKER_PASSWORD }}
         registry: ghcr.io
 
     - name: Build and push the Docker image
