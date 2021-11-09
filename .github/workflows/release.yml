@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Release version (example : v3.2.0)"
+        description: "Release version (example : 3.2.0)"
         required: true
       draft:
         description: True to create a draft (unpublished) release, false to publish
@@ -40,7 +40,7 @@ jobs:
         script: |
           const fs = require('fs');
 
-          const regex = new RegExp('^v([0-9]+\.){0,2}([0-9]+)$');
+          const regex = new RegExp('^([0-9]+\.){0,2}([0-9]+)$');
 
           try {
             const { owner, repo } = context.repo;
