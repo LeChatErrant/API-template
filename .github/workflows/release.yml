@@ -69,7 +69,7 @@ jobs:
               repo,
               tag: version,
               message: `Release ${version}`,
-              object: latestCommitSHA',
+              object: latestCommitSHA,
               type: 'commit',
             });
             
