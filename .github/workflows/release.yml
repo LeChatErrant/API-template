@@ -51,7 +51,7 @@ jobs:
               throw new Error(`${version} is not a valid versionning`);
             }
             
-            await github.repos.createTag({
+            await github.git.createTag({
               owner,
               repo,
               tag: version,
