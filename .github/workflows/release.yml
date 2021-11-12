@@ -6,9 +6,9 @@ on:
       version:
         description: "Release version (example : 3.2.0)"
         required: true
-      draft:
-        description: True to create a draft (unpublished) release, false to publish
-        default: 'true'
+      publish:
+        description: True to publish, false to create a draft
+        default: 'false'
         required: true
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         version: ${{github.event.inputs.version}}
-        draft: ${{github.event.inputs.draft}}
+        draft: ${{!github.event.inputs.publish}}
         script: |
           const fs = require('fs');
 
@@ -51,18 +51,31 @@ jobs:
               throw new Error(`${version} is not a valid versionning`);
             }
             
+            core.info(`Creating tag ${version}`);
+            
+            const latestCommitSHA = await github.repos.getCommit({
+              owner,
+              repo,
+              ref: 'refs/heads/master',
+              mediaType: {
+                format: 'sha'
+              },
+            });
+            
+            core.info(latestCommitSHA);
+            
             await github.git.createTag({
               owner,
               repo,
               tag: version,
               message: `Release ${version}`,
-              object: 'master',
+              object: latestCommitSHA',
               type: 'commit',
             });
             
             core.info(`Creating release ${version}`);
 
-            const draft = core.getInput('draft', { required: true }).toLowerCase() === 'true';
+            const draft = core.getInput('publish', { required: true }).toLowerCase() === 'false';
             core.info(`Draft mode : ${draft}`);
 
             const body = fs.readFileSync('CHANGELOG.md').toString();
