@@ -53,7 +53,7 @@ jobs:
             
             core.info(`Creating tag ${version}`);
             
-            const latestCommitSHA = await github.repos.getCommit({
+            const { sha } = await github.repos.getCommit({
               owner,
               repo,
               ref: 'refs/heads/master',
@@ -62,14 +62,14 @@ jobs:
               },
             });
             
-            core.info(latestCommitSHA);
+            core.info(sha);
             
             await github.git.createTag({
               owner,
               repo,
               tag: version,
               message: `Release ${version}`,
-              object: latestCommitSHA,
+              object: sha,
               type: 'commit',
             });
             
