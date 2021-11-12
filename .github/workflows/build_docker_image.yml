@@ -32,8 +32,8 @@ jobs:
       with:
         images: ghcr.io/${{ github.repository }}
         tags: |
-          type=sha,format=long,prefix={{branch}}-
           type=semver,pattern={{version}}
+          type=sha,format=long,prefix={{branch}}-,enable=${{ github.ref_type == 'branch' }}
 
     - name: Debug
       run: |
