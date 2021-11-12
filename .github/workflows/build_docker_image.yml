@@ -31,7 +31,9 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: ghcr.io/${{ github.repository }}
-        tags: type=sha,format=long,prefix={{branch}}-
+        tags: |
+          type=sha,format=long,prefix={{branch}}-
+          type=semver,pattern={{version}}
 
     - name: Debug
       run: |
