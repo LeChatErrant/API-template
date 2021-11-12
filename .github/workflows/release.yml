@@ -50,6 +50,16 @@ jobs:
             if (!regex.test(version)) {
               throw new Error(`${version} is not a valid versionning`);
             }
+            
+            await github.repos.createTag({
+              owner,
+              repo,
+              tag: version,
+              message: `Release ${version}`,
+              object: 'master',
+              type: 'commit',
+            });
+            
             core.info(`Creating release ${version}`);
 
             const draft = core.getInput('draft', { required: true }).toLowerCase() === 'true';
