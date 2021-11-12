@@ -53,7 +53,7 @@ jobs:
             
             core.info(`Creating tag ${version}`);
             
-            const { sha } = await github.repos.getCommit({
+            const { data: { sha } } = await github.repos.getCommit({
               owner,
               repo,
               ref: 'refs/heads/master',
