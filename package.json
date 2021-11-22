@@ -78,7 +78,7 @@
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-plugin-import": "^2.25.3",
     "jest": "^27.3.1",
-    "lint-staged": "^12.0.3",
+    "lint-staged": "^12.1.2",
     "supertest": "^6.1.6",
     "templated-project-cli": "^3.0.0",
     "ts-jest": "^27.0.7",
