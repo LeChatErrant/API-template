@@ -81,7 +81,7 @@
     "lint-staged": "^12.1.2",
     "supertest": "^6.1.6",
     "templated-project-cli": "^3.0.0",
-    "ts-jest": "^27.1.0",
+    "ts-jest": "^27.1.1",
     "ts-node-dev": "^1.1.8",
     "husky": "^7.0.0"
   }
