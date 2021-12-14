@@ -1,4 +1,5 @@
 import express from 'express';
+import helmet from 'helmet';
 
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
@@ -17,6 +18,7 @@ const app = express();
 app.use(session);
 
 /*  Middlewares */
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(meMiddleware);
