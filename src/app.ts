@@ -3,7 +3,7 @@ import express from 'express';
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
 
-import router from './components';
+import router from './routes';
 import session from './appSession';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
