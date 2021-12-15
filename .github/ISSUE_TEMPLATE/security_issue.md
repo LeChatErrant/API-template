@@ -7,10 +7,6 @@ assignees: ''
 
 ---
 
-# Bug report
+# About the security issue
 
-## Actual behaviour
-
-## Expected behaviour
-
-## Steps to reproduce
+# How to fix
