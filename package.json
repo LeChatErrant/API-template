@@ -11,7 +11,7 @@
     "integration:watch": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --watch --silent --detectOpenHandles",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",
-    "dev": "npm run db:deploy && concurrently --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
+    "dev": "npm run db:deploy && concurrently --raw --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
     "prisma:generate": "prisma generate",
     "prisma:format": "prisma format",
     "db:migrate:help": "prisma migrate --help",
