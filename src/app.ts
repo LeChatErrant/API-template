@@ -1,10 +1,12 @@
 import express from 'express';
 import helmet from 'helmet';
+import cors from 'cors';
 
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
 
 import router from './routes';
+import { config } from './appConfig';
 import session from './appSession';
 import requestLogger from './middlewares/requestLogger';
 import errorMiddleware from './middlewares/errorMiddleware';
@@ -21,6 +23,9 @@ app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
+app.use(cors({
+  origin: config.whitelist,
+}));
 app.use(meMiddleware);
 app.use(requestLogger);
 
