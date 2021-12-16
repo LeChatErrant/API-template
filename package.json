@@ -11,6 +11,9 @@
   "repository": {
     "url": "https://github.com/LeChatErrant/API-template"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "license": "ISC",
   "scripts": {
     "cli": "templated-project-cli",
