@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  integration-tests:
+  publish-types:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,9 @@ jobs:
       with:
         node-version: '14.x'
         registry-url: 'https://npm.pkg.github.com'
+
+    - name: Install dependencies
+      run: npm install
 
     - name: Publish
       run: npm publish
