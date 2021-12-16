@@ -1,5 +1,5 @@
 {
-  "name": "API-template",
+  "name": "api-template",
   "version": "1.0.0",
   "description": "Modern production-ready typescript backend template",
   "keywords": [],
@@ -7,6 +7,9 @@
     "name": "LeChatErrant",
     "email": "guillaume.hector@epitech.eu",
     "url": "https://github.com/LeChatErrant/"
+  },
+  "repository": {
+    "url": "https://github.com/LeChatErrant/API-template"
   },
   "license": "ISC",
   "scripts": {
