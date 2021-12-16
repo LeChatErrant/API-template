@@ -11,6 +11,7 @@ export enum MODES {
 
 export const config = {
   port: env('PORT').asPortNumber(),
+  whitelist: env('WHITELIST').asArray(','),
   sessionSecret: env('SESSION_SECRET').asString(),
   mode: env('MODE').asEnum(Object.values(MODES)),
   defaultAdminEmail: env('DEFAULT_ADMIN_EMAIL').asString(),
