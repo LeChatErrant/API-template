@@ -1,7 +1,14 @@
 {
-  "name": "app",
+  "name": "API-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "Modern production-ready typescript backend template",
+  "keywords": [],
+  "author": {
+    "name": "LeChatErrant",
+    "email": "guillaume.hector@epitech.eu",
+    "url": "https://github.com/LeChatErrant/"
+  },
+  "license": "ISC",
   "scripts": {
     "cli": "templated-project-cli",
     "build": "tsc",
@@ -34,13 +41,6 @@
       "npm run prisma:format"
     ]
   },
-  "keywords": [],
-  "author": {
-    "name": "LeChatErrant",
-    "email": "guillaume.hector@epitech.eu",
-    "url": "https://github.com/LeChatErrant/"
-  },
-  "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.6.0",
     "bcrypt": "^5.0.1",
