@@ -41,20 +41,22 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 # Technologies
 
- - [Typescript](https://www.typescriptlang.org/)
- - [Express](https://expressjs.com/) (web server)
- - [Prisma](https://www.prisma.io/) (ORM)
- - [Bcrypt](https://www.npmjs.com/package/bcrypt) (password hash)
- - [Eslint](https://eslint.org/) (styling)
- - [Jest](https://jestjs.io/) (testing)
- - [Supertest](https://www.npmjs.com/package/supertest) (testing)
- - [Class validator](https://github.com/typestack/class-validator) (DTO validation)
- - [Winston](https://github.com/winstonjs/winston) (logger)
- - [Husky](https://typicode.github.io/husky/#/) (pre commit hooks)
- - [Github action](https://github.com/features/actions) (CI/CD)
- - [Docker](https://www.docker.com/) (containerization)
- - [Redis](https://redis.io/) (session management)
- - [PostgreSQL](https://www.postgresql.org/) (database)
+ - [Typescript](https://www.typescriptlang.org/) : Language
+ - [Express](https://expressjs.com/) : Web server
+ - [Prisma](https://www.prisma.io/) : ORM
+ - [Prisma studio](https://www.prisma.io/studio) : Database visualisation
+ - [Prisma migrate](https://www.prisma.io/migrate) : Database migration
+ - [Bcrypt](https://www.npmjs.com/package/bcrypt) : Password hashing
+ - [Eslint](https://eslint.org/) : Code styling
+ - [Jest](https://jestjs.io/) : Testing
+ - [Supertest](https://www.npmjs.com/package/supertest) : Endpoint testing
+ - [Class validator](https://github.com/typestack/class-validator) : DTO validation
+ - [Winston](https://github.com/winstonjs/winston) : Logger
+ - [Husky](https://typicode.github.io/husky/#/) : Pre commit hooks
+ - [Github action](https://github.com/features/actions) : CI / CD
+ - [Docker](https://www.docker.com/) : Containerization
+ - [Redis](https://redis.io/) : Session management
+ - [PostgreSQL](https://www.postgresql.org/) : Database
 
 ...and more
 
