@@ -42,16 +42,19 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 # Technologies
 
  - [Typescript](https://www.typescriptlang.org/)
- - [Express](https://expressjs.com/)
- - [Prisma (ORM)](https://www.prisma.io/)
- - [Bcrypt (password hash)](https://www.npmjs.com/package/bcrypt)
- - [Eslint (styling)](https://eslint.org/)
- - [Jest (testing)](https://jestjs.io/)
- - [Supertest (testing)](https://www.npmjs.com/package/supertest)
- - [Husky (pre commit hooks)](https://typicode.github.io/husky/#/)
- - [Github action (CI/CD)](https://github.com/features/actions)
- - [Redis (session management)](https://redis.io/)
- - [Docker](https://www.docker.com/)
+ - [Express](https://expressjs.com/) (web server)
+ - [Prisma](https://www.prisma.io/) (ORM)
+ - [Bcrypt](https://www.npmjs.com/package/bcrypt) (password hash)
+ - [Eslint](https://eslint.org/) (styling)
+ - [Jest](https://jestjs.io/) (testing)
+ - [Supertest](https://www.npmjs.com/package/supertest) (testing)
+ - [Class validator](https://github.com/typestack/class-validator) (DTO validation)
+ - [Winston](https://github.com/winstonjs/winston) (logger)
+ - [Husky](https://typicode.github.io/husky/#/) (pre commit hooks)
+ - [Github action](https://github.com/features/actions) (CI/CD)
+ - [Docker](https://www.docker.com/) (containerization)
+ - [Redis](https://redis.io/) (session management)
+ - [PostgreSQL](https://www.postgresql.org/) (database)
 
 ...and more
 
