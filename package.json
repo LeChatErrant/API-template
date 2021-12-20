@@ -88,7 +88,7 @@
     "eslint-plugin-import": "^2.25.3",
     "husky": "^7.0.0",
     "jest": "^27.4.5",
-    "lint-staged": "^12.1.2",
+    "lint-staged": "^12.1.3",
     "supertest": "^6.1.6",
     "templated-project-cli": "^3.0.0",
     "ts-jest": "^27.1.2",
