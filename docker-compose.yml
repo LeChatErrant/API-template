@@ -13,6 +13,7 @@ services:
       - REDIS_PORT
       - REDIS_HOST=redis
       - REDIS_PASS
+      - WHITELIST
     ports:
       - "${PORT}:${PORT}"
     networks:
