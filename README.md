@@ -13,7 +13,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 ![Deployment example](https://github.com/LeChatErrant/API-template/blob/master/.github/assets/deployment.gif)
 
-> This project is fully integrated with **[devops-template](https://github.com/LeChatErrant/devops-template)** **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
+> This project is fully integrated with **[ops-template](https://github.com/LeChatErrant/ops-template)** **(work still in progress)**, which provide a full infrastructure on Kubernetes along with its tooling
 >
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
 
