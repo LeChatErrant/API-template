@@ -43,9 +43,11 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
  - [Typescript](https://www.typescriptlang.org/) : Language
  - [Express](https://expressjs.com/) : Web server
+ - [Heroku](https://www.heroku.com) : Application hosting
  - [Prisma](https://www.prisma.io/) : ORM
  - [Prisma studio](https://www.prisma.io/studio) : Database visualisation
  - [Prisma migrate](https://www.prisma.io/migrate) : Database migration
+ - [Prisma data platform](https://www.prisma.io/dataplatform) : Database hosting
  - [Bcrypt](https://www.npmjs.com/package/bcrypt) : Password hashing
  - [Eslint](https://eslint.org/) : Code styling
  - [Jest](https://jestjs.io/) : Testing

@@ -37,7 +37,8 @@
     "db:studio": "prisma studio --port ${STUDIO_PORT}",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "npm run build"
   },
   "lint-staged": {
     "*.@(ts|js)": [
