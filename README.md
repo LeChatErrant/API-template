@@ -28,7 +28,6 @@ This project is fully integrated with
 - [Getting started](#getting-started)
 - [Technologies](#technologies)
 - [CLI](#cli)
-- [How to reuse this template](#how-to-reuse-this-template)
 - [Work in progress](#work-in-progress)
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
