@@ -24,6 +24,7 @@ This project is fully integrated with
 # Table of contents
 
 - [Documentation](#documentation)
+- [Deployment](#deployment)
 - [Getting started](#getting-started)
 - [Technologies](#technologies)
 - [CLI](#cli)
