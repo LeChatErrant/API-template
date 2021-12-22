@@ -21,10 +21,10 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 # Table of contents
 
+- [Documentation](#documentation)
 - [Getting started](#getting-started)
 - [Technologies](#technologies)
 - [CLI](#cli)
-- [Documentation](#documentation)
 - [How to reuse this template](#how-to-reuse-this-template)
 - [Work in progress](#work-in-progress)
 - [How to contribute](#how-to-contribute)
