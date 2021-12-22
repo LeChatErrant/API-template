@@ -32,6 +32,10 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# Documentation
+
+Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
+
 # Getting started
 
 1. Make sure the **[.envrc](/.envrc)** is loaded (have a look **[here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration)**)
@@ -71,10 +75,6 @@ The template comes with a **[Command-Line Interface](https://github.com/LeChatEr
 > More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/CLI)**
 
 ![CLI - Generate](.github/assets/cli-generate.gif)
-
-# Documentation
-
-Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-template/wiki)**
 
 # How to reuse this template
 
