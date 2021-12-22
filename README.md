@@ -11,13 +11,13 @@ It gives your project a clean base to start and follows development **good pract
 
 Lastly, it aims to save developers a lot of time since all **nasty configurations** are already written (typescript, eslint, jest, docker, CI, ...) and **technologies** are already chosen (language, testing framework, database, ORM, ...)
 
-![Deployment example](.github/assets/deployment.gif)
-
 This project is fully integrated with
 - **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
 - **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes along with its tooling
 
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
+
+![Template](.github/assets/template.gif)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -28,7 +28,6 @@ This project is fully integrated with
 - [Getting started](#getting-started)
 - [Technologies](#technologies)
 - [CLI](#cli)
-- [How to reuse this template](#how-to-reuse-this-template)
 - [Work in progress](#work-in-progress)
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
@@ -53,6 +52,8 @@ For a complete scalable deployment, see **[ops-template](https://github.com/LeCh
 2. Install dependencies with `npm install`
 3. Launch a local database with `npm run dev:db`
 4. Run `npm run dev`
+
+![Deployment example](.github/assets/deployment.gif)
 
 # Technologies
 
@@ -86,12 +87,6 @@ The template comes with a **[Command-Line Interface](https://github.com/LeChatEr
 > More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/CLI)**
 
 ![CLI - Generate](.github/assets/cli-generate.gif)
-
-# How to reuse this template
-
-This repository is **templated** : try using it as a base for your own projects by clicking on the **[Use this template](https://github.com/LeChatErrant/API-template/generate)**
-
-![Template](.github/assets/template.gif)
 
 # Work in progress
 
