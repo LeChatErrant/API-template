@@ -11,11 +11,15 @@ It gives your project a clean base to start and follows development **good pract
 
 Lastly, it aims to save developers a lot of time since all **nasty configurations** are already written (typescript, eslint, jest, docker, CI, ...) and **technologies** are already chosen (language, testing framework, database, ORM, ...)
 
+&nbsp;
+
 This project is fully integrated with
 - **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
 - **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes along with its tooling
 
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
+
+&nbsp;
 
 ![Template](.github/assets/template.gif)
 
