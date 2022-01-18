@@ -1,6 +1,6 @@
-import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
+import { RequestHandler } from 'express';
 
 import db from '../../appDatabase';
 
@@ -16,20 +16,24 @@ import db from '../../appDatabase';
  *   const { user } = res.locals;
  * });
  */
-const userMiddleware = handler(async (req, res, next) => {
+const userMiddleware: RequestHandler = async (req, res, next) => {
   const { userId } = req.params;
   if (!userId) {
     next(createError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId"'));
     return;
   }
 
-  const user = await db.user.findUnique({ where: { id: userId } });
-  if (!user) {
-    next(createError(httpStatus.NOT_FOUND, `User ${userId} not found`));
-  } else {
-    res.locals.user = user;
-    next();
+  try {
+    const user = await db.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      next(createError(httpStatus.NOT_FOUND, `User ${userId} not found`));
+    } else {
+      res.locals.user = user;
+      next();
+    }
+  } catch (err) {
+    next(err);
   }
-});
+};
 
 export default userMiddleware;

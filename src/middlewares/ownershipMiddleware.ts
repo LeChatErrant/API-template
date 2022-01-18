@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import { Role } from '@prisma/client';
 
 import authMiddleware from './authMiddleware';
+import combineMiddlewares from '../utils/combineMiddlewares';
 
 /**
  * This middleware scopes an entity to a specific user
@@ -36,4 +37,4 @@ const ownershipMiddleware: RequestHandler = (req, res, next) => {
   }
 };
 
-export default [authMiddleware, ownershipMiddleware];
+export default combineMiddlewares(authMiddleware, ownershipMiddleware);

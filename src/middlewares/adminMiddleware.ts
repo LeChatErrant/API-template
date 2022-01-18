@@ -3,6 +3,8 @@ import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
 import { Role } from '@prisma/client';
 
+import combineMiddlewares from '../utils/combineMiddlewares';
+
 import authMiddleware from './authMiddleware';
 
 /**
@@ -19,4 +21,4 @@ const adminMiddleware: RequestHandler = (req, res, next) => {
   }
 };
 
-export default [authMiddleware, adminMiddleware];
+export default combineMiddlewares(authMiddleware, adminMiddleware);

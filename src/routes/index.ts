@@ -1,9 +1,9 @@
-import express from 'express';
+import { AsyncRouter } from 'express-async-router';
 
 import users from './user/userRoutes';
 import posts from './post/postRoutes';
 
-const router = express.Router();
+const router = AsyncRouter();
 
 router.get('/', (req, res) => res.send('Welcome to the backend world !'));
 router.get('/ping', (req, res) => res.send('pong'));

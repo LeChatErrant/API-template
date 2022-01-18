@@ -13,7 +13,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "license": "ISC",
   "scripts": {
@@ -58,6 +58,7 @@
     "env-var": "^7.1.1",
     "express": "^4.17.2",
     "express-async-handler": "^1.2.0",
+    "express-async-router": "^0.1.15",
     "express-session": "^1.17.2",
     "helmet": "^5.0.1",
     "http-errors": "^2.0.0",
