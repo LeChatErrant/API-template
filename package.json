@@ -27,6 +27,7 @@
     "dev:redis": "docker run --name redis -e REDIS_PASSWORD=${REDIS_PASS} -p ${REDIS_PORT}:${REDIS_PORT} -d bitnami/redis:latest",
     "dev": "npm run db:deploy && concurrently --raw --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
     "prisma:generate": "prisma generate",
+    "db:format": "prisma:format",
     "db:migrate:help": "prisma migrate --help",
     "db:migrate": "prisma migrate dev",
     "db:migrate:draft": "prisma migrate dev --create-only",
