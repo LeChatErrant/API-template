@@ -71,6 +71,7 @@
     "winston": "^3.4.0"
   },
   "devDependencies": {
+    "@lechaterrant/templated-project-cli": "^1.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/connect-redis": "0.0.18",
     "@types/cors": "^2.8.12",
