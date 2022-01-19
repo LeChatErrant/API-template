@@ -17,7 +17,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "cli": "templated-project-cli",
+    "lantern": "lantern",
     "build": "tsc",
     "start": "npm run db:deploy && node dist",
     "test": "MODE=test && exit 0",
@@ -72,7 +72,7 @@
     "winston": "^3.4.0"
   },
   "devDependencies": {
-    "@lechaterrant/templated-project-cli": "^1.1.2",
+    "@lechaterrant/lantern": "^1.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/connect-redis": "0.0.18",
     "@types/cors": "^2.8.12",
