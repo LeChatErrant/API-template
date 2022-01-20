@@ -1,4 +1,4 @@
-name: Generate TOC section
+name: Generate Readme TOC section
 
 on:
   push:
