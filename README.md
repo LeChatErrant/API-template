@@ -34,7 +34,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 - [Getting started](#getting-started)
 - [Technologies](#technologies)
 - [CLI](#cli)
-- [Work in progress](#work-in-progress)
+- [Roadmap](#roadmap)
 - [How to contribute](#how-to-contribute)
   - [Contributors](#contributors)
 
