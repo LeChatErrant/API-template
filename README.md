@@ -48,9 +48,9 @@ Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-t
 
 API is deployed on **[Heroku](https://www.heroku.com)** and can be reached on **[api-template-prod.herokuapp.com](https://api-template-prod.herokuapp.com)**
 
-Additionally, a public **[Postman](https://www.postman.com/)** workspace is available on **[www.postman.com/LeChatErrant/workspace/api-template](https://www.postman.com/LeChatErrant/workspace/api-template)** to let you try the API
-
 For a complete production deployment, see **[ops-template](https://github.com/LeChatErrant/ops-template)**
+
+> Additionally, you can try out the APU on **[Postman](https://www.postman.com/)** at **[www.postman.com/LeChatErrant/workspace/api-template](https://www.postman.com/LeChatErrant/workspace/api-template)**
 
 # Getting started
 
