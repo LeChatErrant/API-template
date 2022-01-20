@@ -50,7 +50,7 @@ API is deployed on **[Heroku](https://www.heroku.com)** and can be reached on **
 
 For a complete production deployment, see **[ops-template](https://github.com/LeChatErrant/ops-template)**
 
-> Additionally, you can try out the APU on **[Postman](https://www.postman.com/)** at **[www.postman.com/LeChatErrant/workspace/api-template](https://www.postman.com/LeChatErrant/workspace/api-template)**
+> Additionally, you can try out the API on **[Postman](https://www.postman.com/)** at **[www.postman.com/LeChatErrant/workspace/api-template](https://www.postman.com/LeChatErrant/workspace/api-template)**
 
 # Getting started
 
@@ -94,7 +94,7 @@ The template comes with a **[Command-Line Interface](https://github.com/LeChatEr
 
 ![CLI - Generate](.github/assets/cli-generate.gif)
 
-# Work in progress
+# Roadmap
 
  - [ ] CLI to create, extend and manage API resources
  - [ ] Auto generated code documentation
