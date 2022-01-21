@@ -25,7 +25,8 @@ export class PostUpdateDto {
 export interface PostRo extends Ro {
   id: string;
   authorId: string;
-  createdAt: Date;
   title: string;
   content: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

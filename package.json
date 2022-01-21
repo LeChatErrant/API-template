@@ -2,25 +2,17 @@
   "name": "api-template",
   "version": "1.0.0",
   "description": "Modern production-ready typescript backend template",
-  "keywords": [],
   "author": {
     "name": "LeChatErrant",
     "email": "guillaume.hector@epitech.eu",
     "url": "https://github.com/LeChatErrant/"
-  },
-  "repository": {
-    "url": "https://github.com/LeChatErrant/API-template"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com"
   },
   "license": "ISC",
   "scripts": {
     "lantern": "lantern",
     "build": "tsc",
     "start": "npm run db:deploy && node dist",
-    "test": "MODE=test && exit 0",
+    "test": "MODE=local && exit 0",
     "integration": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --silent --detectOpenHandles",
     "integration:watch": "MODE=test && npm run db:deploy && jest --passWithNoTests --coverage --runInBand --watch --silent --detectOpenHandles",
     "dev:db": "docker run --name db -e POSTGRES_PASSWORD=${DB_PASS} -e POSTGRES_USER=${DB_USER} -p ${DB_PORT}:${DB_PORT} -d postgres:alpine",
@@ -28,14 +20,11 @@
     "dev": "npm run db:deploy && concurrently --raw --kill-others 'prisma generate --watch' 'ts-node-dev --respawn --cls --exit-child src'",
     "prisma:generate": "prisma generate",
     "prisma:format": "prisma format",
-    "db:migrate:help": "prisma migrate --help",
-    "db:migrate": "prisma migrate dev",
-    "db:migrate:draft": "prisma migrate dev --create-only",
-    "db:reset": "prisma migrate reset",
-    "db:deploy": "prisma migrate deploy",
-    "db:deploy:status": "prisma migrate status",
-    "db:push": "prisma db push --preview-feature",
     "db:studio": "prisma studio --port ${STUDIO_PORT}",
+    "db:push": "prisma db push",
+    "db:reset": "prisma migrate reset",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'",
     "prepare": "husky install",
