@@ -14,7 +14,7 @@ import combineMiddlewares from '../utils/combineMiddlewares';
  *  - It checks if the user is logged in
  *  - It checks if the user has the right to access the requested resources
  *     - If the user has the role USER, he can only access his own resources
- *     - If the user has the role ADMIN, he can access resources from every users
+ *     - If the user has the role ADMIN, he can access resources from every user
  *
  * @throws 400 - Bad request | If the route parameters are missing
  * @throws 401 - Unauthorized | If not logged in
@@ -24,7 +24,7 @@ import combineMiddlewares from '../utils/combineMiddlewares';
  * @example
  * router.get('/users/:userId', ownershipMiddleware, ...);
  * // You can't access this route without being logged in anymore
- * // If an user A try to call this route with the id of the user B, it'll be rejected
+ * // If a user A try to call this route with the id of the user B, it'll be rejected
  * // (unless user A is an ADMIN)
  */
 const ownershipMiddleware: RequestHandler = (req, res, next) => {

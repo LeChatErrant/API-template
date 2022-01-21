@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 
 /**
- * This middleware add the 'me' logic on API routes
+ * This middleware adds the 'me' logic on API routes
  * It enables using 'me' as userId to refer to the user currently logged in (ex: GET /users/me)
  *
  * @example

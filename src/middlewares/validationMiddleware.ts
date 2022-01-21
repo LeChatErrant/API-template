@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { ClassConstructor, plainToClass } from 'class-transformer';
+import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
 import httpStatus from 'http-status-codes';
 import createError from 'http-errors';
@@ -32,7 +32,7 @@ import handler from 'express-async-handler';
  */
 function validate<T>(type: ClassConstructor<T>): RequestHandler {
   return handler(async (req, res, next) => {
-    const parsedBody = plainToClass(type, req.body);
+    const parsedBody = plainToInstance(type, req.body);
     // eslint-disable-next-line @typescript-eslint/ban-types
     const errors = await classValidator(parsedBody as Object, { whitelist: true });
     if (errors.length !== 0) {
