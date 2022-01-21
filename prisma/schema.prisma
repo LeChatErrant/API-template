@@ -13,22 +13,28 @@ enum Role {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  username  String?
-  role      Role     @default(USER)
+  id       String  @id @default(cuid())
+  email    String  @unique
+  password String
+  username String?
+  role     Role    @default(USER)
+
+  Post Post[]
+
   createdAt DateTime @default(now())
-  Post      Post[]
+  updatedAt DateTime @updatedAt
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
+  id      String @id @default(cuid())
+  title   String
+  content String @db.Text
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
   createdAt DateTime @default(now())
-  title     String
-  content   String   @db.Text
+  updatedAt DateTime @updatedAt
 
   @@unique([authorId, title])
 }

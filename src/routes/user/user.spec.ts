@@ -52,8 +52,9 @@ function validateUser(user: any) {
   expect(user.username).toBe(baseUser.username);
   expect(user.password).toBeUndefined();
   expect(user.id).toBeDefined();
-  expect(user.createdAt).toBeDefined();
   expect(user.role).toBe(Role.USER);
+  expect(user.createdAt).toBeDefined();
+  expect(user.updatedAt).toBeDefined();
 }
 
 /*  Signup  */

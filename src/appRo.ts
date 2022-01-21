@@ -1,6 +1,6 @@
 /**
  * Basic interface representing a Response Object (RO), from which all ROs inherits
- * It may contains an error and enable API consumer to treat every responses the same way
+ * It may contain an error and enable API consumer to treat every response the same way
  */
 export interface Ro {
   error?: {

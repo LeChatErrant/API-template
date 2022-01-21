@@ -49,4 +49,5 @@ export interface UserRo extends Ro {
   username: string | null;
   role: Role;
   createdAt: Date;
+  updatedAt: Date;
 }

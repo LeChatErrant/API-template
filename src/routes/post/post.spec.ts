@@ -60,9 +60,10 @@ afterEach(async () => {
 function validatePost(post: any) {
   expect(post.id).toBeDefined();
   expect(post.authorId).toBe(user.id);
-  expect(post.createdAt).toBeDefined();
   expect(post.title).toBe(basePost.title);
   expect(post.content).toBe(basePost.content);
+  expect(post.createdAt).toBeDefined();
+  expect(post.updatedAt).toBeDefined();
 }
 
 /*  Create post */
