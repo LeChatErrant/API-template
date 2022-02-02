@@ -3,6 +3,8 @@
 ![Unit tests](https://github.com/LeChatErrant/API-template/workflows/Unit%20tests/badge.svg)
 ![Integration tests](https://github.com/LeChatErrant/API-template/workflows/Integration%20tests/badge.svg)
 
+TEST
+
 # What is it ?
 
 The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
