@@ -15,22 +15,23 @@ jobs:
           gifs = curl https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100
           echo "::set-output name=gifs::$gifs"
 
-      uses: actions/github-script@v3
-      id: select-gif
-      with:
-        gifs: ${{ steps.fetch-gifs.outputs.gifs }}
-        script: |
-          try {
-            const gifs = JSON.parse(core.getInput('gifs', { required: true }));
+      - name: Select random gif
+        uses: actions/github-script@v3
+        id: select-gif
+        with:
+          gifs: ${{ steps.fetch-gifs.outputs.gifs }}
+          script: |
+            try {
+              const gifs = JSON.parse(core.getInput('gifs', { required: true }));
           
-            const gif = gifs.data[Math.floor(Math.random() % 100)];
-            const url = gif.images.original.url
+              const gif = gifs.data[Math.floor(Math.random() % 100)];
+              const url = gif.images.original.url
                           
-            core.info(`Url : ${url}`);
-            core.setOutput('url', url);
-          } catch (err) {
-            core.setFailed(err.message);
-          }
+              core.info(`Url : ${url}`);
+              core.setOutput('url', url);
+            } catch (err) {
+              core.setFailed(err.message);
+            }
 
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v1
