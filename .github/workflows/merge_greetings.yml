@@ -19,10 +19,9 @@ jobs:
         uses: actions/github-script@v3
         id: select-gif
         with:
-          gifs: ${{ steps.fetch-gifs.outputs.gifs }}
           script: |
             try {
-              const gifs = JSON.parse(core.getInput('gifs', { required: true }));
+              const gifs = JSON.parse(${{ steps.fetch-gifs.outputs.gifs }});
           
               const gif = gifs.data[Math.floor(Math.random() % 100)];
               const url = gif.images.original.url
