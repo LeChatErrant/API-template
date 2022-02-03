@@ -22,7 +22,7 @@ jobs:
             try {
               const gifs = JSON.parse(fs.readFileSync('.gifs').toString());
           
-              const gif = gifs.data[Math.floor(Math.random() * 100)];
+              const gif = gifs.data[Math.floor(Math.random() * 99)];
               const url = gif.images.original.url
                           
               core.info(`Url : ${url}`);
@@ -31,7 +31,7 @@ jobs:
               const { data } = github.rest.issues.createComment({
                 owner,
                 repo,
-                issue_number: github.context.issue.number,
+                issue_number: context.issue.number,
                 body: '![Congratulations](${{ steps.select-gif.outputs.url }})',
               });
             } catch (err) {
