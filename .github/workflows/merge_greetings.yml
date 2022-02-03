@@ -26,13 +26,14 @@ jobs:
               const url = gif.images.original.url
                           
               core.info(`Url : ${url}`);
-              core.setOutput('url', url);
+            
+              const { owner, repo } = context.repo;
+              const { data } = github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: github.context.issue.number,
+                body: '![Congratulations](${{ steps.select-gif.outputs.url }})',
+              });
             } catch (err) {
               core.setFailed(err.message);
             }
-
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: '![Congratulations](${{ steps.select-gif.outputs.url }})'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
