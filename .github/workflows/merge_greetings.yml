@@ -12,7 +12,7 @@ jobs:
       - name: Fetch greetings gif
         id: fetch-gifs
         run: |
-          gifs = curl https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100
+          gifs=$(curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100")
           echo "::set-output name=gifs::$gifs"
 
       - name: Select random gif
