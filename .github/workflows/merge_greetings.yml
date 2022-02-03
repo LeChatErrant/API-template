@@ -21,8 +21,12 @@ jobs:
             const fs = require('fs');
             try {
               const gifs = JSON.parse(fs.readFileSync('.gifs').toString());
+              core.info(`Fetched ${gifs.data.length} gifs`);
           
-              const gif = gifs.data[Math.floor(Math.random() * 99)];
+              const randomIndex = Math.floor(Math.random() * (gifs.data.length - 1));
+              core.info(`Selected gif number ${randomIndex}`);
+
+              const gif = gifs.data[randomIndex];
               const url = gif.images.original.url
                           
               core.info(`Url : ${url}`);
