@@ -9,13 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Fetch greetings gif
-        id: fetch-gifs
+      - name: Fetch gifs
         run: curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100" > .gifs
 
-      - name: Select random gif
+      - name: Select random gif and comment issue
         uses: actions/github-script@v5
-        id: select-gif
         with:
           script: |
             const fs = require('fs');
@@ -36,7 +34,7 @@ jobs:
                 owner,
                 repo,
                 issue_number: context.issue.number,
-                body: '![Congratulations](${{ steps.select-gif.outputs.url }})',
+                body: `![Congratulations](${url})`,
               });
             } catch (err) {
               core.setFailed(err.message);
