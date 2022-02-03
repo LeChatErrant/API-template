@@ -11,17 +11,16 @@ jobs:
     steps:
       - name: Fetch greetings gif
         id: fetch-gifs
-        run: |
-          gifs=$(curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100")
-          echo "::set-output name=gifs::$gifs"
+        run: curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100" > .gifs
 
       - name: Select random gif
         uses: actions/github-script@v3
         id: select-gif
         with:
           script: |
+            const fs = require('fs');
             try {
-              const gifs = JSON.parse(${{ steps.fetch-gifs.outputs.gifs }});
+              const gifs = JSON.parse(fs.readFileSync('.gifs').toString());
           
               const gif = gifs.data[Math.floor(Math.random() % 100)];
               const url = gif.images.original.url
