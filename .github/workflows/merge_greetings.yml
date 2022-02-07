@@ -9,31 +9,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Fetch greetings gif
-        id: fetch-gifs
-        run: |
-          gifs = curl https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100
-          echo "::set-output name=gifs::$gifs"
+      - name: Fetch gifs
+        run: curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100" > .gifs
 
-      uses: actions/github-script@v3
-      id: select-gif
-      with:
-        gifs: ${{ steps.fetch-gifs.outputs.gifs }}
-        script: |
-          try {
-            const gifs = JSON.parse(core.getInput('gifs', { required: true }));
-          
-            const gif = gifs.data[Math.floor(Math.random() % 100)];
-            const url = gif.images.original.url
-                          
-            core.info(`Url : ${url}`);
-            core.setOutput('url', url);
-          } catch (err) {
-            core.setFailed(err.message);
-          }
-
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v1
+      - name: Select random gif and comment issue
+        uses: actions/github-script@v5
         with:
-          message: '![Congratulations](${{ steps.select-gif.outputs.url }})'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            try {
+              const gifs = JSON.parse(fs.readFileSync('.gifs').toString());
+              core.info(`Fetched ${gifs.data.length} gifs`);
+          
+              const randomIndex = Math.floor(Math.random() * (gifs.data.length - 1));
+              core.info(`Selected gif number ${randomIndex}`);
+
+              const gif = gifs.data[randomIndex];
+              const url = gif.images.original.url
+                          
+              core.info(`Url : ${url}`);
+            
+              const { owner, repo } = context.repo;
+              const { data } = github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: context.issue.number,
+                body: `![Congratulations](${url})`,
+              });
+            } catch (err) {
+              core.setFailed(err.message);
+            }
