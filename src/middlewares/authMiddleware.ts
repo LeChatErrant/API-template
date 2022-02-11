@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
+
+import { ApiError } from '../appErrors';
 
 /**
  * Protect the route so only logged users can access it.
@@ -13,7 +14,7 @@ const authMiddleware: RequestHandler = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    next(createError(httpStatus.UNAUTHORIZED, 'You must be logged in'));
+    next(new ApiError(httpStatus.UNAUTHORIZED, 'You must be logged in'));
   }
 };
 

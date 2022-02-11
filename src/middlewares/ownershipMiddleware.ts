@@ -1,10 +1,11 @@
 import type { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
 import { Role } from '@prisma/client';
 
-import authMiddleware from './authMiddleware';
 import combineMiddlewares from '../utils/combineMiddlewares';
+import { ApiError } from '../appErrors';
+
+import authMiddleware from './authMiddleware';
 
 /**
  * This middleware scopes an entity to a specific user
@@ -29,9 +30,9 @@ import combineMiddlewares from '../utils/combineMiddlewares';
  */
 const ownershipMiddleware: RequestHandler = (req, res, next) => {
   if (!req.params.userId) {
-    next(createError(httpStatus.BAD_REQUEST, 'A route parameter named "userId" have to be defined'));
+    next(new ApiError(httpStatus.BAD_REQUEST, 'A route parameter named "userId" have to be defined'));
   } else if (req.params.userId !== req.session.user!.id && req.session.user!.role !== Role.ADMIN) {
-    next(createError(httpStatus.FORBIDDEN, 'You are not allowed to access other users information\'s'));
+    next(new ApiError(httpStatus.FORBIDDEN, 'You are not allowed to access other users information\'s'));
   } else {
     next();
   }
