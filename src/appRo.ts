@@ -8,22 +8,3 @@ export interface Ro {
     message: string;
   };
 }
-
-/**
- * Construct a basic error RO
- *
- * @param statusCode HTTP status code
- * @param message Error message
- * @constructor
- */
-export function ErrorRo(
-  statusCode: number,
-  message: string,
-): Ro {
-  return {
-    error: {
-      statusCode,
-      message,
-    },
-  };
-}

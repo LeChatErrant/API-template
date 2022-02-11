@@ -1,8 +1,8 @@
 import handler from 'express-async-handler';
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
 
 import db from '../../appDatabase';
+import { ApiError } from '../../appErrors';
 
 /**
  * Middleware used to check if the requested post exists in database
@@ -19,13 +19,13 @@ import db from '../../appDatabase';
 const postMiddleware = handler(async (req, res, next) => {
   const { userId, postId } = req.params;
   if (!userId || !postId) {
-    next(createError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
+    next(new ApiError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
     return;
   }
 
   const post = await db.post.findFirst({ where: { id: postId, authorId: userId } });
   if (!post) {
-    next(createError(httpStatus.NOT_FOUND, `Post ${postId} of user ${userId} not found`));
+    next(new ApiError(httpStatus.NOT_FOUND, `Post ${postId} of user ${userId} not found`));
   } else {
     res.locals.post = post;
     next();

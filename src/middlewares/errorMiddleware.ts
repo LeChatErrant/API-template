@@ -1,9 +1,9 @@
 import type { ErrorRequestHandler } from 'express';
-import createError from 'http-errors';
 import httpStatus from 'http-status-codes';
 
 import logger from '../appLogger';
-import { ErrorRo } from '../appRo';
+import { Ro } from '../appRo';
+import { ApiError } from '../appErrors';
 
 /**
  * Error middleware
@@ -17,14 +17,20 @@ import { ErrorRo } from '../appRo';
 const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
   logger.error(err.message);
   // If the error is not an HTTP error, the whole object is printed through console.error
-  if (!createError.isHttpError(err)) {
+  if (!(err instanceof ApiError)) {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-  const status = err.status ?? httpStatus.INTERNAL_SERVER_ERROR;
+  const statusCode = err.statusCode ?? httpStatus.INTERNAL_SERVER_ERROR;
+  const ro: Ro = {
+    error: {
+      statusCode,
+      message: err.message,
+    },
+  };
   res
-    .status(status)
-    .send(ErrorRo(status, err.message));
+    .status(statusCode)
+    .send(ro);
 };
 
 export default errorMiddleware;

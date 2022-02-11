@@ -2,8 +2,9 @@ import type { RequestHandler } from 'express';
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
 import handler from 'express-async-handler';
+
+import { ApiError } from '../appErrors';
 
 /**
  * Validate the request body
@@ -37,7 +38,7 @@ function validate<T>(type: ClassConstructor<T>): RequestHandler {
     const errors = await classValidator(parsedBody as Object, { whitelist: true });
     if (errors.length !== 0) {
       const message = errors.join('').trimEnd();
-      next(createError(httpStatus.BAD_REQUEST, message));
+      next(new ApiError(httpStatus.BAD_REQUEST, message));
     } else {
       req.body = parsedBody;
       next();
