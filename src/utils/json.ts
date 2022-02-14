@@ -39,3 +39,13 @@ export function parseJsonWithDates(str: string) {
 
   return JSON.parse(str, handleDates);
 }
+
+/**
+ * Return a deep copy of the json passed as parameter
+ *
+ * @param json Json to copy
+ * @return Deep copy of the json
+ */
+export function deepCopy<T>(json: T): T {
+  return JSON.parse(JSON.stringify(json));
+}
