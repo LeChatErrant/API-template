@@ -22,6 +22,12 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 &nbsp;
 
+| ![Template](.github/assets/template.gif)                                                                                                                               |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| This repository is **templated**. Use it as a base for your own projects by clicking on **[Use this template](https://github.com/LeChatErrant/API-template/generate)** |
+
+&nbsp;
+
 **[API-template](https://github.com/LeChatErrant/API-template)** is fully integrated with
 - **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
 - **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes
@@ -29,11 +35,6 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
 
-&nbsp;
-
-| ![Template](.github/assets/template.gif)                                                                                                                               |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| This repository is **templated**. Use it as a base for your own projects by clicking on **[Use this template](https://github.com/LeChatErrant/API-template/generate)** |
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
