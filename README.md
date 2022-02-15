@@ -6,13 +6,13 @@
 # What is it ?
 
  - [x] **Decisions** are already made
- - [x] **Configuration** are already written
+ - [x] **Configurations** are already written
  - [x] **CI / CD** are running
  - [x] **Development** environment is configured
  - [x] **[CLI](https://github.com/LeChatErrant/lantern)** is adding new routes
  - [x] **[Frontend](https://github.com/LeChatErrant/front-template)** is available
  - [x] **[Deployment](https://github.com/LeChatErrant/ops-template)** is ready
- - [x] **Focus on what matter : *code***
+ - [x] **Focus on what matters : *code***
 
 The goal of this project is to provide a **typesafe**, **production ready** modern web API template along with a full **development environment**.
 
