@@ -7,9 +7,9 @@
 
  - [x] **Decisions** are already made
  - [x] **Configurations** are already written
- - [x] **CI / CD** are running
+ - [x] **CI / CD** pipelines are running
  - [x] **Development** environment is configured
- - [x] **[CLI](https://github.com/LeChatErrant/lantern)** is adding new routes
+ - [x] **[CLI](https://github.com/LeChatErrant/lantern)** adds new routes
  - [x] **[Frontend](https://github.com/LeChatErrant/front-template)** is available
  - [x] **[Deployment](https://github.com/LeChatErrant/ops-template)** is ready
  - [x] **Focus on what matters : *code***
