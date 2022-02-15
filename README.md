@@ -5,7 +5,16 @@
 
 # What is it ?
 
-The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
+ - [x] **Decisions** are already made
+ - [x] **Configuration** are already written
+ - [x] **CI / CD** are running
+ - [x] **Development** environment is configured
+ - [x] **[CLI](https://github.com/LeChatErrant/lantern)** is adding new routes
+ - [x] **[Frontend](https://github.com/LeChatErrant/front-template)** is available
+ - [x] **[Deployment](https://github.com/LeChatErrant/ops-template)** is ready
+ - [x] **Focus on what matter : *code***
+
+The goal of this project is to provide a **typesafe**, **production ready** modern web API template along with a full **development environment**.
 
 It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintainability** and **extensibility**
 
@@ -16,7 +25,7 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 **[API-template](https://github.com/LeChatErrant/API-template)** is fully integrated with
 - **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
 - **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes
-- **[lantern](https://github.com/LeChatErrant/lantern)**, a CLI to assist backend development and write boilerplate code for you
+- **[lantern](https://github.com/LeChatErrant/lantern)**, a CLI to assist backend development
 
 > Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
 
