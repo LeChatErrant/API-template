@@ -14,6 +14,8 @@
  - [x] **[Deployment](https://github.com/LeChatErrant/ops-template)** is ready
  - [x] **Focus on what matters : *code***
 
+&nbsp;
+
 The goal of this project is to provide a **typesafe**, **production ready** modern web API template along with a full **development environment**.
 
 It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintainability** and **extensibility**
