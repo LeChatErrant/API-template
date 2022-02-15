@@ -28,8 +28,6 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | This repository is **templated**. Use it as a base for your own projects by clicking on **[Use this template](https://github.com/LeChatErrant/API-template/generate)** |
 
-&nbsp;
-
 **[API-template](https://github.com/LeChatErrant/API-template)** is fully integrated with
 - **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
 - **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes
