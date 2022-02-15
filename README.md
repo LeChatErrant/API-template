@@ -56,7 +56,7 @@ Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-t
 
 # Deployment
 
-API is deployed on **[Heroku](https://www.heroku.com)** and can be reached on **[api-template-prod.herokuapp.com](https://api-template-prod.herokuapp.com)**
+API is automatically deployed on **[Heroku](https://www.heroku.com)** and can be reached on **[api-template-prod.herokuapp.com](https://api-template-prod.herokuapp.com)**
 
 For a complete production deployment, see **[ops-template](https://github.com/LeChatErrant/ops-template)**
 
