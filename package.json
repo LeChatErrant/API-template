@@ -46,7 +46,7 @@
     "connect-redis": "^6.1.1",
     "cors": "^2.8.5",
     "env-var": "^7.1.1",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "express-async-router": "^0.1.15",
     "express-session": "^1.17.2",
