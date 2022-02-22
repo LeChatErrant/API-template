@@ -12,10 +12,19 @@ import { PostCreateDto, PostUpdateDto } from './postTypes';
 const router = AsyncRouter();
 
 router.get(
+  '/posts',
+  authMiddleware,
+  async (req, res) => {
+    const posts = await controllers.listPosts();
+    res.send(posts);
+  },
+);
+
+router.get(
   '/users/:userId/posts',
   authMiddleware,
   async (req, res) => {
-    const posts = await controllers.listPosts(req.params.userId);
+    const posts = await controllers.listPostsByUser(req.params.userId);
     res.send(posts);
   },
 );
