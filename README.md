@@ -5,7 +5,18 @@
 
 # What is it ?
 
-The purpose of this template is to provide a **typesafe**, **production ready** web API, and a full **development environment** with the best tooling possible
+ - [x] **Decisions** are already made
+ - [x] **Configurations** are already written
+ - [x] **CI / CD** pipelines are running
+ - [x] **Development** environment is configured
+ - [x] **[CLI](https://github.com/LeChatErrant/lantern)** adds new routes
+ - [x] **[Frontend](https://github.com/LeChatErrant/front-template)** is available
+ - [x] **[Deployment](https://github.com/LeChatErrant/ops-template)** is ready
+ - [x] **Focus on what matters : *code***
+
+&nbsp;
+
+This project provides a **typesafe**, **production ready** modern web API template along with a full **development environment**.
 
 It gives your project a clean base to start and follows development **good practices**, essentially focusing on **maintainability** and **extensibility**
 
@@ -13,18 +24,17 @@ Lastly, it aims to save developers a lot of time since all **nasty configuration
 
 &nbsp;
 
-**[API-template](https://github.com/LeChatErrant/API-template)** is fully integrated with
-- **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
-- **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes
-- **[lantern](https://github.com/LeChatErrant/lantern)**, a CLI to assist backend development and write boilerplate code for you
-
-> Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
-
-&nbsp;
-
 | ![Template](.github/assets/template.gif)                                                                                                                               |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | This repository is **templated**. Use it as a base for your own projects by clicking on **[Use this template](https://github.com/LeChatErrant/API-template/generate)** |
+
+**[API-template](https://github.com/LeChatErrant/API-template)** is fully integrated with
+- **[front-template](https://github.com/LeChatErrant/front-template)**, a modern typescript frontend stack
+- **[ops-template](https://github.com/LeChatErrant/ops-template)**, a complete scalable infrastructure on Kubernetes
+- **[lantern](https://github.com/LeChatErrant/lantern)**, a CLI to assist backend development
+
+> Don't hesitate to share your improvements or to give feedback on Discord **(LeChatErrant#6074)** :wink:
+
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -47,11 +57,11 @@ Documentation can be found in the **[wiki](https://github.com/LeChatErrant/API-t
 
 # Deployment
 
-API is deployed on **[Heroku](https://www.heroku.com)** and can be reached on **[api-template-prod.herokuapp.com](https://api-template-prod.herokuapp.com)**
+API is automatically deployed on **[Heroku](https://www.heroku.com)** and can be reached on **[api-template-prod.herokuapp.com](https://api-template-prod.herokuapp.com)**
 
 For a complete production deployment, see **[ops-template](https://github.com/LeChatErrant/ops-template)**
 
-> Additionally, you can try out the API on **[Postman](https://www.postman.com/)** at **[www.postman.com/LeChatErrant/workspace/api-template](https://www.postman.com/LeChatErrant/workspace/api-template)**
+> Additionally, you can try out the API **[here, on Postman](https://www.postman.com/LeChatErrant/workspace/api-template)**
 
 # Getting started
 
