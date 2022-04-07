@@ -1,13 +1,14 @@
 import winston from 'winston';
 
 import { config, MODES } from './appConfig';
+import { beautifyJson } from './utils/json';
 
 const customFormat = winston.format.printf((args) => {
   const { timestamp, level, message } = args;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   const more: Array<any> | undefined = args[Symbol.for('splat') as unknown as string];
   const moreMsg = more
-    ? more.map((msg) => (msg instanceof Object ? JSON.stringify(msg, null, 2) : msg.toString()))
+    ? more.map((msg) => (msg instanceof Object ? beautifyJson(msg) : msg.toString()))
     : [];
   return `${timestamp} | ${level}: ${message} ${moreMsg.join(' ')}`;
 });

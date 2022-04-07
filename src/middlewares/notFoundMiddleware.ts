@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
+
+import { ApiError } from '../appErrors';
 
 /**
  * Middleware always throwing a 404 error
@@ -9,6 +10,6 @@ import createError from 'http-errors';
  *
  * @throws 404 - Not found
  */
-const notFoundMiddleware: RequestHandler = (req, res, next) => next(createError(httpStatus.NOT_FOUND, `${req.url} not found`));
+const notFoundMiddleware: RequestHandler = (req, res, next) => next(new ApiError(httpStatus.NOT_FOUND, `${req.url} not found`));
 
 export default notFoundMiddleware;

@@ -1,18 +1,25 @@
 import httpStatus from 'http-status-codes';
-import createError from 'http-errors';
 import { Post } from '@prisma/client';
 
 import db from '../../appDatabase';
+import { ApiError } from '../../appErrors';
 
 import type { PostCreateDto, PostUpdateDto } from './postTypes';
 import { buildPostRo } from './postHelpers';
 
-export async function listPosts(authorId: string) {
+export async function listPosts() {
+  // Todo: pagination
+  const posts = await db.post.findMany({ orderBy: { createdAt: 'desc' } });
+  return posts.map((post) => buildPostRo(post));
+}
+
+export async function listPostsByUser(authorId: string) {
   const posts = await db.post.findMany({ where: { authorId },
     orderBy: { createdAt: 'desc' },
   });
   return posts.map((post) => buildPostRo(post));
 }
+
 
 export async function createNewPost(authorId: string, payload: PostCreateDto) {
   const alreadyExists = !!await db.post.findUnique({
@@ -23,7 +30,7 @@ export async function createNewPost(authorId: string, payload: PostCreateDto) {
     },
   });
   if (alreadyExists) {
-    throw createError(httpStatus.CONFLICT, `User ${authorId} already has a post named ${payload.title}`);
+    throw new ApiError(httpStatus.CONFLICT, `User ${authorId} already has a post named ${payload.title}`);
   }
 
   const post = await db.post.create({

@@ -109,14 +109,14 @@ test('Create post - ownership', async () => {
   await app.createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
 });
 
-/*  List posts  */
+/*  List users posts  */
 
-test('List posts - auth', async () => {
+test('List user posts - auth', async () => {
   await app.signout();
   await app.listPosts('me', httpStatus.UNAUTHORIZED);
 });
 
-test('List posts - me + ordering', async () => {
+test('List user posts - me + ordering', async () => {
   let posts = await app.listPosts('me');
   expect(posts).toHaveLength(0);
 
@@ -140,7 +140,7 @@ test('List posts - me + ordering', async () => {
   expect(posts[0].title).toBe('last title');
 });
 
-test('List posts - other user', async () => {
+test('List user posts - other user', async () => {
   await app.signin(otherUser);
   await app.createPost('me', basePost);
   await app.createPost('me', { ...basePost, title: 'other title' });
