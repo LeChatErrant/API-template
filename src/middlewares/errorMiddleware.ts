@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import logger from '../appLogger';
 import { Ro } from '../appRo';
@@ -21,7 +21,7 @@ const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
     // eslint-disable-next-line no-console
     console.error(err);
   }
-  const statusCode = err.statusCode ?? httpStatus.INTERNAL_SERVER_ERROR;
+  const statusCode = err.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR;
   const ro: Ro = {
     error: {
       statusCode,

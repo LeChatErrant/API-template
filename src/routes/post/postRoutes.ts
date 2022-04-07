@@ -1,5 +1,5 @@
 import { AsyncRouter } from 'express-async-router';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
 import authMiddleware from '../../middlewares/authMiddleware';
@@ -35,7 +35,7 @@ router.post(
   ownershipMiddleware,
   async (req, res) => {
     const post = await controllers.createNewPost(req.params.userId, req.body);
-    res.status(httpStatus.CREATED).send(post);
+    res.status(StatusCodes.CREATED).send(post);
   },
 );
 
@@ -66,7 +66,7 @@ router.delete(
   postMiddleware,
   async (req, res) => {
     await controllers.deletePost(res.locals.post);
-    res.sendStatus(httpStatus.NO_CONTENT);
+    res.sendStatus(StatusCodes.NO_CONTENT);
   },
 );
 

@@ -1,6 +1,6 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Role } from '@prisma/client';
 
 import Requester from '../../appRequester';
@@ -73,7 +73,7 @@ test('Signup - user already exists', async () => {
   const user = await app.signup(baseUser);
   validateUser(user);
 
-  await app.signup(baseUser, httpStatus.CONFLICT);
+  await app.signup(baseUser, StatusCodes.CONFLICT);
 });
 
 test('Signup - username can be omitted', async () => {
@@ -87,27 +87,27 @@ test('Signup - username can be omitted', async () => {
 });
 
 test('Signup - missing parameter', async () => {
-  await app.signup({}, httpStatus.BAD_REQUEST);
+  await app.signup({}, StatusCodes.BAD_REQUEST);
 });
 
 test('Signup - wrong email format', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.email = '';
-  await app.signup(falseUser, httpStatus.BAD_REQUEST);
+  await app.signup(falseUser, StatusCodes.BAD_REQUEST);
 
   falseUser.email = 'wrong email';
-  await app.signup(falseUser, httpStatus.BAD_REQUEST);
+  await app.signup(falseUser, StatusCodes.BAD_REQUEST);
 
   falseUser.email = 'the@fuck@is@this';
-  await app.signup(falseUser, httpStatus.BAD_REQUEST);
+  await app.signup(falseUser, StatusCodes.BAD_REQUEST);
 });
 
 test('Signup - password length 8 minimum', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.password = '1234567';
-  await app.signup(falseUser, httpStatus.BAD_REQUEST);
+  await app.signup(falseUser, StatusCodes.BAD_REQUEST);
 
   falseUser.password = '12345678';
   await app.signup(falseUser);
@@ -117,7 +117,7 @@ test('Signup - password length 64 maximum', async () => {
   const falseUser = { ...baseUser };
 
   falseUser.password = 'a'.repeat(65);
-  await app.signup(falseUser, httpStatus.BAD_REQUEST);
+  await app.signup(falseUser, StatusCodes.BAD_REQUEST);
 
   falseUser.password = 'a'.repeat(64);
   await app.signup(falseUser);
@@ -150,18 +150,18 @@ test('Signin - consecutive', async () => {
 });
 
 test('Signin - missing parameter', async () => {
-  await app.signin({}, httpStatus.BAD_REQUEST);
+  await app.signin({}, StatusCodes.BAD_REQUEST);
 });
 
 test('Signin - wrong email format', async () => {
   await app.signin({
     ...baseUser,
     email: 'the@fuck@is@this',
-  }, httpStatus.BAD_REQUEST);
+  }, StatusCodes.BAD_REQUEST);
 });
 
 test('Signin - unknown account', async () => {
-  await app.signin(baseUser, httpStatus.UNAUTHORIZED);
+  await app.signin(baseUser, StatusCodes.UNAUTHORIZED);
 });
 
 test('Signin - wrong email', async () => {
@@ -169,7 +169,7 @@ test('Signin - wrong email', async () => {
   await app.signin({
     ...baseUser,
     email: 'crack.me@something.fr',
-  }, httpStatus.UNAUTHORIZED);
+  }, StatusCodes.UNAUTHORIZED);
 });
 
 test('Signin - wrong password', async () => {
@@ -177,7 +177,7 @@ test('Signin - wrong password', async () => {
   await app.signin({
     ...baseUser,
     password: 'crack me',
-  }, httpStatus.UNAUTHORIZED);
+  }, StatusCodes.UNAUTHORIZED);
 });
 
 test('Signin - hiding password length informations', async () => {
@@ -185,11 +185,11 @@ test('Signin - hiding password length informations', async () => {
   await app.signin({
     ...baseUser,
     password: 'short',
-  }, httpStatus.UNAUTHORIZED);
+  }, StatusCodes.UNAUTHORIZED);
   await app.signin({
     ...baseUser,
     password: 'long'.repeat(50),
-  }, httpStatus.UNAUTHORIZED);
+  }, StatusCodes.UNAUTHORIZED);
 });
 
 test('Signin - admin', async () => {
@@ -208,23 +208,23 @@ test('Signout', async () => {
   await app.getUser('me');
 
   await app.signout();
-  await app.getUser('me', httpStatus.UNAUTHORIZED);
+  await app.getUser('me', StatusCodes.UNAUTHORIZED);
 });
 
 test('Signout - Not logged in', async () => {
-  await app.signout(httpStatus.UNAUTHORIZED);
+  await app.signout(StatusCodes.UNAUTHORIZED);
 });
 
 /*  List users  */
 
 test('List users - auth', async () => {
-  await app.listUsers(httpStatus.UNAUTHORIZED);
+  await app.listUsers(StatusCodes.UNAUTHORIZED);
 });
 
 test('List users - forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
-  await app.listUsers(httpStatus.FORBIDDEN);
+  await app.listUsers(StatusCodes.FORBIDDEN);
 });
 
 test.todo('List users - empty');
@@ -235,7 +235,7 @@ test.todo('List users - pagination');
 
 test('Get user - auth', async () => {
   const { id } = await app.signup(baseUser);
-  await app.getUser(id, httpStatus.UNAUTHORIZED);
+  await app.getUser(id, StatusCodes.UNAUTHORIZED);
 });
 
 test('Get user', async () => {
@@ -257,7 +257,7 @@ test('Get user - me', async () => {
 test('Get user - access others forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
-  await app.getUser('otherUserId', httpStatus.FORBIDDEN);
+  await app.getUser('otherUserId', StatusCodes.FORBIDDEN);
 });
 
 test('Get user - admin', async () => {
@@ -275,14 +275,14 @@ test('Get user - admin', async () => {
   const user = await app.getUser(userId);
   validateUser(user);
 
-  await app.getUser('unknownUserId', httpStatus.NOT_FOUND);
+  await app.getUser('unknownUserId', StatusCodes.NOT_FOUND);
 });
 
 /*  Update user */
 
 test('Update user - auth', async () => {
   const { id } = await app.signup(baseUser);
-  await app.updateUser(id, { username: 'LeChatErrant' }, httpStatus.UNAUTHORIZED);
+  await app.updateUser(id, { username: 'LeChatErrant' }, StatusCodes.UNAUTHORIZED);
 });
 
 test('Update user - username', async () => {
@@ -304,7 +304,7 @@ test('Update user - email', async () => {
   user.email = baseUser.email;
   validateUser(user);
 
-  await app.updateUser(id, { email: 'a.nice.api.template' }, httpStatus.BAD_REQUEST);
+  await app.updateUser(id, { email: 'a.nice.api.template' }, StatusCodes.BAD_REQUEST);
 });
 
 test('Update user - password', async () => {
@@ -313,11 +313,11 @@ test('Update user - password', async () => {
 
   const user = await app.updateUser(id, { password: 'new password' });
   validateUser(user);
-  await app.signin(baseUser, httpStatus.UNAUTHORIZED);
+  await app.signin(baseUser, StatusCodes.UNAUTHORIZED);
   await app.signin({ ...baseUser, password: 'new password' });
 
-  await app.updateUser(id, { password: 'short' }, httpStatus.BAD_REQUEST);
-  await app.updateUser(id, { password: 'long'.repeat(50) }, httpStatus.BAD_REQUEST);
+  await app.updateUser(id, { password: 'short' }, StatusCodes.BAD_REQUEST);
+  await app.updateUser(id, { password: 'long'.repeat(50) }, StatusCodes.BAD_REQUEST);
 });
 
 test('Update user - me', async () => {
@@ -341,7 +341,7 @@ test('Update user - multiple fields', async () => {
   });
   expect(user.username).toBe('LeChatErrant');
   expect(user.email).toBe('a.new@email.com');
-  await app.signin(baseUser, httpStatus.UNAUTHORIZED);
+  await app.signin(baseUser, StatusCodes.UNAUTHORIZED);
   await app.signin({ email: 'a.new@email.com', password: 'new password' });
 });
 
@@ -357,7 +357,7 @@ test('Update user - access others forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
 
-  await app.updateUser('otherUserId', { password: 'YOU HAVE BEEN HACKED' }, httpStatus.FORBIDDEN);
+  await app.updateUser('otherUserId', { password: 'YOU HAVE BEEN HACKED' }, StatusCodes.FORBIDDEN);
 });
 
 test('Update user - admin', async () => {
@@ -365,7 +365,7 @@ test('Update user - admin', async () => {
   const { id } = await app.signin(adminUser);
 
   await app.updateUser(id, { password: 'new password' });
-  await app.signin(adminUser, httpStatus.UNAUTHORIZED);
+  await app.signin(adminUser, StatusCodes.UNAUTHORIZED);
   await app.signin({ ...adminUser, password: 'new password' });
 
   const admin = await app.updateUser('me', { username: 'root' });
@@ -375,14 +375,14 @@ test('Update user - admin', async () => {
   const { username } = await app.updateUser(userId, { username: 'I have all rights' });
   expect(username).toBe('I have all rights');
 
-  await app.updateUser('unknownUserId', {}, httpStatus.NOT_FOUND);
+  await app.updateUser('unknownUserId', {}, StatusCodes.NOT_FOUND);
 });
 
 /*  Delete user */
 
 test('Delete user - auth', async () => {
   const { id } = await app.signup(baseUser);
-  await app.deleteUser(id, httpStatus.UNAUTHORIZED);
+  await app.deleteUser(id, StatusCodes.UNAUTHORIZED);
 
   const users = await db.user.findMany();
   expect(users).toHaveLength(1);
@@ -410,7 +410,7 @@ test('Delete user - access others forbidden unless admin', async () => {
   await app.signup(baseUser);
   await app.signin(baseUser);
 
-  await app.deleteUser('otherUserId', httpStatus.FORBIDDEN);
+  await app.deleteUser('otherUserId', StatusCodes.FORBIDDEN);
   const users = await db.user.findMany();
   expect(users).toHaveLength(1);
 });
@@ -424,7 +424,7 @@ test('Delete user - admin', async () => {
   await app.deleteUser(user.id);
   expect(await db.user.findMany()).toHaveLength(1);
 
-  await app.deleteUser('unknownUserId', httpStatus.NOT_FOUND);
+  await app.deleteUser('unknownUserId', StatusCodes.NOT_FOUND);
   expect(await db.user.findMany()).toHaveLength(1);
 
   await app.deleteUser(admin.id);

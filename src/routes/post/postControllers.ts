@@ -1,4 +1,4 @@
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Post } from '@prisma/client';
 
 import db from '../../appDatabase';
@@ -30,7 +30,7 @@ export async function createNewPost(authorId: string, payload: PostCreateDto) {
     },
   });
   if (alreadyExists) {
-    throw new ApiError(httpStatus.CONFLICT, `User ${authorId} already has a post named ${payload.title}`);
+    throw new ApiError(StatusCodes.CONFLICT, `User ${authorId} already has a post named ${payload.title}`);
   }
 
   const post = await db.post.create({

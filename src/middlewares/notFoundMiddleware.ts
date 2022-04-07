@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '../appErrors';
 
@@ -10,6 +10,6 @@ import { ApiError } from '../appErrors';
  *
  * @throws 404 - Not found
  */
-const notFoundMiddleware: RequestHandler = (req, res, next) => next(new ApiError(httpStatus.NOT_FOUND, `${req.url} not found`));
+const notFoundMiddleware: RequestHandler = (req, res, next) => next(new ApiError(StatusCodes.NOT_FOUND, `${req.url} not found`));
 
 export default notFoundMiddleware;

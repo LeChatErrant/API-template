@@ -1,5 +1,5 @@
 import handler from 'express-async-handler';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import db from '../../appDatabase';
 import { ApiError } from '../../appErrors';
@@ -19,13 +19,13 @@ import { ApiError } from '../../appErrors';
 const postMiddleware = handler(async (req, res, next) => {
   const { userId, postId } = req.params;
   if (!userId || !postId) {
-    next(new ApiError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
+    next(new ApiError(StatusCodes.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
     return;
   }
 
   const post = await db.post.findFirst({ where: { id: postId, authorId: userId } });
   if (!post) {
-    next(new ApiError(httpStatus.NOT_FOUND, `Post ${postId} of user ${userId} not found`));
+    next(new ApiError(StatusCodes.NOT_FOUND, `Post ${postId} of user ${userId} not found`));
   } else {
     res.locals.post = post;
     next();

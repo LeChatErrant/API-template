@@ -1,4 +1,4 @@
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { RequestHandler } from 'express';
 
 import db from '../../appDatabase';
@@ -19,14 +19,14 @@ import { ApiError } from '../../appErrors';
 const userMiddleware: RequestHandler = async (req, res, next) => {
   const { userId } = req.params;
   if (!userId) {
-    next(new ApiError(httpStatus.BAD_REQUEST, 'Missing route parameters "userId"'));
+    next(new ApiError(StatusCodes.BAD_REQUEST, 'Missing route parameters "userId"'));
     return;
   }
 
   try {
     const user = await db.user.findUnique({ where: { id: userId } });
     if (!user) {
-      next(new ApiError(httpStatus.NOT_FOUND, `User ${userId} not found`));
+      next(new ApiError(StatusCodes.NOT_FOUND, `User ${userId} not found`));
     } else {
       res.locals.user = user;
       next();

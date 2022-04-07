@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Role } from '@prisma/client';
 
 import combineMiddlewares from '../utils/combineMiddlewares';
@@ -17,7 +17,7 @@ const adminMiddleware: RequestHandler = (req, res, next) => {
   if (req.session.user!.role === Role.ADMIN) {
     next();
   } else {
-    next(new ApiError(httpStatus.FORBIDDEN, 'You must be admin to perform this operation'));
+    next(new ApiError(StatusCodes.FORBIDDEN, 'You must be admin to perform this operation'));
   }
 };
 

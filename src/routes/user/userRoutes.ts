@@ -1,5 +1,5 @@
 import { AsyncRouter } from 'express-async-router';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import authMiddleware from '../../middlewares/authMiddleware';
 import adminMiddleware from '../../middlewares/adminMiddleware';
@@ -26,7 +26,7 @@ router.post(
   validate(UserSignupDto),
   async (req, res) => {
     const user = await controllers.signup(req.body);
-    res.status(httpStatus.CREATED).send(user);
+    res.status(StatusCodes.CREATED).send(user);
   },
 );
 
@@ -56,7 +56,7 @@ router.post(
         }
       });
     });
-    res.sendStatus(httpStatus.NO_CONTENT);
+    res.sendStatus(StatusCodes.NO_CONTENT);
   },
 );
 
@@ -87,7 +87,7 @@ router.delete(
   userMiddleware,
   async (req, res) => {
     await controllers.deleteUser(res.locals.user);
-    res.sendStatus(httpStatus.NO_CONTENT);
+    res.sendStatus(StatusCodes.NO_CONTENT);
   },
 );
 

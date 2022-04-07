@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '../appErrors';
 
@@ -14,7 +14,7 @@ const authMiddleware: RequestHandler = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-    next(new ApiError(httpStatus.UNAUTHORIZED, 'You must be logged in'));
+    next(new ApiError(StatusCodes.UNAUTHORIZED, 'You must be logged in'));
   }
 };
 

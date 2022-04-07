@@ -1,6 +1,6 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import Requester from '../../appRequester';
 import db from '../../appDatabase';
@@ -70,7 +70,7 @@ function validatePost(post: any) {
 
 test('Create post - auth', async () => {
   await app.signout();
-  await app.createPost('me', basePost, httpStatus.UNAUTHORIZED);
+  await app.createPost('me', basePost, StatusCodes.UNAUTHORIZED);
 });
 
 test('Create post', async () => {
@@ -80,7 +80,7 @@ test('Create post', async () => {
 
 test('Create post - Title already exist', async () => {
   await app.createPost('me', basePost);
-  await app.createPost('me', basePost, httpStatus.CONFLICT);
+  await app.createPost('me', basePost, StatusCodes.CONFLICT);
 });
 
 test('Create post - Same title, different user', async () => {
@@ -96,7 +96,7 @@ test('Create post - Title max length (50)', async () => {
   await app.createPost('me', {
     ...basePost,
     title: 'a'.repeat(51),
-  }, httpStatus.BAD_REQUEST);
+  }, StatusCodes.BAD_REQUEST);
 
   const post = await app.createPost('me', {
     ...basePost,
@@ -106,14 +106,14 @@ test('Create post - Title max length (50)', async () => {
 });
 
 test('Create post - ownership', async () => {
-  await app.createPost(otherUser.id, basePost, httpStatus.FORBIDDEN);
+  await app.createPost(otherUser.id, basePost, StatusCodes.FORBIDDEN);
 });
 
 /*  List users posts  */
 
 test('List user posts - auth', async () => {
   await app.signout();
-  await app.listPosts('me', httpStatus.UNAUTHORIZED);
+  await app.listPosts('me', StatusCodes.UNAUTHORIZED);
 });
 
 test('List user posts - me + ordering', async () => {
@@ -164,7 +164,7 @@ test('Get post - auth', async () => {
   const { id } = await app.createPost(user.id, basePost);
 
   await app.signout();
-  await app.getPost(user.id, id, httpStatus.UNAUTHORIZED);
+  await app.getPost(user.id, id, StatusCodes.UNAUTHORIZED);
 });
 
 test('Get post', async () => {
@@ -183,16 +183,16 @@ test('Get post - other user', async () => {
 
 test('Get post - wrong user', async () => {
   const { id } = await app.createPost(user.id, basePost);
-  await app.getPost(otherUser.id, id, httpStatus.NOT_FOUND);
+  await app.getPost(otherUser.id, id, StatusCodes.NOT_FOUND);
 });
 
 test('Get post - unknown user', async () => {
   const { id } = await app.createPost(user.id, basePost);
-  await app.getPost('unknown', id, httpStatus.NOT_FOUND);
+  await app.getPost('unknown', id, StatusCodes.NOT_FOUND);
 });
 
 test('Get post - unknown post', async () => {
-  await app.getPost('me', 'unknown', httpStatus.NOT_FOUND);
+  await app.getPost('me', 'unknown', StatusCodes.NOT_FOUND);
 });
 
 /*  Update post */
@@ -229,17 +229,17 @@ test('Update post - ownership', async () => {
   const { id } = await app.createPost('me', basePost);
 
   await app.signin(otherUser);
-  await app.updatePost(user.id, id, { title: '' }, httpStatus.FORBIDDEN);
+  await app.updatePost(user.id, id, { title: '' }, StatusCodes.FORBIDDEN);
 });
 
 test('Update post - Title max length (50)', async () => {
   const { id } = await app.createPost('me', basePost);
   await app.updatePost('me', id, { title: 'a'.repeat(50) });
-  await app.updatePost('me', id, { title: 'a'.repeat(51) }, httpStatus.BAD_REQUEST);
+  await app.updatePost('me', id, { title: 'a'.repeat(51) }, StatusCodes.BAD_REQUEST);
 });
 
 test('Update post - unknown post', async () => {
-  await app.updatePost('me', 'unknown', {}, httpStatus.NOT_FOUND);
+  await app.updatePost('me', 'unknown', {}, StatusCodes.NOT_FOUND);
 });
 
 /*  Delete posts  */
@@ -248,14 +248,14 @@ test('Delete post - auth', async () => {
   const { id } = await app.createPost('me', basePost);
   await app.signout();
 
-  await app.deletePost('me', id, httpStatus.UNAUTHORIZED);
+  await app.deletePost('me', id, StatusCodes.UNAUTHORIZED);
 });
 
 test('Delete post', async () => {
   const { id } = await app.createPost('me', basePost);
 
   await app.deletePost('me', id);
-  await app.getPost('me', id, httpStatus.NOT_FOUND);
+  await app.getPost('me', id, StatusCodes.NOT_FOUND);
   expect(await app.listPosts('me')).toHaveLength(0);
 });
 
@@ -263,16 +263,16 @@ test('Delete post - multiple times', async () => {
   const { id } = await app.createPost('me', basePost);
 
   await app.deletePost('me', id);
-  await app.deletePost('me', id, httpStatus.NOT_FOUND);
+  await app.deletePost('me', id, StatusCodes.NOT_FOUND);
 });
 
 test('Delete post - unknown post', async () => {
-  await app.deletePost('me', 'unknown', httpStatus.NOT_FOUND);
+  await app.deletePost('me', 'unknown', StatusCodes.NOT_FOUND);
 });
 
 test('Delete post - ownership', async () => {
   const { id } = await app.createPost('me', basePost);
 
   await app.signin(otherUser);
-  await app.deletePost(user.id, id, httpStatus.FORBIDDEN);
+  await app.deletePost(user.id, id, StatusCodes.FORBIDDEN);
 });

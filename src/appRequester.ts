@@ -2,7 +2,7 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
 import supertest from 'supertest';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import app from './app';
 
@@ -34,7 +34,7 @@ export default class Requester {
     this.request = supertest.agent(app);
   }
 
-  async signup(user: any, statusCodeExpected = httpStatus.CREATED) {
+  async signup(user: any, statusCodeExpected = StatusCodes.CREATED) {
     const { body } = await this.request
       .post('/users/signup')
       .send(user)
@@ -43,7 +43,7 @@ export default class Requester {
     return body;
   }
 
-  async signin(user: any, statusCodeExpected = httpStatus.OK) {
+  async signin(user: any, statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .post('/users/signin')
       .send(user)
@@ -52,13 +52,13 @@ export default class Requester {
     return body;
   }
 
-  async signout(statusCodeExpected = httpStatus.NO_CONTENT) {
+  async signout(statusCodeExpected = StatusCodes.NO_CONTENT) {
     await this.request
       .post('/users/signout')
       .expect(statusCodeExpected);
   }
 
-  async listUsers(statusCodeExpected = httpStatus.OK) {
+  async listUsers(statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .get('/users')
       .expect(statusCodeExpected);
@@ -66,7 +66,7 @@ export default class Requester {
     return body;
   }
 
-  async getUser(userId: string, statusCodeExpected = httpStatus.OK) {
+  async getUser(userId: string, statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .get(`/users/${userId}`)
       .expect(statusCodeExpected);
@@ -74,7 +74,7 @@ export default class Requester {
     return body;
   }
 
-  async updateUser(userId: string, payload: any, statusCodeExpected = httpStatus.OK) {
+  async updateUser(userId: string, payload: any, statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .patch(`/users/${userId}`)
       .send(payload)
@@ -83,13 +83,13 @@ export default class Requester {
     return body;
   }
 
-  async deleteUser(userId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
+  async deleteUser(userId: string, statusCodeExpected = StatusCodes.NO_CONTENT) {
     await this.request
       .delete(`/users/${userId}`)
       .expect(statusCodeExpected);
   }
 
-  async createPost(userId: string, payload: any, statusCodeExpected = httpStatus.CREATED) {
+  async createPost(userId: string, payload: any, statusCodeExpected = StatusCodes.CREATED) {
     const { body } = await this.request
       .post(`/users/${userId}/posts`)
       .send(payload)
@@ -98,7 +98,7 @@ export default class Requester {
     return body;
   }
 
-  async listPosts(userId: string, statusCodeExpected = httpStatus.OK) {
+  async listPosts(userId: string, statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .get(`/users/${userId}/posts`)
       .expect(statusCodeExpected);
@@ -106,7 +106,7 @@ export default class Requester {
     return body;
   }
 
-  async getPost(userId: string, postId: string, statusCodeExpected = httpStatus.OK) {
+  async getPost(userId: string, postId: string, statusCodeExpected = StatusCodes.OK) {
     const { body } = await this.request
       .get(`/users/${userId}/posts/${postId}`)
       .expect(statusCodeExpected);
@@ -115,7 +115,7 @@ export default class Requester {
   }
 
   async updatePost(
-    userId: string, postId: string, payload: any, statusCodeExpected = httpStatus.OK,
+    userId: string, postId: string, payload: any, statusCodeExpected = StatusCodes.OK,
   ) {
     const { body } = await this.request
       .patch(`/users/${userId}/posts/${postId}`)
@@ -125,7 +125,7 @@ export default class Requester {
     return body;
   }
 
-  async deletePost(userId: string, postId: string, statusCodeExpected = httpStatus.NO_CONTENT) {
+  async deletePost(userId: string, postId: string, statusCodeExpected = StatusCodes.NO_CONTENT) {
     await this.request
       .delete(`/users/${userId}/posts/${postId}`)
       .expect(statusCodeExpected);

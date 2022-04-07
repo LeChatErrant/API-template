@@ -1,5 +1,5 @@
-import httpStatus from 'http-status-codes';
 import { User } from '@prisma/client';
+import { StatusCodes } from 'http-status-codes';
 
 import db from '../../appDatabase';
 import { ApiError } from '../../appErrors';
@@ -11,7 +11,7 @@ import { buildUserRo } from './userHelpers';
 export async function signup(payload: UserSignupDto) {
   const alreadyExists = !!await db.user.findUnique({ where: { email: payload.email } });
   if (alreadyExists) {
-    throw new ApiError(httpStatus.CONFLICT, `A user with email ${payload.email} already exists`);
+    throw new ApiError(StatusCodes.CONFLICT, `A user with email ${payload.email} already exists`);
   }
 
   const hashedPassword = await hashPassword(payload.password);
@@ -26,7 +26,7 @@ export async function signin(payload: UserSigninDto) {
     where: { email: payload.email },
   });
   if (!user || !await verifyPassword(payload.password, user.password)) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid email or password');
+    throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid email or password');
   }
   return buildUserRo(user);
 }

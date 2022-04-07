@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Role } from '@prisma/client';
 
 import combineMiddlewares from '../utils/combineMiddlewares';
@@ -30,9 +30,9 @@ import authMiddleware from './authMiddleware';
  */
 const ownershipMiddleware: RequestHandler = (req, res, next) => {
   if (!req.params.userId) {
-    next(new ApiError(httpStatus.BAD_REQUEST, 'A route parameter named "userId" have to be defined'));
+    next(new ApiError(StatusCodes.BAD_REQUEST, 'A route parameter named "userId" have to be defined'));
   } else if (req.params.userId !== req.session.user!.id && req.session.user!.role !== Role.ADMIN) {
-    next(new ApiError(httpStatus.FORBIDDEN, 'You are not allowed to access other users information\'s'));
+    next(new ApiError(StatusCodes.FORBIDDEN, 'You are not allowed to access other users information\'s'));
   } else {
     next();
   }
