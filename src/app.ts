@@ -1,17 +1,20 @@
-import express from 'express';
-import helmet from 'helmet';
-import cors from 'cors';
-
 /*  This import is only used for class-transformer side effects */
 import 'reflect-metadata';
 
+/*  This import is used to resolve path aliases, since ts configuration is not enough for the built JS */
+import 'module-alias/register';
+
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+
+import { config } from './app.config';
+import session from './app.session';
+import errorMiddleware from './middlewares/error.middleware';
+import meMiddleware from './middlewares/me.middleware';
+import notFoundMiddleware from './middlewares/notFound.middleware';
+import requestLoggerMiddleware from './middlewares/requestLogger.middleware';
 import router from './routes';
-import { config } from './appConfig';
-import session from './appSession';
-import requestLogger from './middlewares/requestLogger';
-import errorMiddleware from './middlewares/errorMiddleware';
-import notFoundMiddleware from './middlewares/notFoundMiddleware';
-import meMiddleware from './middlewares/meMiddleware';
 
 /*  Express server  */
 const app = express();
@@ -23,11 +26,9 @@ app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
-app.use(cors({
-  origin: config.whitelist,
-}));
+app.use(cors({ origin: config.whitelist }));
 app.use(meMiddleware);
-app.use(requestLogger);
+app.use(requestLoggerMiddleware);
 
 /*  Proxy rules */
 app.set('trust proxy', true);

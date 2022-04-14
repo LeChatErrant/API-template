@@ -1,6 +1,6 @@
-import db from '../appDatabase';
-import { redisClient } from '../appStore';
-import logger from '../appLogger';
+import db from '@services/database';
+import logger from '@services/logger';
+import { redisClient } from '@services/store';
 
 export default async function closeApp() {
   /*  Prisma  */

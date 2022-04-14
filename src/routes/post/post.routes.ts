@@ -1,13 +1,13 @@
 import { AsyncRouter } from 'express-async-router';
 import { StatusCodes } from 'http-status-codes';
 
-import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
-import authMiddleware from '../../middlewares/authMiddleware';
-import validate from '../../middlewares/validationMiddleware';
+import authMiddleware from '@middlewares/auth.middleware';
+import ownershipMiddleware from '@middlewares/ownership.middleware';
+import validate from '@middlewares/validation.middleware';
 
-import postMiddleware from './postMiddleware';
-import * as controllers from './postControllers';
-import { PostCreateDto, PostUpdateDto } from './postTypes';
+import * as controllers from './post.controllers';
+import postMiddleware from './post.middleware';
+import { PostCreateDto, PostUpdateDto } from './post.types';
 
 const router = AsyncRouter();
 

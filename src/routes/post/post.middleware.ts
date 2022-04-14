@@ -1,8 +1,8 @@
 import handler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 
-import db from '../../appDatabase';
-import { ApiError } from '../../appErrors';
+import { ApiError } from '@root/app.errors';
+import db from '@services/database';
 
 /**
  * Middleware used to check if the requested post exists in database

@@ -1,7 +1,7 @@
 import { AsyncRouter } from 'express-async-router';
 
-import users from './user/userRoutes';
-import posts from './post/postRoutes';
+import posts from './post/post.routes';
+import users from './user/user.routes';
 
 const router = AsyncRouter();
 

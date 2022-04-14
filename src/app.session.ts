@@ -1,8 +1,8 @@
-import session from 'express-session';
 import { Role } from '@prisma/client';
+import session from 'express-session';
 
-import { config, MODES } from './appConfig';
-import store from './appStore';
+import { config, MODES } from './app.config';
+import store from './services/store';
 
 interface UserSession {
   id: string;

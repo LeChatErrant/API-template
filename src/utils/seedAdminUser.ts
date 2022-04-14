@@ -1,8 +1,9 @@
 import { Role } from '@prisma/client';
 
-import db from '../appDatabase';
-import { config } from '../appConfig';
-import logger from '../appLogger';
+import { config } from '@root/app.config';
+import db from '@services/database';
+import logger from '@services/logger';
+
 import { hashPassword } from './hash';
 
 export default async function seedAdminUser() {

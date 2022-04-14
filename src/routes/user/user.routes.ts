@@ -1,14 +1,14 @@
 import { AsyncRouter } from 'express-async-router';
 import { StatusCodes } from 'http-status-codes';
 
-import authMiddleware from '../../middlewares/authMiddleware';
-import adminMiddleware from '../../middlewares/adminMiddleware';
-import ownershipMiddleware from '../../middlewares/ownershipMiddleware';
-import validate from '../../middlewares/validationMiddleware';
+import adminMiddleware from '@middlewares/admin.middleware';
+import authMiddleware from '@middlewares/auth.middleware';
+import ownershipMiddleware from '@middlewares/ownership.middleware';
+import validate from '@middlewares/validation.middleware';
 
-import * as controllers from './userControllers';
-import userMiddleware from './userMiddleware';
-import { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
+import * as controllers from './user.controllers';
+import userMiddleware from './user.middleware';
+import { UserSignupDto, UserSigninDto, UserUpdateDto } from './user.types';
 
 const router = AsyncRouter();
 

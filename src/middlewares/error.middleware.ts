@@ -1,9 +1,9 @@
 import type { ErrorRequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import logger from '../appLogger';
-import { Ro } from '../appRo';
-import { ApiError } from '../appErrors';
+import { ApiError } from '@root/app.errors';
+import { Ro } from '@root/app.types';
+import logger from '@services/logger';
 
 /**
  * Error middleware

@@ -1,9 +1,9 @@
+import { Role } from '@prisma/client';
 import {
   IsEmail, IsOptional, IsString, MinLength, MaxLength,
 } from 'class-validator';
-import { Role } from '@prisma/client';
 
-import { Ro } from '../../appRo';
+import { Ro } from '@root/app.types';
 
 export class UserSignupDto {
   @IsEmail()

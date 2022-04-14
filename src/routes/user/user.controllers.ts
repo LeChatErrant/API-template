@@ -1,12 +1,12 @@
 import { User } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
-import db from '../../appDatabase';
-import { ApiError } from '../../appErrors';
-import { hashPassword, verifyPassword } from '../../utils/hash';
+import { ApiError } from '@root/app.errors';
+import db from '@services/database';
+import { hashPassword, verifyPassword } from '@utils/hash';
 
-import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './userTypes';
-import { buildUserRo } from './userHelpers';
+import { buildUserRo } from './user.helpers';
+import type { UserSignupDto, UserSigninDto, UserUpdateDto } from './user.types';
 
 export async function signup(payload: UserSignupDto) {
   const alreadyExists = !!await db.user.findUnique({ where: { email: payload.email } });

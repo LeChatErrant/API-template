@@ -1,7 +1,7 @@
 import winston from 'winston';
 
-import { config, MODES } from './appConfig';
-import { beautifyJson } from './utils/json';
+import { config, MODES } from '@root/app.config';
+import { beautifyJson } from '@utils/json';
 
 const customFormat = winston.format.printf((args) => {
   const { timestamp, level, message } = args;

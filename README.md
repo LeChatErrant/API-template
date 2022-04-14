@@ -99,7 +99,7 @@ For a complete production deployment, see **[ops-template](https://github.com/Le
 
 The template comes with a **[Command-Line Interface](https://github.com/LeChatErrant/lantern)** that helps you to **initialize**, **develop** and **maintain** your projects. It saves you from writing boilerplate code 
 
-> The CLI is currently under heavy development, new features will be release soon ❤️
+> The CLI is currently under heavy development and will be release soon ❤️
 > 
 > More details in **[wiki](https://github.com/LeChatErrant/API-template/wiki/CLI)**
 

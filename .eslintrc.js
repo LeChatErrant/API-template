@@ -10,6 +10,32 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
+    'no-multiple-empty-lines': ['error', { 'max': 1 }],
+    'import/order': ['error', {
+      'newlines-between': 'always',
+      'groups': [
+        ['builtin', 'external'],
+        'internal',
+        'parent',
+        'sibling',
+        'index',
+      ],
+      'pathGroups': [
+        {
+          'pattern': '@{root,services,middlewares,routes,utils}/**',
+          'group': 'external',
+          'position': 'after',
+        },
+      ],
+      'pathGroupsExcludedImportTypes': ['builtin'],
+      'alphabetize': {
+        'order': 'asc',
+        'caseInsensitive': true,
+      },
+    }],
+    'import/newline-after-import': ['error', { 'count': 1/*, 'considerComments': true */ }],
+    'import/first': 'error',
+    'import/no-duplicates': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'eol-last': 2,

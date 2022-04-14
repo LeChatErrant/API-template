@@ -1,7 +1,7 @@
-import db from '../appDatabase';
-import { redisClient } from '../appStore';
-import logger from '../appLogger';
-import { config } from '../appConfig';
+import { config } from '@root/app.config';
+import db from '@services/database';
+import logger from '@services/logger';
+import { redisClient } from '@services/store';
 
 export default async function waitApp() {
   /*  Prisma  */

@@ -1,8 +1,8 @@
 import app from './app';
-import logger from './appLogger';
-import { config } from './appConfig';
-import waitApp from './utils/waitApp';
+import { config } from './app.config';
+import logger from './services/logger';
 import seedAdminUser from './utils/seedAdminUser';
+import waitApp from './utils/waitApp';
 
 const { port } = config;
 

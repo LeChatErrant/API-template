@@ -1,11 +1,11 @@
 import morgan from 'morgan';
 
-import logger from '../appLogger';
+import logger from '@services/logger';
 
 /**
  * Middleware logging every API calls
  */
-const requestLogger = morgan('tiny', {
+const requestLoggerMiddleware = morgan('tiny', {
   stream: {
     write(msg: string) {
       logger.http(msg.trimEnd());
@@ -13,4 +13,4 @@ const requestLogger = morgan('tiny', {
   },
 });
 
-export default requestLogger;
+export default requestLoggerMiddleware;

@@ -1,6 +1,6 @@
 import type { User } from '@prisma/client';
 
-import type { UserRo } from './userTypes';
+import type { UserRo } from './user.types';
 
 /**
  * Build a user Response Object (RO) with only the fields to be shown to the user

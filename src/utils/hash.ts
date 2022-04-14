@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import { config } from '../appConfig';
-
+import { config } from '@root/app.config';
 /**
  * Hash the given password using bcrypt algorithm
  *

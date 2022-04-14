@@ -24,7 +24,7 @@ export function sortJsonKeys(json: Record<string, any>) {
  * JSON.parse doesn't convert dates to Date type (yeah, it's insane...)
  * Use parseJsonWithDates to correctly have Dates deserialized
  *
- * @param str JSON stringifies
+ * @param str Stringified JSON
  * @return JSON deserialized, including dates
  */
 export function parseJsonWithDates(str: string) {

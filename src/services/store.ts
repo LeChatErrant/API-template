@@ -1,13 +1,13 @@
-import redis from 'redis';
 import connectRedis from 'connect-redis';
 import session, { MemoryStore, Store } from 'express-session';
+import redis from 'redis';
 
-import logger from './appLogger';
-import { redisConfig } from './appConfig';
+import { redisConfig } from '@root/app.config';
+
+import logger from './logger';
 
 // eslint-disable-next-line import/no-mutable-exports
 let store: Store | MemoryStore;
-// eslint-disable-next-line import/no-mutable-exports
 export let redisClient: redis.RedisClient | null = null;
 
 if (redisConfig.enabled) {

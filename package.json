@@ -30,6 +30,13 @@
     "prepare": "husky install",
     "postinstall": "npm run build"
   },
+  "_moduleAliases": {
+    "@root": "src",
+    "@services": "src/services",
+    "@middlewares": "src/middlewares",
+    "@utils": "src/utils",
+    "@routes": "src/routes"
+  },
   "lint-staged": {
     "*.@(ts|js)": [
       "eslint --fix"
@@ -52,6 +59,7 @@
     "express-session": "^1.17.2",
     "helmet": "^5.0.2",
     "http-status-codes": "^2.2.0",
+    "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
     "prisma": "^3.12.0",
     "redis": "^3.1.2",
@@ -73,6 +81,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "comment-json": "^4.2.2",
     "concurrently": "^7.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^14.0.2",

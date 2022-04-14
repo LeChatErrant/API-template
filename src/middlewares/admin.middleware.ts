@@ -1,11 +1,11 @@
+import { Role } from '@prisma/client';
 import type { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { Role } from '@prisma/client';
 
-import combineMiddlewares from '../utils/combineMiddlewares';
-import { ApiError } from '../appErrors';
+import { ApiError } from '@root/app.errors';
 
-import authMiddleware from './authMiddleware';
+import authMiddleware from './auth.middleware';
+import combineMiddlewares from './combineMiddlewares';
 
 /**
  * Protect the route so only users with role ADMIN can access it

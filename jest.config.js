@@ -1,11 +1,20 @@
 /*  eslint-disable max-len  */
+/* eslint-disable @typescript-eslint/no-var-requires  */
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/en/configuration.html
  */
 
+const JSON = require('comment-json');
+const fs = require('fs');
+const { pathsToModuleNameMapper } = require('ts-jest');
+
+const tsconfig = JSON.parse(fs.readFileSync('./tsconfig.json').toString());
+
 module.exports = {
+  // Handle path aliases from tsconfig in jest
+  moduleNameMapper: pathsToModuleNameMapper(tsconfig.compilerOptions.paths, { prefix: '<rootDir>/' }),
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 

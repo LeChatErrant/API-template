@@ -1,15 +1,15 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
-import { StatusCodes } from 'http-status-codes';
 import { Role } from '@prisma/client';
+import { StatusCodes } from 'http-status-codes';
 
-import Requester from '../../appRequester';
-import db from '../../appDatabase';
-import logger from '../../appLogger';
-import waitApp from '../../utils/waitApp';
-import closeApp from '../../utils/closeApp';
-import { config } from '../../appConfig';
-import seedAdminUser from '../../utils/seedAdminUser';
+import { config } from '@root/app.config';
+import Requester from '@root/app.requester';
+import db from '@services/database';
+import logger from '@services/logger';
+import closeApp from '@utils/closeApp';
+import seedAdminUser from '@utils/seedAdminUser';
+import waitApp from '@utils/waitApp';
 
 const app = new Requester();
 

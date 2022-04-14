@@ -1,8 +1,8 @@
 /*  eslint-disable  import/no-extraneous-dependencies */
 /*  eslint-disable  @typescript-eslint/no-explicit-any  */
 
-import supertest from 'supertest';
 import { StatusCodes } from 'http-status-codes';
+import supertest from 'supertest';
 
 import app from './app';
 

@@ -1,11 +1,11 @@
-import { StatusCodes } from 'http-status-codes';
 import { Post } from '@prisma/client';
+import { StatusCodes } from 'http-status-codes';
 
-import db from '../../appDatabase';
-import { ApiError } from '../../appErrors';
+import { ApiError } from '@root/app.errors';
+import db from '@services/database';
 
-import type { PostCreateDto, PostUpdateDto } from './postTypes';
-import { buildPostRo } from './postHelpers';
+import { buildPostRo } from './post.helpers';
+import type { PostCreateDto, PostUpdateDto } from './post.types';
 
 export async function listPosts() {
   // Todo: pagination
@@ -19,7 +19,6 @@ export async function listPostsByUser(authorId: string) {
   });
   return posts.map((post) => buildPostRo(post));
 }
-
 
 export async function createNewPost(authorId: string, payload: PostCreateDto) {
   const alreadyExists = !!await db.post.findUnique({

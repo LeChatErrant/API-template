@@ -1,8 +1,8 @@
-import { StatusCodes } from 'http-status-codes';
 import { RequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
-import db from '../../appDatabase';
-import { ApiError } from '../../appErrors';
+import { ApiError } from '@root/app.errors';
+import db from '@services/database';
 
 /**
  * Middleware used to check if the user identified by route param `userId` exists in database

@@ -1,10 +1,10 @@
-import type { RequestHandler } from 'express';
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
-import { StatusCodes } from 'http-status-codes';
+import type { RequestHandler } from 'express';
 import handler from 'express-async-handler';
+import { StatusCodes } from 'http-status-codes';
 
-import { ApiError } from '../appErrors';
+import { ApiError } from '@root/app.errors';
 
 /**
  * Validate the request body

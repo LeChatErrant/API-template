@@ -2,11 +2,11 @@
 
 import { StatusCodes } from 'http-status-codes';
 
-import Requester from '../../appRequester';
-import db from '../../appDatabase';
-import logger from '../../appLogger';
-import waitApp from '../../utils/waitApp';
-import closeApp from '../../utils/closeApp';
+import Requester from '@root/app.requester';
+import db from '@services/database';
+import logger from '@services/logger';
+import closeApp from '@utils/closeApp';
+import waitApp from '@utils/waitApp';
 
 const app = new Requester();
 

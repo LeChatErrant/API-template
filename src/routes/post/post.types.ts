@@ -1,6 +1,6 @@
 import { IsOptional, IsString, MaxLength } from 'class-validator';
 
-import { Ro } from '../../appRo';
+import { Ro } from '@root/app.types';
 
 export class PostCreateDto {
   @IsString()

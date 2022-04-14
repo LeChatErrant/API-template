@@ -1,6 +1,6 @@
 import type { Post } from '@prisma/client';
 
-import type { PostRo } from './postTypes';
+import type { PostRo } from './post.types';
 
 /**
  * Build a post Response Object (RO) with only the fields to be shown to the user

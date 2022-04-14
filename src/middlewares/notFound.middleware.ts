@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { ApiError } from '../appErrors';
+import { ApiError } from '@root/app.errors';
 
 /**
  * Middleware always throwing a 404 error
