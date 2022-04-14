@@ -1,8 +1,11 @@
-import app from './app';
-import { config } from './app.config';
-import logger from './services/logger';
-import seedAdminUser from './utils/seedAdminUser';
-import waitApp from './utils/waitApp';
+/*  This import is used to resolve path aliases, since ts configuration is not enough for the built JS */
+import 'module-alias/register';
+
+import app from '@root/app';
+import { config } from '@root/app.config';
+import logger from '@services/logger';
+import seedAdminUser from '@utils/seedAdminUser';
+import waitApp from '@utils/waitApp';
 
 const { port } = config;
 

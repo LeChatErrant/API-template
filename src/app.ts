@@ -8,13 +8,13 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 
-import { config } from './app.config';
-import session from './app.session';
-import errorMiddleware from './middlewares/error.middleware';
-import meMiddleware from './middlewares/me.middleware';
-import notFoundMiddleware from './middlewares/notFound.middleware';
-import requestLoggerMiddleware from './middlewares/requestLogger.middleware';
-import router from './routes';
+import errorMiddleware from '@middlewares/error.middleware';
+import meMiddleware from '@middlewares/me.middleware';
+import notFoundMiddleware from '@middlewares/notFound.middleware';
+import requestLoggerMiddleware from '@middlewares/requestLogger.middleware';
+import { config } from '@root/app.config';
+import session from '@root/app.session';
+import router from '@routes/index';
 
 /*  Express server  */
 const app = express();

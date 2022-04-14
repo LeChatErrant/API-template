@@ -4,7 +4,7 @@
 import { StatusCodes } from 'http-status-codes';
 import supertest from 'supertest';
 
-import app from './app';
+import app from '@root/app';
 
 /**
  * Class used to make API call to the API itself
