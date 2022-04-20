@@ -3,13 +3,14 @@ module.exports = {
     'airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['import'],
+  plugins: ['import', 'unused-imports'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
     project: './tsconfig.json',
   },
   rules: {
+    // Import order
     'no-multiple-empty-lines': ['error', { 'max': 1 }],
     'import/order': ['error', {
       'newlines-between': 'always',
@@ -22,7 +23,7 @@ module.exports = {
       ],
       'pathGroups': [
         {
-          'pattern': '@{root,services,middlewares,routes,utils}/**',
+          'pattern': '@{root,services,middlewares,routes,utils,openAPIGenerator,products}/**',
           'group': 'external',
           'position': 'after',
         },
@@ -36,6 +37,16 @@ module.exports = {
     'import/newline-after-import': ['error', { 'count': 1/*, 'considerComments': true */ }],
     'import/first': 'error',
     'import/no-duplicates': 'error',
+
+    // Unused imports
+    'no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      { 'vars': 'all', 'varsIgnorePattern': '^_', 'args': 'after-used', 'argsIgnorePattern': '^_' },
+    ],
+
+    // Misc rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'eol-last': 2,
@@ -45,7 +56,8 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
-    'no-use-before-define': ['error', 'nofunc'],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     'no-restricted-syntax': [
       'error',
       {
