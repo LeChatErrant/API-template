@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler } from 'express';
-import { StatusCodes } from 'http-status-codes';
+import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '@root/app.errors';
 import { Ro } from '@root/app.types';
@@ -15,19 +15,26 @@ import logger from '@services/logger';
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
-  logger.error(err.message);
-  // If the error is not an HTTP error, the whole object is printed through console.error
-  if (!(err instanceof ApiError)) {
+  const ro: Ro = {};
+  let statusCode: StatusCodes;
+
+  if (err instanceof ApiError) {
+    statusCode = err.statusCode;
+    ro.error = {
+      statusCode,
+      message: err.message,
+    };
+    logger.error(err.message);
+  } else {
+    statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
+    ro.error = {
+      statusCode,
+      message: getReasonPhrase(statusCode),
+    };
     // eslint-disable-next-line no-console
     console.error(err);
   }
-  const statusCode = err.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR;
-  const ro: Ro = {
-    error: {
-      statusCode,
-      message: err.message,
-    },
-  };
+
   res
     .status(statusCode)
     .send(ro);
