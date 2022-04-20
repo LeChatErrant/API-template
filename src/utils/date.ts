@@ -5,8 +5,21 @@
  * @param hours Number of hours
  * @return New date
  */
-export function addHours(date: Date, hours: number) {
+export function addHoursToDate(date: Date, hours: number) {
   const newDate = new Date(date);
   newDate.setHours(date.getHours() + hours);
+  return newDate;
+}
+
+/**
+ * Add days to a given date
+ *
+ * @param date Date to increase
+ * @param days Number of days
+ * @return New date
+ */
+export function addDaysToDate(date: Date, days: number) {
+  const newDate = new Date(date);
+  newDate.setDate(date.getDate() + days);
   return newDate;
 }
