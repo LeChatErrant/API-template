@@ -23,7 +23,7 @@ module.exports = {
       ],
       'pathGroups': [
         {
-          'pattern': '@{root,services,middlewares,routes,utils,openAPIGenerator,products}/**',
+          'pattern': '@{root,services,middlewares,routes,utils}/**',
           'group': 'external',
           'position': 'after',
         },
