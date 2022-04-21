@@ -35,7 +35,7 @@ export async function listUsers() {
   const users = await db.user.findMany({
     orderBy: { createdAt: 'desc' },
   });
-  return users.map((user) => buildUserRo(user));
+  return users.map(buildUserRo);
 }
 
 export async function getUser(user: User) {

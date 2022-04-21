@@ -17,7 +17,7 @@ export async function listPostsByUser(authorId: string) {
   const posts = await db.post.findMany({ where: { authorId },
     orderBy: { createdAt: 'desc' },
   });
-  return posts.map((post) => buildPostRo(post));
+  return posts.map(buildPostRo);
 }
 
 export async function createNewPost(authorId: string, payload: PostCreateDto) {
