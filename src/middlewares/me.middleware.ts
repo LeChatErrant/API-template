@@ -11,6 +11,7 @@ import type { RequestHandler } from 'express';
 const meMiddleware: RequestHandler = (req, res, next) => {
   if (req.session.user) {
     req.url = req.url.replace('/users/me', `/users/${req.session.user.id}`);
+    req.params.userId = req.session.user.id;
   }
   next();
 };
