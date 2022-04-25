@@ -1,7 +1,6 @@
 import type { ErrorRequestHandler } from 'express';
 import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
-import { ApiError } from '@root/app.errors';
 import { Ro } from '@root/app.types';
 import logger from '@services/logger';
 
@@ -18,7 +17,7 @@ const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
   const ro: Ro = {};
   let statusCode: StatusCodes;
 
-  if (err instanceof ApiError) {
+  if (err.statusCode) {
     statusCode = err.statusCode;
     ro.error = {
       statusCode,
