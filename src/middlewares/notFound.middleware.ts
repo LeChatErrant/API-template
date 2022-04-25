@@ -10,6 +10,6 @@ import { ApiError } from '@root/app.errors';
  *
  * @throws 404 - Not found
  */
-const notFoundMiddleware: RequestHandler = (req, res, next) => next(new ApiError(StatusCodes.NOT_FOUND, `${req.url} not found`));
+const notFoundMiddleware: RequestHandler = (req, res, next) => next(new ApiError(StatusCodes.NOT_FOUND, `${req.method} ${req.url} not found`));
 
 export default notFoundMiddleware;
