@@ -1,6 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 
+import { config } from '@root/app.config';
 import logger from '@services/logger';
+import { hashPassword } from '@utils/hash';
 
 const db = new PrismaClient({
   log: [
@@ -17,5 +19,30 @@ const db = new PrismaClient({
 
 db.$on('info', (e) => logger.info(e.message));
 db.$on('warn', (e) => logger.warn(e.message));
+
+export async function seedAdminUser() {
+  logger.info('Seeding root user...');
+
+  const alreadyExists = !!await db.user.findFirst({
+    where: {
+      role: Role.ADMIN,
+    },
+  });
+
+  if (alreadyExists) {
+    logger.info('Root user already exists. Skipping database seeding');
+    return;
+  }
+
+  const hashedPassword = await hashPassword(config.defaultAdminPassword);
+  await db.user.create({
+    data: {
+      role: Role.ADMIN,
+      username: 'root',
+      email: config.defaultAdminEmail,
+      password: hashedPassword,
+    },
+  });
+}
 
 export default db;

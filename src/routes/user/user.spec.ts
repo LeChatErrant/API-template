@@ -4,12 +4,10 @@ import { Role } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { config } from '@root/app.config';
+import { gracefullyExit, waitServices } from '@root/app.handlers';
 import Requester from '@root/app.requester';
-import db from '@services/database';
+import db, { seedAdminUser } from '@services/database';
 import logger from '@services/logger';
-import closeApp from '@utils/closeApp';
-import seedAdminUser from '@utils/seedAdminUser';
-import waitApp from '@utils/waitApp';
 
 const app = new Requester();
 
@@ -26,12 +24,12 @@ const adminUser = {
 
 // Wait for all external services (db, redis...)
 beforeAll(async () => {
-  await waitApp();
+  await waitServices();
 });
 
 // Gracefully terminate external services connections
 afterAll(async () => {
-  await closeApp();
+  await gracefullyExit();
 });
 
 // Reset session before each test

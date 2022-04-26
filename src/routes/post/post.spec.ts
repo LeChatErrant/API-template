@@ -2,11 +2,10 @@
 
 import { StatusCodes } from 'http-status-codes';
 
+import { gracefullyExit, waitServices } from '@root/app.handlers';
 import Requester from '@root/app.requester';
 import db from '@services/database';
 import logger from '@services/logger';
-import closeApp from '@utils/closeApp';
-import waitApp from '@utils/waitApp';
 
 const app = new Requester();
 
@@ -31,12 +30,12 @@ const basePost = {
 
 // Wait for all external services (db, redis...)
 beforeAll(async () => {
-  await waitApp();
+  await waitServices();
 });
 
 // Gracefully terminate external services connections
 afterAll(async () => {
-  await closeApp();
+  await gracefullyExit();
 });
 
 // Reset session before each test, create two user and log in

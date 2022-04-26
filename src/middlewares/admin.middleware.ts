@@ -3,9 +3,9 @@ import type { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '@root/app.errors';
+import combineMiddlewares from '@utils/combineMiddlewares';
 
 import authMiddleware from './auth.middleware';
-import combineMiddlewares from './combineMiddlewares';
 
 /**
  * Protect the route so only users with role ADMIN can access it
