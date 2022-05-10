@@ -42,7 +42,7 @@ export class AxiosClient {
   constructor({ baseURL, headers = {}, verbose = false, throwsOnError = true }: AxiosClientParams) {
     this.client = axios.create({
       baseURL,
-      validateStatus: throwsOnError ? null : (statusCode: number) => true,
+      validateStatus: (statusCode: number) => throwsOnError ? statusCode < 300 : true,
       headers,
     });
 
@@ -63,13 +63,13 @@ export class AxiosClient {
         logger.debug(`[Error response data] ${beautifyJson(response.data)}`);
       }
       return response;
-    }, (response) => {
-      logger.info(`[Error response] ${response.status} | ${response.statusText}`);
+    }, (error) => {
+      logger.info(`[Error response] ${error.response.status} | ${error.response.statusText}`);
 
       if (verbose) {
-        logger.debug(`[Error response data] ${beautifyJson(response.data)}`);
+        logger.debug(`[Error response data] ${beautifyJson(error.response.data)}`);
       }
-      return response;
+      return Promise.reject(error.response);
     });
   }
 }
