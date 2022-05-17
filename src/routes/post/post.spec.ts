@@ -2,7 +2,7 @@
 
 import { StatusCodes } from 'http-status-codes';
 
-import { gracefullyExit, waitServices } from '@root/app.handlers';
+import { gracefullyCloseConnections, waitServices } from '@root/app.handlers';
 import Requester from '@root/app.requester';
 import db from '@services/database';
 import logger from '@services/logger';
@@ -35,7 +35,7 @@ beforeAll(async () => {
 
 // Gracefully terminate external services connections
 afterAll(async () => {
-  await gracefullyExit();
+  await gracefullyCloseConnections();
 });
 
 // Reset session before each test, create two user and log in

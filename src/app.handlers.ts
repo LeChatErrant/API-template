@@ -39,7 +39,7 @@ export async function waitServices() {
 /**
  * Gracefully close connection with services to avoid zombis processes
  */
-export async function gracefullyExit() {
+export async function gracefullyCloseConnections() {
   /*  Prisma  */
   logger.info('Disconnecting from database...');
   await db

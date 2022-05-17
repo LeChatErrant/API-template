@@ -4,7 +4,7 @@ import { Role } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 
 import { config } from '@root/app.config';
-import { gracefullyExit, waitServices } from '@root/app.handlers';
+import { gracefullyCloseConnections, waitServices } from '@root/app.handlers';
 import Requester from '@root/app.requester';
 import db, { seedAdminUser } from '@services/database';
 import logger from '@services/logger';
@@ -29,7 +29,7 @@ beforeAll(async () => {
 
 // Gracefully terminate external services connections
 afterAll(async () => {
-  await gracefullyExit();
+  await gracefullyCloseConnections();
 });
 
 // Reset session before each test
