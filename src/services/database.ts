@@ -43,6 +43,7 @@ export async function seedAdminUser() {
       password: hashedPassword,
     },
   });
+  logger.info('Root user created !');
 }
 
 export default db;
