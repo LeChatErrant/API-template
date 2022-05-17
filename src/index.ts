@@ -3,7 +3,7 @@ import 'module-alias/register';
 
 import app from '@root/app';
 import { config } from '@root/app.config';
-import { waitServices } from '@root/app.handlers';
+import { gracefullyExit, waitServices } from '@root/app.handlers';
 import { seedAdminUser } from '@services/database';
 import logger from '@services/logger';
 
@@ -16,7 +16,9 @@ async function main() {
 }
 
 main()
-  .catch((error) => {
+  .catch(async (error) => {
     logger.error(error);
-    throw error;
+    logger.error('Exiting...');
+    await gracefullyExit();
+    process.exit(1);
   });
