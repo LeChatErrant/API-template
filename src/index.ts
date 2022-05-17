@@ -17,7 +17,7 @@ async function main() {
 
 main()
   .catch(async (error) => {
-    logger.error(error);
+    logger.error(error, error.stack);
     logger.error('Exiting...');
     await gracefullyCloseConnections();
     process.exit(1);
