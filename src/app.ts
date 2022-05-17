@@ -13,8 +13,8 @@ import meMiddleware from '@middlewares/me.middleware';
 import notFoundMiddleware from '@middlewares/notFound.middleware';
 import requestLoggerMiddleware from '@middlewares/requestLogger.middleware';
 import { config } from '@root/app.config';
+import router from '@root/app.routes';
 import session from '@root/app.session';
-import router from '@routes/index';
 
 /*  Express server  */
 const app = express();
