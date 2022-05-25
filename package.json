@@ -88,7 +88,7 @@
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-unused-imports": "^1.1.5",
-    "husky": "^7.0.0",
+    "husky": "^8.0.1",
     "jest": "^27.5.1",
     "lint-staged": "^12.4.2",
     "supertest": "^6.2.3",
