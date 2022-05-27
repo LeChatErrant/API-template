@@ -93,6 +93,6 @@
     "lint-staged": "^12.4.2",
     "supertest": "^6.2.3",
     "ts-jest": "^27.1.4",
-    "ts-node-dev": "^1.1.8"
+    "ts-node-dev": "^2.0.0"
   }
 }
