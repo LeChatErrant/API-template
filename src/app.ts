@@ -8,11 +8,11 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 
+import corsMiddleware from '@middlewares/cors.middleware';
 import errorMiddleware from '@middlewares/error.middleware';
 import meMiddleware from '@middlewares/me.middleware';
 import notFoundMiddleware from '@middlewares/notFound.middleware';
 import requestLoggerMiddleware from '@middlewares/requestLogger.middleware';
-import { config } from '@root/app.config';
 import router from '@root/app.routes';
 import session from '@root/app.session';
 
@@ -25,8 +25,8 @@ app.use(session);
 /*  Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors(corsMiddleware));
 app.use(helmet());
-app.use(cors({ origin: config.whitelist }));
 app.use(meMiddleware);
 app.use(requestLoggerMiddleware);
 
