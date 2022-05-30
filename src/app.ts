@@ -4,7 +4,6 @@ import 'reflect-metadata';
 /*  This import is used to resolve path aliases, since ts configuration is not enough for the built JS */
 import 'module-alias/register';
 
-import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 
@@ -25,7 +24,7 @@ app.use(session);
 /*  Middlewares */
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsMiddleware));
+app.use(corsMiddleware);
 app.use(helmet());
 app.use(meMiddleware);
 app.use(requestLoggerMiddleware);
