@@ -2,6 +2,7 @@ pull_request_rules:
   - name: Automated dependabot merge
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
+      - head~=^dependabot/npm
       - status-success=integration-tests
       - status-success=unit-tests
       - status-success=lint
