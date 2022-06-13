@@ -6,6 +6,7 @@ import { ApiError } from '@root/app.errors';
 
 /**
  * Cors middleware checking request origin
+ * Whitelisted URLs can be configured through environment variables
  */
 const corsMiddleware = cors({
   credentials: true,
