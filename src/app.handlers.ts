@@ -21,19 +21,17 @@ export async function waitServices() {
     });
 
   /*  Redis */
-  if (redisClient) {
-    logger.info('Waiting redis...');
-    await new Promise<void>((resolve) => {
-      const interval = setInterval(() => {
-        const isConnected = redisClient.ping();
-        if (isConnected) {
-          clearInterval(interval);
-          resolve();
-        }
-      }, 1000);
-    });
-    logger.info('Connected to redis !');
-  }
+  logger.info('Waiting redis...');
+  await new Promise<void>((resolve) => {
+    const interval = setInterval(() => {
+      const isConnected = redisClient.ping();
+      if (isConnected) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 1000);
+  });
+  logger.info('Connected to redis !');
 }
 
 /**
@@ -53,17 +51,15 @@ export async function gracefullyCloseConnections() {
     });
 
   /*  Redis */
-  if (redisClient) {
-    logger.info('Disconnecting from redis...');
-    await new Promise<void>((resolve, reject) => {
-      redisClient.quit((error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
+  logger.info('Disconnecting from redis...');
+  await new Promise<void>((resolve, reject) => {
+    redisClient.quit((error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
     });
-    logger.info('Disconnected from redis !');
-  }
+  });
+  logger.info('Disconnected from redis !');
 }
