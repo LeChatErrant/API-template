@@ -25,7 +25,7 @@ export async function waitServices() {
     logger.info('Waiting redis...');
     await new Promise<void>((resolve) => {
       const interval = setInterval(() => {
-        const isConnected = redisClient?.ping();
+        const isConnected = redisClient.ping();
         if (isConnected) {
           clearInterval(interval);
           resolve();
