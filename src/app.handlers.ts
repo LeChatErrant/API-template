@@ -8,7 +8,7 @@ import redisClient from '@services/redis';
  */
 export async function waitServices() {
   /*  Prisma  */
-  logger.info('Waiting database...');
+  logger.info('Connecting to database...');
   await db
     .$connect()
     .then(() => {
@@ -21,7 +21,7 @@ export async function waitServices() {
     });
 
   /*  Redis */
-  logger.info('Waiting redis...');
+  logger.info('Connecting to redis...');
   await new Promise<void>((resolve) => {
     const interval = setInterval(() => {
       const isConnected = redisClient.ping();
