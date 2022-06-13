@@ -29,11 +29,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Launch database
-      run: source .envrc; npm run dev:db
-
-    - name: Launch redis
-      run: source .envrc; npm run dev:redis
+    - name: Launch services
+      run: source .envrc; npm run dev:services
 
     - name: Run integration tests
       run: source .envrc; npm run integration

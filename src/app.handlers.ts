@@ -1,7 +1,7 @@
-import { config } from '@root/app.config';
+import { dbConfig } from '@root/app.config';
 import db from '@services/database';
 import logger from '@services/logger';
-import { redisClient } from '@services/store';
+import redisClient from '@services/redis';
 
 /**
  * Wait for all services to be up
@@ -16,7 +16,7 @@ export async function waitServices() {
     })
     .catch((error) => {
       logger.error(error);
-      logger.error(`Can't connect to database at url ${config.dbUrl}`);
+      logger.error(`Can't connect to database at url ${dbConfig.url}`);
       throw error;
     });
 
@@ -37,7 +37,7 @@ export async function waitServices() {
 }
 
 /**
- * Gracefully close connection with services to avoid zombis processes
+ * Gracefully close connection with services to avoid zombies processes
  */
 export async function gracefullyCloseConnections() {
   /*  Prisma  */
@@ -56,7 +56,7 @@ export async function gracefullyCloseConnections() {
   if (redisClient) {
     logger.info('Disconnecting from redis...');
     await new Promise<void>((resolve, reject) => {
-      redisClient!.quit((error) => {
+      redisClient.quit((error) => {
         if (error) {
           reject(error);
         } else {

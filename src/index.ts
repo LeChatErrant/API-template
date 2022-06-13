@@ -12,7 +12,7 @@ const { port } = config;
 async function main() {
   await waitServices();
   await seedAdminUser();
-  app.listen(port, () => logger.info(`Server listening on port ${port} on mode ${config.mode}...`));
+  app.listen(port, () => logger.info(`Server listening on port ${port}...`));
 }
 
 main()

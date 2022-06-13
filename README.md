@@ -67,7 +67,7 @@ For a complete production deployment, see **[ops-template](https://github.com/Le
 
 1. Make sure the **[.envrc](/.envrc)** is loaded (have a look **[here](https://github.com/LeChatErrant/API-template/wiki/Getting-started#Configuration)**)
 2. Install dependencies with `npm install`
-3. Launch a local database with `npm run dev:db`
+3. Launch services (database, redis, ...) with `npm run dev:services`
 4. Run `npm run dev`
 
 ![Deployment example](.github/assets/deployment.gif)

@@ -6,7 +6,6 @@ services:
     environment:
       - PORT
       - SESSION_SECRET
-      - MODE=dev
       - DEFAULT_ADMIN_EMAIL
       - DEFAULT_ADMIN_PASSWORD
       - DATABASE_URL=postgresql://$DB_USER:$DB_PASS@db:$DB_PORT/$DB_NAME

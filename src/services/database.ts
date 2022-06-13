@@ -1,10 +1,15 @@
 import { PrismaClient, Role } from '@prisma/client';
 
-import { config } from '@root/app.config';
+import { config, dbConfig } from '@root/app.config';
 import logger from '@services/logger';
 import { hashPassword } from '@utils/hash';
 
 const db = new PrismaClient({
+  datasources: {
+    db: {
+      url: dbConfig.url,
+    },
+  },
   log: [
     {
       emit: 'event',
