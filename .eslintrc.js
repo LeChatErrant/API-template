@@ -3,7 +3,7 @@ module.exports = {
     'airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['import', 'unused-imports'],
+  plugins: ['import'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
@@ -37,14 +37,6 @@ module.exports = {
     'import/newline-after-import': ['error', { 'count': 1/*, 'considerComments': true */ }],
     'import/first': 'error',
     'import/no-duplicates': 'error',
-
-    // Unused imports
-    'no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'warn',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      { 'vars': 'all', 'varsIgnorePattern': '^_', 'args': 'after-used', 'argsIgnorePattern': '^_' },
-    ],
 
     // Misc rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
