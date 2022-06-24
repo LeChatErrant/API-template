@@ -1,7 +1,5 @@
 import { IsOptional, IsString, MaxLength } from 'class-validator';
 
-import { Ro } from '@root/app.types';
-
 export class PostCreateDto {
   @IsString()
   @MaxLength(50)
@@ -22,7 +20,7 @@ export class PostUpdateDto {
   content?: string;
 }
 
-export interface PostRo extends Ro {
+export interface PostRo {
   id: string;
   authorId: string;
   title: string;

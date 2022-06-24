@@ -1,7 +1,7 @@
 import type { ErrorRequestHandler } from 'express';
 import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
-import { Ro } from '@root/app.types';
+import { ErrorRO } from '@root/app.types';
 import logger from '@services/logger';
 
 /**
@@ -14,19 +14,19 @@ import logger from '@services/logger';
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
-  const ro: Ro = {};
+  let ro: ErrorRO;
   let statusCode: StatusCodes;
 
   if (err.statusCode) {
     statusCode = err.statusCode;
-    ro.error = {
-      statusCode,
+    ro = {
+      statusCode: err.statusCode,
       message: err.message,
     };
     logger.error(err.message);
   } else {
     statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
-    ro.error = {
+    ro = {
       statusCode,
       message: getReasonPhrase(statusCode),
     };

@@ -1,15 +1,13 @@
-/**
- * Basic interface representing a Response Object (RO), from which all ROs inherits
- * It may contain an error and enable API consumer to treat every response the same way
- */
 import { Transform } from 'class-transformer';
 import { IsNumber, Min } from 'class-validator';
+import { StatusCodes } from 'http-status-codes';
 
-export interface Ro {
-  error?: {
-    statusCode: number;
-    message: string;
-  };
+/**
+ * Error content, present in the response when an error is thrown
+ */
+export interface ErrorRO {
+  statusCode: StatusCodes;
+  message: string;
 }
 
 /**

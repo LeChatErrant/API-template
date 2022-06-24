@@ -3,8 +3,6 @@ import {
   IsEmail, IsOptional, IsString, MinLength, MaxLength,
 } from 'class-validator';
 
-import { Ro } from '@root/app.types';
-
 export class UserSignupDto {
   @IsEmail()
   email!: string;
@@ -43,7 +41,7 @@ export class UserUpdateDto {
   password?: string;
 }
 
-export interface UserRo extends Ro {
+export interface UserRo {
   id: string;
   email: string;
   username: string | null;
