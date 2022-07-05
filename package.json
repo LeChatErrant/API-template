@@ -48,7 +48,7 @@
     ]
   },
   "dependencies": {
-    "@prisma/client": "^3.15.2",
+    "@prisma/client": "^4.0.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
@@ -64,11 +64,11 @@
     "http-status-codes": "^2.2.0",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
-    "prisma": "^3.15.2",
+    "prisma": "^4.0.0",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.7.4",
-    "winston": "^3.8.0"
+    "winston": "^3.8.1"
   },
   "devDependencies": {
     "@lechaterrant/lantern": "^1.1.0",
@@ -79,7 +79,7 @@
     "@types/express-session": "^1.17.4",
     "@types/jest": "^27.5.0",
     "@types/morgan": "^1.9.3",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.1",
     "@types/redis": "^2.8.32",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -91,8 +91,8 @@
     "eslint-plugin-import": "^2.26.0",
     "husky": "^8.0.1",
     "jest": "^27.5.1",
-    "lint-staged": "^13.0.2",
-    "supertest": "^6.2.3",
+    "lint-staged": "^13.0.3",
+    "supertest": "^6.2.4",
     "ts-jest": "^27.1.4",
     "ts-node-dev": "^2.0.0"
   }
