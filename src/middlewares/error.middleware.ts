@@ -30,8 +30,13 @@ const errorMiddleware: ErrorRequestHandler = (err, req, res, _) => {
       statusCode,
       message: getReasonPhrase(statusCode),
     };
-    // eslint-disable-next-line no-console
-    console.error(err);
+
+    if (err.isAxiosError) {
+      logger.error(err.message);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
   }
 
   res
