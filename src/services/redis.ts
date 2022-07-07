@@ -1,7 +1,9 @@
 import redis from 'redis';
 
 import { redisConfig } from '@root/app.config';
-import logger from '@services/logger';
+import { createChildLogger } from '@services/logger';
+
+const logger = createChildLogger('redis');
 
 const redisClient = redis.createClient({
   host: redisConfig.host,

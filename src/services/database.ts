@@ -1,8 +1,10 @@
 import { PrismaClient, Role } from '@prisma/client';
 
 import { config, dbConfig } from '@root/app.config';
-import logger from '@services/logger';
+import { createChildLogger } from '@services/logger';
 import { hashPassword } from '@utils/hash';
+
+const logger = createChildLogger('database');
 
 const db = new PrismaClient({
   datasources: {
