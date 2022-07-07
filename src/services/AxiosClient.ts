@@ -3,6 +3,9 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'a
 import logger from '@services/logger';
 import { beautifyJson } from '@utils/json';
 
+/**
+ * Axios client configuration
+ */
 export interface AxiosClientParams {
   baseURL: string;
   verbose?: boolean;
@@ -11,7 +14,7 @@ export interface AxiosClientParams {
 }
 
 /**
- * Extend this class to have an axios requester customized
+ * Extend this class to have a customized axios requester
  *
  * @example
  * class RandomApiSdk extends AxiosClient {
@@ -24,7 +27,7 @@ export interface AxiosClientParams {
  *     })
  *   }
  *
- *   getRandomRessource(id: string) {
+ *   getRandomResource(id: string) {
  *     return this.client.get<RandomResource>(`/random/${id}`);
  *   }
  * }
@@ -33,11 +36,18 @@ export class AxiosClient {
   protected readonly client: AxiosInstance;
 
   /**
+   * Return the underlying axios instance
+   */
+  public getClient() {
+    return this.client;
+  }
+
+  /**
    * @constructor
    * @param baseURL Base URL for all requests
    * @param headers Custom headers set on every requests
    * @param verbose True to log every request payload / response data, false otherwise. Default to false
-   * @param throwsOnError True to throw error on HTTP status codes 4XX and 5XX, false to treat it like a normal response. Default to true
+   * @param throwsOnError True to throw error on HTTP status codes 3XX, 4XX and 5XX, false to treat it like a normal response. Default to true
    */
   constructor({ baseURL, headers = {}, verbose = false, throwsOnError = true }: AxiosClientParams) {
     this.client = axios.create({
