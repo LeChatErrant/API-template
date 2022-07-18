@@ -3,7 +3,7 @@ import connectRedis from 'connect-redis';
 import session from 'express-session';
 
 import { config } from '@root/app.config';
-import redisClient from '@services/redis';
+import redis from '@services/redis';
 
 /**
  * Typing for the user session, containing information about the logged-in user
@@ -29,5 +29,5 @@ export default session({
   cookie: { httpOnly: true, secure: config.secureCookies },
   resave: false,
   saveUninitialized: false,
-  store: new RedisStore({ client: redisClient }),
+  store: new RedisStore({ client: redis }),
 });

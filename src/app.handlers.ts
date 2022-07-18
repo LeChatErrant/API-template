@@ -1,7 +1,7 @@
-import { dbConfig } from '@root/app.config';
+import { dbConfig, redisConfig } from '@root/app.config';
 import db from '@services/database';
 import logger from '@services/logger';
-import redisClient from '@services/redis';
+import redis from '@services/redis';
 
 /**
  * Wait for all services to be up
@@ -15,22 +15,20 @@ export async function waitServices() {
       logger.info('Connected to database !');
     })
     .catch((error) => {
-      logger.error(error);
       logger.error(`Can't connect to database at url ${dbConfig.url}`);
+      logger.debug('Try running `npm run dev:db` to quickly launch a PostgreSQL instance !');
       throw error;
     });
 
   /*  Redis */
   logger.info('Connecting to redis...');
-  await new Promise<void>((resolve) => {
-    const interval = setInterval(() => {
-      const isConnected = redisClient.ping();
-      if (isConnected) {
-        clearInterval(interval);
-        resolve();
-      }
-    }, 1000);
-  });
+  try {
+    await redis.connect();
+  } catch (error) {
+    logger.error(`Can't connect to redis at url redis://:${redisConfig.password}@${redisConfig.host}:${redisConfig.port}`);
+    logger.debug('Try running `npm run dev:redis` to quickly launch a Redis instance !');
+    throw error;
+  }
   logger.info('Connected to redis !');
 }
 
@@ -44,22 +42,10 @@ export async function gracefullyCloseConnections() {
     .$disconnect()
     .then(() => {
       logger.info('Disconnected from database !');
-    })
-    .catch((error) => {
-      logger.error(error);
-      throw error;
     });
 
   /*  Redis */
   logger.info('Disconnecting from redis...');
-  await new Promise<void>((resolve, reject) => {
-    redisClient.quit((error) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve();
-      }
-    });
-  });
+  await redis.disconnect();
   logger.info('Disconnected from redis !');
 }

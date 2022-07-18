@@ -1,15 +1,22 @@
-import redis from 'redis';
+import Redis from 'ioredis';
 
 import { redisConfig } from '@root/app.config';
-import { createChildLogger } from '@services/logger';
+import { createChildLogger } from '@root/services/logger';
 
+/**
+ * Custom scoped logger
+ */
 const logger = createChildLogger('redis');
 
-const redisClient = redis.createClient({
+/**
+ * Redis client instance
+ */
+const redis = new Redis({
   host: redisConfig.host,
   port: redisConfig.port,
   password: redisConfig.password,
+  lazyConnect: true,
 });
-redisClient.on('error', (err) => logger.error(err));
+redis.on('error', (err) => logger.error(err));
 
-export default redisClient;
+export default redis;
