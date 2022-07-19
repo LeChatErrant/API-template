@@ -42,7 +42,7 @@ module.exports = {
     'unused-imports/no-unused-imports': 'warn',
 
     // Indentation
-    'indent': ['error', 2],
+    '@typescript-eslint/indent': ['error', 2],
 
     // Misc rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
