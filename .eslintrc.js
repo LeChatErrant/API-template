@@ -41,6 +41,9 @@ module.exports = {
     // Remove unused imports
     'unused-imports/no-unused-imports': 'warn',
 
+    // Indentation
+    'indent': ['error', 2],
+
     // Misc rules
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
