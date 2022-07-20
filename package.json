@@ -79,7 +79,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "comment-json": "^4.2.2",
-    "concurrently": "^7.2.2",
+    "concurrently": "^7.3.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-plugin-import": "^2.26.0",
