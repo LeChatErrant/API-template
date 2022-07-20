@@ -8,6 +8,7 @@ on:
       - '*'
     paths:
       - Dockerfile
+      - .dockerignore
       - package.json
       - package-lock.json
       - prisma/**

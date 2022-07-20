@@ -1,7 +1,12 @@
 .git
 *Dockerfile*
+.dockerignore
 *docker-compose*
 node_modules
 dist
 logs
 coverage
+.idea
+openapi/*
+openapitools.json
+*-sdk
