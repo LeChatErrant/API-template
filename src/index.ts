@@ -1,5 +1,5 @@
 /*  This import is used to resolve path aliases, since ts configuration is not enough for the built JS */
-import 'module-alias/register';
+import './customImports';
 
 import app from '@root/app';
 import { config } from '@root/app.config';
