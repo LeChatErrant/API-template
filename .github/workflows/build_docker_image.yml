@@ -30,12 +30,12 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v3
         with:
-        images: ghcr.io/${{ github.repository }}
-        tags: |
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=ref,event=branch,suffix=-latest
-          type=sha,format=long,prefix=commit-,enable=${{ github.ref_type == 'branch' }}
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=ref,event=branch,suffix=-latest
+            type=sha,format=long,prefix=commit-,enable=${{ github.ref_type == 'branch' }}
 
       - name: Login to docker registry
         uses: docker/login-action@v2
