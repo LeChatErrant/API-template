@@ -13,7 +13,7 @@ jobs:
         run: curl "https://api.giphy.com/v1/gifs/search?q=congratulation&api_key=YRosHbxsmDAZ6JI7xZ0M5J4EqpMb3xKj&limit=100" > .gifs
 
       - name: Select random gif and comment issue
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
