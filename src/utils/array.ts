@@ -12,7 +12,7 @@
  *   { name: 'banana',  type: 'fruit', quantity: 0 },
  *   { name: 'cow', type: 'meat', quantity: 23 },
  *   { name: 'cherry', type: 'fruit', quantity: 5 },
- *   { name: 'fish', type: 'viande', quantity: 22 },
+ *   { name: 'fish', type: 'meat', quantity: 22 },
  * ];
  *
  * groupBy(inventory, 'type');
@@ -22,8 +22,10 @@
  * //     { name: 'banana', type: 'fruit', quantity: 0 },
  * //     { name: 'cherry', type: 'fruit', quantity: 5 }
  * //   ],
- * //   meat: [ { name: 'cow', type: 'meat', quantity: 23 } ],
- * //   viande: [ { name: 'fish', type: 'viande', quantity: 22 } ]
+ * //   meat: [
+ * //     { name: 'cow', type: 'meat', quantity: 23 },
+ * //     { name: 'fish', type: 'meat', quantity: 22 }
+ * //   ]
  * // }
  */
 export function groupBy<T extends Record<string, any>, K extends keyof T>(arr: Array<T>, by: K): Record<T[K], Array<T>> {
