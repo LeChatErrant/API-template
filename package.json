@@ -54,7 +54,7 @@
     "express-async-handler": "^1.2.0",
     "express-async-router": "^0.1.15",
     "express-session": "^1.17.3",
-    "helmet": "^6.0.0",
+    "helmet": "^6.0.1",
     "http-status-codes": "^2.2.0",
     "ioredis": "^5.2.4",
     "module-alias": "^2.2.2",
