@@ -87,7 +87,7 @@
     "husky": "^8.0.2",
     "jest": "^27.5.1",
     "lint-staged": "^13.0.4",
-    "supertest": "^6.3.1",
+    "supertest": "^6.3.2",
     "ts-jest": "^27.1.4",
     "ts-node-dev": "^2.0.0"
   }
