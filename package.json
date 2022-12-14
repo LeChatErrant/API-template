@@ -29,8 +29,7 @@
     "db:deploy": "prisma migrate deploy",
     "lint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint:ci": "eslint './src/**/*.{ts,tsx}'",
-    "prepare": "husky install",
-    "postinstall": "npm run build"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.@(ts|js)": [
