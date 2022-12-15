@@ -1,4 +1,4 @@
-import handler from 'express-async-handler';
+import { RequestHandler } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '@root/app.errors';
@@ -16,7 +16,7 @@ import db from '@services/database';
  *   const { post } = res.locals;
  * });
  */
-const postMiddleware = handler(async (req, res, next) => {
+const postMiddleware: RequestHandler = async (req, res, next) => {
   const { userId, postId } = req.params;
   if (!userId || !postId) {
     next(new ApiError(StatusCodes.BAD_REQUEST, 'Missing route parameters "userId" and/or "postId"'));
@@ -30,6 +30,6 @@ const postMiddleware = handler(async (req, res, next) => {
     res.locals.post = post;
     next();
   }
-});
+};
 
 export default postMiddleware;

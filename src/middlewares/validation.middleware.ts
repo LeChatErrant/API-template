@@ -1,7 +1,6 @@
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate as classValidator } from 'class-validator';
 import type { RequestHandler } from 'express';
-import handler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 
 import { ApiError } from '@root/app.errors';
@@ -31,19 +30,39 @@ import { ApiError } from '@root/app.errors';
 
  * router.post('/users/signup', validate(UserSignupDto), ...);
  */
-function validate<T>(type: ClassConstructor<T>): RequestHandler {
-  return handler(async (req, res, next) => {
-    const parsedBody = plainToInstance(type, req.body);
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const errors = await classValidator(parsedBody as Object, { whitelist: true });
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function validate(type: ClassConstructor<any>, where: 'body' | 'query'): RequestHandler {
+  return async (req, res, next) => {
+    let data;
+
+    if (where === 'body') {
+      data = req.body;
+    } else {
+      data = req.query;
+    }
+    const parsedData = plainToInstance(type, data);
+
+    const errors = await classValidator(parsedData, { whitelist: true });
     if (errors.length !== 0) {
       const message = errors.join('').trimEnd();
       next(new ApiError(StatusCodes.BAD_REQUEST, message));
     } else {
-      req.body = parsedBody;
+      if (where === 'body') {
+        req.body = parsedData;
+      } else {
+        req.query = parsedData;
+      }
       next();
     }
-  });
+  };
 }
 
-export default validate;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function validateBody(type: ClassConstructor<any>): RequestHandler {
+  return validate(type, 'body');
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function validateQuery(type: ClassConstructor<any>): RequestHandler {
+  return validate(type, 'query');
+}

@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import adminMiddleware from '@middlewares/admin.middleware';
 import authMiddleware from '@middlewares/auth.middleware';
 import ownershipMiddleware from '@middlewares/ownership.middleware';
-import validate from '@middlewares/validation.middleware';
+import { validateBody } from '@middlewares/validation.middleware';
 
 import * as controllers from './user.controllers';
 import userMiddleware from './user.middleware';
@@ -23,7 +23,7 @@ router.get(
 
 router.post(
   '/users/signup',
-  validate(UserSignupDto),
+  validateBody(UserSignupDto),
   async (req, res) => {
     const user = await controllers.signup(req.body);
     res.status(StatusCodes.CREATED).send(user);
@@ -32,7 +32,7 @@ router.post(
 
 router.post(
   '/users/signin',
-  validate(UserSigninDto),
+  validateBody(UserSigninDto),
   async (req, res) => {
     const user = await controllers.signin(req.body);
     req.session.user = {
@@ -72,7 +72,7 @@ router.get(
 
 router.patch(
   '/users/:userId',
-  validate(UserUpdateDto),
+  validateBody(UserUpdateDto),
   ownershipMiddleware,
   userMiddleware,
   async (req, res) => {
