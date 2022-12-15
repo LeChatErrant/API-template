@@ -6,6 +6,10 @@ export class PostCreateDto {
   title!: string;
 
   @IsString()
+  @IsOptional()
+  imageLink?: string;
+
+  @IsString()
   content!: string;
 }
 
@@ -17,6 +21,10 @@ export class PostUpdateDto {
 
   @IsString()
   @IsOptional()
+  imageLink?: string;
+
+  @IsString()
+  @IsOptional()
   content?: string;
 }
 
@@ -24,6 +32,7 @@ export interface PostRo {
   id: string;
   authorId: string;
   title: string;
+  imageLink: string | null;
   content: string;
   createdAt: Date;
   updatedAt: Date;

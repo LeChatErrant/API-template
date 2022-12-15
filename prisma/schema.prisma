@@ -26,9 +26,10 @@ model User {
 }
 
 model Post {
-  id      String @id @default(cuid())
-  title   String
-  content String @db.Text
+  id        String  @id @default(cuid())
+  title     String
+  imageLink String?
+  content   String  @db.Text
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String

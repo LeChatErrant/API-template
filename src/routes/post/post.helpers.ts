@@ -13,6 +13,7 @@ export function buildPostRo(post: Post): PostRo {
   return {
     id: post.id,
     authorId: post.authorId,
+    imageLink: post.imageLink,
     title: post.title,
     content: post.content,
     createdAt: post.createdAt,
