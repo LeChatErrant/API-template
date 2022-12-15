@@ -74,16 +74,6 @@ test('Signup - user already exists', async () => {
   await app.signup(baseUser, StatusCodes.CONFLICT);
 });
 
-test('Signup - username can be omitted', async () => {
-  const { username, ...userWithoutName } = baseUser;
-  const user = await app.signup(userWithoutName);
-
-  expect(user.email).toBe(baseUser.email);
-  expect(user.username).toBeNull();
-  expect(user.password).toBeUndefined();
-  expect(user.id).toBeDefined();
-});
-
 test('Signup - missing parameter', async () => {
   await app.signup({}, StatusCodes.BAD_REQUEST);
 });
