@@ -71,7 +71,7 @@
     "@types/express-session": "^1.17.5",
     "@types/jest": "^27.5.0",
     "@types/module-alias": "^2.0.1",
-    "@types/morgan": "^1.9.3",
+    "@types/morgan": "^1.9.4",
     "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
