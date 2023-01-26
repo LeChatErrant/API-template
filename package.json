@@ -63,7 +63,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
-    "@lechaterrant/lantern": "^1.1.1",
+    "@lechaterrant/lantern": "^1.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/connect-redis": "0.0.19",
     "@types/cors": "^2.8.13",
