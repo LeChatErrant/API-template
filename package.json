@@ -60,7 +60,7 @@
     "prisma": "^4.8.1",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.9.5",
-    "winston": "^3.8.2"
+    "winston": "^3.9.0"
   },
   "devDependencies": {
     "@lechaterrant/lantern": "^1.1.2",
