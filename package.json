@@ -67,7 +67,7 @@
     "@types/bcrypt": "^5.0.1",
     "@types/connect-redis": "0.0.20",
     "@types/cors": "^2.8.15",
-    "@types/express": "^4.17.19",
+    "@types/express": "^4.17.20",
     "@types/express-session": "^1.17.9",
     "@types/jest": "^27.5.0",
     "@types/module-alias": "^2.0.3",
