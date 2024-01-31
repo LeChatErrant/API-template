@@ -84,7 +84,7 @@
     "eslint-plugin-unused-imports": "^1.1.5",
     "husky": "^9.0.2",
     "jest": "^27.5.1",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.1",
     "supertest": "^6.3.3",
     "ts-jest": "^27.1.4",
     "ts-node-dev": "^2.0.0"
