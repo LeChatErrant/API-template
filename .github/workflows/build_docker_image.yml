@@ -29,7 +29,7 @@ jobs:
 
       - name: Compute metadata for Docker image
         id: metadata
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
