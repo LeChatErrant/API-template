@@ -74,7 +74,7 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.4.1",
     "@types/supertest": "^2.0.16",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
     "@typescript-eslint/parser": "^4.33.0",
     "comment-json": "^4.2.5",
     "concurrently": "^8.2.2",
